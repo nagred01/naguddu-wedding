@@ -184,11 +184,24 @@ function Assistant({ lang }: { lang: Lang }) {
       : { role: 'a', content: failed || (en ? "Sorry, I can't answer right now. Try the quick questions below, or ask the family." : 'క్షమించండి, ఇప్పుడు సమాధానం ఇవ్వలేకపోతున్నాను. దిగువ ప్రశ్నలు ప్రయత్నించండి, లేదా కుటుంబాన్ని అడగండి.') }]);
   };
 
+  // Close with a short slide-down instead of vanishing.
+  const [closing, setClosing] = useState(false);
+  const close = () => { setClosing(true); window.setTimeout(() => { setOpen(false); setClosing(false); }, 180); };
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
   return (
-    <div className="wa">
+    <div className={'wa' + (open ? ' is-open' : '')}>
       {open && (
-        <div className="wa-panel" role="dialog" aria-label={title}>
-          <div className="wa-head"><span>{title}</span><button className="wa-x" onClick={() => setOpen(false)} aria-label="Close">×</button></div>
+        <div className={'wa-panel' + (closing ? ' closing' : '')} role="dialog" aria-label={title}>
+          <div className="wa-head">
+            <div><span className="wa-title">{title}</span><span className="wa-sub">{en ? 'Events, venues, hotels and more' : 'వేడుకలు, వేదికలు, హోటళ్లు మరియు మరిన్ని'}</span></div>
+            <button className="wa-x" onClick={close} aria-label={en ? 'Close' : 'మూసివేయి'}>×</button>
+          </div>
           <div className="wa-body" ref={bodyRef} aria-live="polite">
             <p className="wa-msg wa-a">{SCRIPT_URL
               ? (en ? 'Namaste! Ask me anything about the wedding, or tap a question below.' : 'నమస్తే! వివాహం గురించి ఏదైనా అడగండి, లేదా దిగువ ప్రశ్నను తాకండి.')
@@ -196,20 +209,25 @@ function Assistant({ lang }: { lang: Lang }) {
             {items.map((m, i) => <p key={i} className={'wa-msg ' + (m.role === 'q' ? 'wa-q' : 'wa-a') + (m.text !== undefined ? ' wa-ai' : '')}>{m.content}</p>)}
             {thinking && <p className="wa-msg wa-a wa-typing" aria-label={en ? 'Typing' : 'టైప్ చేస్తోంది'}><span /><span /><span /></p>}
           </div>
-          <div className="wa-chips">
-            {QA_LIST.filter((x) => !asked.includes(x.id)).map((x) => (
-              <button key={x.id} onClick={() => pick(x)}>{x.q[lang]}</button>
-            ))}
-          </div>
+          {/* Suggested questions: one swipeable row, so the conversation keeps the space. */}
+          {QA_LIST.some((x) => !asked.includes(x.id)) && (
+            <div className="wa-chips" aria-label={en ? 'Suggested questions' : 'సూచించిన ప్రశ్నలు'}>
+              {QA_LIST.filter((x) => !asked.includes(x.id)).map((x) => (
+                <button key={x.id} onClick={() => pick(x)}>{x.q[lang]}</button>
+              ))}
+            </div>
+          )}
           {SCRIPT_URL && (
             <form className="wa-input" onSubmit={ask}>
-              <input value={draft} onChange={(e) => setDraft(e.target.value)} maxLength={600} placeholder={en ? 'Type your question…' : 'మీ ప్రశ్న రాయండి…'} aria-label={en ? 'Your question' : 'మీ ప్రశ్న'} />
-              <button type="submit" disabled={thinking || !draft.trim()}>{en ? 'Send' : 'పంపు'}</button>
+              <input value={draft} onChange={(e) => setDraft(e.target.value)} maxLength={600} enterKeyHint="send" placeholder={en ? 'Type your question…' : 'మీ ప్రశ్న రాయండి…'} aria-label={en ? 'Your question' : 'మీ ప్రశ్న'} />
+              <button type="submit" disabled={thinking || !draft.trim()} aria-label={en ? 'Send' : 'పంపు'}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12.6 2-12.6 2z" /></svg>
+              </button>
             </form>
           )}
         </div>
       )}
-      <button className="wa-fab" onClick={() => setOpen(!open)} aria-label={title} aria-expanded={open}>
+      <button className="wa-fab" onClick={() => (open ? close() : setOpen(true))} aria-label={title} aria-expanded={open}>
         {open ? <span className="wa-fab-x">×</span> : (
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 5.94 2 10.8c0 2.55 1.24 4.84 3.22 6.46-.14 1.1-.62 2.63-1.72 3.74 0 0 2.98.28 5.35-1.5.74.18 1.51.3 2.32.3 5.52 0 10-3.94 10-8.8S17.52 2 12 2Z"/></svg>
         )}
@@ -372,9 +390,9 @@ export function App() {
                       </div>
                       <p className="rc-label">{t('meal')}</p>
                       <div className="chips">
-                        {(['mealVeg', 'mealNonVeg', 'mealVegan', 'mealJain'] as const).map((m) => (
+                        {(['mealVeg', 'mealNonVeg'] as const).map((m) => (
                           <button key={m} type="button" aria-pressed={party[ev.id]?.meal === m} className={party[ev.id]?.meal === m ? 'on' : ''} onClick={() => setMeal(ev.id, m)}>
-                            {t(m)}{m === 'mealJain' && <small> {t('mealJainNote')}</small>}
+                            {t(m)}
                           </button>
                         ))}
                       </div>
