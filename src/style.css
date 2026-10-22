@@ -1,0 +1,1055 @@
+html, body, #root { margin: 0; min-height: 100%; }
+body { background: #3a070d; }
+.stage { position: relative; height: 100vh; min-height: 600px; max-height: 900px; max-width: 460px; margin: 0 auto; overflow: hidden; background: #4a0a12; }
+.scroller { height: 100%; overflow-y: auto; scroll-snap-type: y proximity; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+.wed { --maroon: #6b0f1a; --deep: #4a0a12; --gold: #e2b866; --ivory: #fbf3e2; --leaf: #2f5d34; color: var(--ivory); font-family: Georgia, 'Times New Roman', 'Noto Serif Telugu', 'Telugu Sangam MN', serif; -webkit-font-smoothing: antialiased; }
+.wed.is-te { font-family: 'Noto Sans Telugu', 'Telugu Sangam MN', 'Nirmala UI', system-ui, sans-serif; line-height: 1.5; }
+.sample-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 40; background: #1d1d1d; color: #fff; font: 600 11px system-ui, sans-serif; text-align: center; padding: 6px 10px; letter-spacing: .03em; }
+.topbar { position: absolute; top: 52px; left: 10px; right: 10px; z-index: 60; display: flex; justify-content: space-between; align-items: center; }
+.pill, .lang button { font: 600 13px system-ui, 'Noto Sans Telugu', sans-serif; border: 1px solid rgba(226,184,102,.7); background: rgba(74,10,18,.82); color: var(--gold); backdrop-filter: blur(6px); min-height: 40px; cursor: pointer; }
+.pill { width: 40px; border-radius: 50%; font-size: 16px; }
+.lang { display: flex; border-radius: 999px; overflow: hidden; border: 1px solid rgba(226,184,102,.7); }
+.lang button { border: 0; padding: 0 14px; border-radius: 0; }
+.lang button.on { background: var(--gold); color: var(--deep); }
+.dots { position: absolute; right: 8px; top: 55%; transform: translateY(-50%); z-index: 30; display: flex; flex-direction: column; gap: 4px; }
+.dots button { width: 22px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+.dots button::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; border: 1px solid var(--gold); background: transparent; }
+.dots button.on::after { background: var(--gold); }
+.sec { min-height: 100%; box-sizing: border-box; scroll-snap-align: start; position: relative; display: flex; align-items: center; justify-content: center; padding: 96px 22px 40px; overflow: hidden; }
+.cover { background-size: cover; background-position: center; text-align: center; }
+.eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; color: var(--gold); margin: 0 0 8px; }
+.is-te .eyebrow { text-transform: none; letter-spacing: .02em; font-size: 13px; }
+.names { margin: 0; font-weight: 400; font-size: clamp(38px, 11vw, 60px); line-height: 1.1; display: flex; flex-direction: column; align-items: center; color: var(--ivory); text-shadow: 0 2px 12px rgba(0,0,0,.4); }
+.names em { font-size: .5em; color: var(--gold); margin: 4px 0; }
+.divider { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 260px; margin: 12px auto; color: var(--gold); }
+.divider span { flex: 1; height: 1px; background: currentColor; opacity: .6; } .divider-k { width: 28px; flex: none; }
+.event .corner { position: absolute; width: 150px; opacity: .22; } .tl { top: 40px; left: -30px; } .br { bottom: 30px; right: -30px; transform: rotate(45deg); }
+.card { position: relative; width: 100%; max-width: 440px; text-align: center; padding: 18px 16px; border: 1px solid currentColor; border-color: rgba(226,184,102,.55); outline: 1px solid rgba(226,184,102,.3); outline-offset: 6px; border-radius: 3px; box-sizing: border-box; }
+.card h2 { font-size: clamp(34px, 9vw, 46px); font-weight: 400; margin: 0; }
+.blurb { font-style: italic; opacity: .9; margin: 4px 0 12px; font-size: 15px; }
+.facts { margin: 0 0 16px; display: grid; gap: 8px; text-align: left; }
+.facts div { display: grid; grid-template-columns: 80px 1fr; gap: 8px; border-top: 1px solid rgba(226,184,102,.3); padding-top: 8px; }
+.facts dt { text-transform: uppercase; letter-spacing: .12em; font-size: 11px; opacity: .75; padding-top: 3px; } .is-te .facts dt { text-transform: none; letter-spacing: 0; font-size: 13px; }
+.facts dd { margin: 0; font-size: 15px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: var(--gold); color: var(--deep); border: 0; font: 600 14px system-ui, 'Noto Sans Telugu', sans-serif; cursor: pointer; box-sizing: border-box; }
+.btn.ghost { background: transparent; border: 1px solid currentColor; color: inherit; opacity: .8; cursor: default; }
+.rsvp { background: radial-gradient(circle at 50% 0, #7d1220, var(--deep)); } .photos { background: linear-gradient(#264d2c, #17331c); }
+.wide { max-width: 480px; }
+.rsvp, .photos { padding-top: 110px; }
+.field { display: grid; gap: 4px; text-align: left; margin-bottom: 12px; font-size: 13px; color: var(--gold); }
+.field input { font: 16px system-ui, 'Noto Sans Telugu', sans-serif; padding: 11px 12px; border-radius: 6px; border: 1px solid rgba(226,184,102,.6); background: rgba(255,255,255,.08); color: var(--ivory); min-height: 44px; box-sizing: border-box; }
+.seg { display: flex; border: 1px solid rgba(226,184,102,.6); border-radius: 999px; overflow: hidden; flex: none; }
+.seg button { font: 600 12px system-ui, 'Noto Sans Telugu', sans-serif; padding: 0 12px; min-height: 40px; border: 0; background: transparent; color: var(--gold); cursor: pointer; }
+.seg button.on { background: var(--gold); color: var(--deep); } .seg button.on.no { background: #d9c7b0; }
+.rsvp-cards { list-style: none; padding: 0; margin: 16px 0 18px; display: grid; gap: 14px; align-items: start; }
+.rsvp-card { padding: 14px 13px 16px; text-align: left; border: 1px solid rgba(226,184,102,.6); border-radius: 12px; background: rgba(40,2,8,.35); transition: border-color .25s, background .25s, opacity .25s; }
+.rsvp-card.yes { border-color: #9fd8c4; background: rgba(60,20,22,.55); }
+.rsvp-card.no { opacity: .7; }
+.rc-name { margin: 0 0 4px; font-size: 20px; font-weight: 400; line-height: 1.2; color: var(--gold); }
+.rc-when, .rc-venue { margin: 0; font: 14px/1.4 system-ui, 'Noto Sans Telugu', sans-serif; color: var(--ivory); opacity: .9; }
+.rsvp-card .seg { margin-top: 14px; }
+.rsvp-card .seg button { flex: 1; min-height: 45px; font-size: 14px; padding: 0 6px; line-height: 1.2; }
+.rsvp-card .seg button + button { border-left: 1px solid rgba(226,184,102,.6); }
+.rc-more { margin-top: 16px; padding-top: 4px; border-top: 1px dashed rgba(226,184,102,.55); }
+.rc-label { margin: 14px 0 8px; font: 600 11px system-ui, 'Noto Sans Telugu', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.stepper { display: inline-flex; align-items: center; border: 1px solid rgba(226,184,102,.6); border-radius: 8px; }
+.stepper button { width: 44px; height: 44px; border: 0; background: transparent; color: var(--gold); font: 400 22px system-ui, sans-serif; cursor: pointer; }
+.stepper output { min-width: 40px; text-align: center; font: 600 17px system-ui, sans-serif; color: var(--ivory); }
+.chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.chips button { min-height: 43px; padding: 0 15px; border-radius: 999px; border: 1px solid rgba(226,184,102,.6); background: transparent; color: var(--ivory); font: 15px system-ui, 'Noto Sans Telugu', sans-serif; cursor: pointer; }
+.chips button small { font-size: 12px; opacity: .8; }
+.chips button.on { background: var(--gold); border-color: var(--gold); color: var(--deep); }
+.rsvp .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.rsvp-msg { min-height: 1.4em; margin: 0 0 10px; font: 600 14px/1.4 system-ui, 'Noto Sans Telugu', sans-serif; color: var(--gold); }
+.rsvp-msg.bad { color: #ffc9b8; }
+.rsvp .field input[aria-invalid="true"] { border-color: #ffc9b8; }
+.rsvp .btn:disabled { opacity: .7; cursor: progress; }
+.rsvp-done { margin: 20px 0 8px; padding: 22px 16px; border: 1px solid #9fd8c4; border-radius: 12px; background: rgba(40,2,8,.35); }
+.rsvp-done-msg { margin: 0 0 6px; font-size: 20px; color: var(--gold); }
+.rsvp-done .btn { margin-top: 14px; }
+@media (min-width: 900px) {
+  .rsvp .card.wide { max-width: 1000px !important; }
+  .rsvp-cards { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+}
+.note { font: 12px/1.45 system-ui, 'Noto Sans Telugu', sans-serif; opacity: .75; margin: 16px 0 0; } .note.strong { opacity: 1; color: var(--gold); }
+.drop { border: 1.5px dashed var(--gold); border-radius: 8px; padding: 26px 12px; display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 8px 0; }
+.drop-k { width: 56px; color: var(--gold); opacity: .8; }
+.thanks { font-style: italic; font-size: 18px; margin: 8px 0 0; }
+
+.ev-wrap { overflow: hidden; border-radius: 2px; margin: 0 0 12px; border: 1px solid rgba(226,184,102,.5); }
+.ev-img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; animation: drift 14s ease-in-out infinite alternate; }
+.credits { font: 10px/1.4 system-ui, 'Noto Sans Telugu', sans-serif; opacity: .65; margin: 14px 0 0; }
+
+@keyframes drift { from { transform: scale(1.02) translateX(-1.5%); } to { transform: scale(1.12) translateX(1.5%); } }
+@media (prefers-reduced-motion: reduce) { .ev-img { animation: none; } }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.gate { position: absolute; inset: 0; z-index: 50; cursor: pointer; perspective: 1400px; overflow: hidden; transition: opacity .6s ease 1.5s; }
+.gate.opening { opacity: 0; pointer-events: none; }
+.door { position: absolute; top: 0; bottom: 0; width: 50%; background-size: 200% 100%; background-position-y: top; transition: transform 1.5s cubic-bezier(.6,.05,.3,1); backface-visibility: hidden; }
+.door.l { left: 0; background-position-x: left; transform-origin: left center; box-shadow: inset -6px 0 14px rgba(0,0,0,.35); }
+.door.r { right: 0; background-position-x: right; transform-origin: right center; box-shadow: inset 6px 0 14px rgba(0,0,0,.35); }
+.gate.opening .door.l { transform: rotateY(-105deg); } .gate.opening .door.r { transform: rotateY(105deg); }
+.gate-in { position: absolute; left: 0; right: 0; top: 37%; bottom: auto; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 24px; text-align: center; transition: opacity .5s; }
+.gate.opening .gate-in { opacity: 0; }
+.gate-om { color: var(--gold); font-size: 14px; letter-spacing: .08em; }
+.gate-names { font-size: clamp(26px, 8vw, 36px); line-height: 1.2; }
+.gate-h { font-size: 20px; color: var(--ivory); opacity: .9; }
+.gate-t { font-size: 15px; border: 1px solid var(--gold); padding: 10px 20px; border-radius: 999px; color: var(--gold); margin-top: 8px; animation: pulse 5s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(226,184,102,.18); } }
+.gold { background: linear-gradient(100deg, #b98322 0%, #f6dc8e 22%, #d9a73e 40%, #fff1b8 52%, #c8932b 66%, #f3d37a 85%, #b98322 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: shimmer 16s linear infinite; text-shadow: none; }
+@keyframes shimmer { to { background-position: -250% 0; } }
+.names span, .names em { -webkit-text-fill-color: transparent; }
+.petals { position: absolute; inset: 0; pointer-events: none; z-index: 20; overflow: hidden; }
+.petals i { position: absolute; top: -30px; border-radius: 80% 0 80% 0; opacity: .5; animation: fall linear infinite; }
+@keyframes fall { 0% { transform: translate(0,-30px) rotate(0); } 50% { transform: translate(26px, 45vh) rotate(160deg); } 100% { transform: translate(-14px, 105vh) rotate(340deg); } }
+.countdown { display: flex; gap: 8px; margin: 0 0 18px; }
+.countdown div { display: flex; flex-direction: column; align-items: center; min-width: 56px; padding: 8px 4px; border: 1px solid rgba(226,184,102,.6); background: rgba(74,10,18,.55); border-radius: 6px; }
+.countdown b { font-size: 24px; font-weight: 400; color: var(--gold); font-variant-numeric: tabular-nums; }
+.countdown span { font: 10px system-ui, 'Noto Sans Telugu', sans-serif; color: var(--ivory); opacity: .85; }
+/* per-event color worlds */
+.world-pasupu { background: linear-gradient(#f9d95a, #f0b92a); color: #4a2f00; }
+.world-pasupu .eyebrow, .world-pasupu .divider { color: #8a5a00; } .world-pasupu .corner { color: #8a5a00; }
+.world-mehandi { background: linear-gradient(#1f4d2b, #2f6a3b); }
+.world-pellikuthuru .eyebrow, .world-pellikuthuru .divider, .world-pellikuthuru .corner { color: #ffe3a0; }
+.world-vivaham { background: linear-gradient(#8a1220, #5a0a14); }
+.world-reception { background: linear-gradient(#18285a, #0b1330); }
+.world-pasupu .card { border-color: rgba(110,70,0,.55); outline-color: rgba(110,70,0,.3); }
+.world-pasupu .facts div { border-color: rgba(110,70,0,.3); }
+.world-pasupu .h2gold, .world-pasupu h2.gold { background-image: linear-gradient(100deg, #7a4c00, #c48a0a 40%, #7a4c00); }
+.world-pasupu .btn.ghost { color: #4a2f00; }
+@media (prefers-reduced-motion: reduce) { .petals { display: none; } .gold { animation: none; } .gate-t { animation: none; } }
+
+.gate-om { color: #6b0f1a; font-weight: 600; text-shadow: 0 1px 0 rgba(255,235,200,.6); }
+.gate-names { color: #5a0f18; text-shadow: 0 1px 0 rgba(255,235,200,.7); font-weight: 600; }
+.gate-h { color: #5a0f18; opacity: 1; }
+.gate-t { color: #5a0f18; background: #fbf3e2; border-color: #e2b866; font-size: 14px; padding: 9px 18px; margin-top: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.ganesha { display: block; height: 96px; width: auto; margin: -2px auto 8px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.35)); }
+.ganesha.big { height: 120px; margin-bottom: 10px; }
+
+.gate-in { gap: 3px; }
+.gate-om { font-size: 12px; }
+.gate-names { font-size: clamp(20px, 6vw, 25px); line-height: 1.2; max-width: 250px; }
+.gate-h { font-size: 15px; }
+
+.world-pasupu .ev-img { aspect-ratio: 1 / 1; animation: none; }
+.world-pasupu .ev-img.still { aspect-ratio: 4 / 3; }
+.alt-name { margin: 2px 0 0; font-size: 17px; color: #6e4600; font-style: italic; }
+.snanam h3 { font-size: 26px; font-weight: 400; margin: 0 0 10px; }
+.snanam .blurb { margin-bottom: 16px; }
+.world-pasupu h3.gold { background-image: linear-gradient(100deg, #7a4c00, #c48a0a 40%, #7a4c00); }
+
+.tabs { position: absolute; top: 0; left: 0; right: 0; z-index: 58; display: flex; gap: 4px; overflow-x: auto; padding: 6px 8px; background: rgba(40,6,12,.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(226,184,102,.45); scrollbar-width: none; font-family: system-ui, 'Noto Sans Telugu', sans-serif; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: none; background: none; border: 1px solid transparent; color: #f3dfb0; font: 600 13px system-ui, 'Noto Sans Telugu', sans-serif; padding: 0 12px; min-height: 40px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.tabs button.on { background: rgba(226,184,102,.2); border-color: var(--gold); color: #fff; }
+.tabs button:focus-visible, .pill:focus-visible, .lang button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.sec { padding-top: 112px; scroll-margin-top: 0; }
+@media (min-width: 900px) {
+  .stage { max-width: 980px; height: 100vh; min-height: 640px; max-height: 1000px; }
+  .tabs { justify-content: center; padding: 8px 16px; gap: 8px; }
+  .topbar { top: 60px; left: 18px; right: 18px; }
+  .gate { left: 0; right: 0; margin: 0 auto; width: 480px; }
+  .stage { background: radial-gradient(circle at 50% 40%, #6b0f1a, #2d0509 70%); }
+  .card { max-width: 560px; }
+  .dots { right: 18px; }
+  .ev-img { aspect-ratio: 16 / 9; }
+  .world-pasupu .ev-img { aspect-ratio: 4 / 3; }
+}
+
+/* v8: Haldi art melts into the card */
+.world-pasupu .ev-wrap { background: none; border: 0; box-shadow: none; border-radius: 0; }
+.world-pasupu .ev-img { -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 48%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 48%, rgba(0,0,0,0) 100%); border-radius: 0; }
+
+.world-mehandi .ev-wrap { background: none; border: 0; box-shadow: none; border-radius: 0; }
+.world-mehandi .ev-img { aspect-ratio: 1 / 1; animation: none; -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 48%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 48%, rgba(0,0,0,0) 100%); }
+.world-mehandi .ev-img.still { aspect-ratio: 4 / 3; }
+.world-mehandi .snanam h3.gold, .world-mehandi h3.gold { }
+@media (min-width:900px) { .world-mehandi .ev-img { aspect-ratio: 4 / 3; } }
+
+.world-pellikuthuru .ev-wrap { background: none; border: 0; box-shadow: none; border-radius: 0; }
+.world-pellikuthuru .ev-img { aspect-ratio: 1 / 1; animation: none; -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 48%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 48%, rgba(0,0,0,0) 100%); }
+@media (min-width:900px) { .world-pellikuthuru .ev-img, .world-pellikuthuru .ev-img.still { aspect-ratio: 1 / 1; max-width: 460px; margin: 0 auto; } }
+
+/* v11: Pellikuthuru backdrop */
+.world-pellikuthuru { background: url(./img/pelli-top.webp) top center / 100% auto no-repeat, url(./img/pelli-bottom.webp) bottom center / 100% auto no-repeat, #f3e9de; color: #5a1a1a; }
+.world-pellikuthuru .eyebrow, .world-pellikuthuru .divider, .world-pellikuthuru .corner { color: #8a3a2a; }
+.world-pellikuthuru .card { border-color: rgba(120,40,30,.4); outline-color: rgba(120,40,30,.22); }
+.world-pellikuthuru .facts div { border-color: rgba(120,40,30,.25); }
+.world-pellikuthuru .h2gold, .world-pellikuthuru h2.gold, .world-pellikuthuru h3.gold { background-image: linear-gradient(100deg, #6b1020, #b5651d 45%, #6b1020); }
+.world-pellikuthuru .btn.ghost { color: #5a1a1a; border-color: rgba(120,40,30,.55); }
+.world-pellikuthuru .ev-img { -webkit-mask-image: radial-gradient(ellipse 62% 60% at 50% 50%, #000 52%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 62% 60% at 50% 50%, #000 52%, rgba(0,0,0,0) 100%); }
+.world-pellikuthuru { padding-bottom: 64vw; }
+@media (min-width:900px) { .world-pellikuthuru { padding-bottom: 36vw; background-size: 100% auto, 100% auto, auto; } }
+
+/* v12: borderless, compact event pages */
+.event .card { border: 0; outline: 0; border-radius: 0; padding: 4px 6px; background: none; }
+.event .corner { display: none; }
+.event .divider span { display: none; }
+.event .facts div { border: 0; padding-top: 0; }
+.event .ganesha { height: 64px; margin: 0 auto 4px; }
+.event .card h2 { font-size: clamp(28px, 7.5vw, 38px); }
+.event .eyebrow { margin-bottom: 2px; }
+.pair { display: flex; gap: 4px; justify-content: center; margin: 6px 0 4px; }
+.pair figure { margin: 0; flex: 1 1 0; min-width: 0; max-width: 300px; }
+.pair:not(.two) figure { max-width: 240px; }
+.pair .ev-wrap { margin: 0; }
+.pair .ev-img, .pair .ev-img.still, .pair .ev-img.sq { aspect-ratio: 1 / 1 !important; max-width: none !important; width: 100%; }
+.pair figcaption { font-size: 13px; font-style: italic; margin-top: -4px; opacity: .9; }
+.verse { margin: 4px 0 6px; font: 14px/1.55 'Noto Sans Telugu', 'Telugu Sangam MN', 'Nirmala UI', system-ui, sans-serif; display: flex; flex-direction: column; opacity: .95; }
+.welcome { margin: 0 0 6px; font: 600 15px 'Noto Sans Telugu', 'Telugu Sangam MN', system-ui, sans-serif; color: #c0392b; }
+.world-pasupu .welcome { color: #8a2a10; }
+.event .blurb { margin: 2px 0 8px; font-size: 14px; }
+.event .facts { grid-template-columns: 1fr 1fr; gap: 6px 12px; margin-bottom: 10px; }
+.event .facts div { grid-template-columns: 1fr; gap: 0; }
+.event .facts dt { padding-top: 0; font-size: 10px; }
+.event .facts dd { font-size: 14px; }
+.event .facts div:nth-child(3) { grid-column: 1 / -1; }
+.event .btn.ghost { min-height: 38px; }
+.world-pellikuthuru { padding-bottom: 46vw; }
+@media (min-width: 900px) { .event .card { max-width: 640px; } .pair figure { max-width: 300px; } }
+
+/* v12 desktop: full-width stage, art left and text right */
+@media (min-width: 900px) {
+  .stage { max-width: none; max-height: none; height: 100vh; min-height: 620px; }
+  .sec { padding: 96px 5vw 36px; }
+  .event .card { max-width: 1120px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 3vw; align-content: center; justify-items: center; text-align: center; }
+  .event .card > * { grid-column: 2; }
+  .event .card > .pair { grid-column: 1; grid-row: 1 / span 12; align-self: center; width: 100%; margin: 0; }
+  .pair figure, .pair:not(.two) figure { max-width: 340px; }
+  .event .card h2 { font-size: clamp(34px, 3.4vw, 54px); }
+  .event .ganesha { height: 72px; }
+  .event .blurb { font-size: 16px; }
+  .event .facts { width: 100%; max-width: 440px; }
+  .event .facts dd { font-size: 16px; }
+  .verse { font-size: 16px; }
+  .rsvp .card.wide, .photos .card.wide { max-width: 640px; }
+  .names { font-size: clamp(54px, 5.2vw, 92px); flex-direction: row; gap: .35em; flex-wrap: wrap; justify-content: center; }
+  .world-pellikuthuru { background: #f3e9de; padding-bottom: 36px; }
+  .world-pellikuthuru::before, .world-pellikuthuru::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50%; pointer-events: none; background: url(./img/pelli-top.webp) left top / auto 80% no-repeat, url(./img/pelli-bottom.webp) left bottom / auto 52% no-repeat; }
+  .world-pellikuthuru::before { left: 0; } .world-pellikuthuru::after { right: 0; transform: scaleX(-1); }
+  .world-pellikuthuru .card { z-index: 1; }
+}
+@media (min-width: 900px) {
+  .world-pellikuthuru::before, .world-pellikuthuru::after { width: 38%; background: url(./img/pelli-top.webp) left top / 100% auto no-repeat, url(./img/pelli-bottom.webp) left bottom / 100% auto no-repeat; -webkit-mask-image: linear-gradient(to right, #000 35%, transparent 100%); mask-image: linear-gradient(to right, #000 35%, transparent 100%); }
+  .world-pellikuthuru .card { max-width: 1000px; }
+}
+@media (min-width: 1600px) { .pair figure, .pair:not(.two) figure { max-width: 400px; } .event .card { max-width: 1240px; } .world-pellikuthuru .card { max-width: 1100px; } .event .facts dd, .event .blurb, .verse { font-size: 18px; } .event .card h2 { font-size: 56px; } }
+
+/* v14: red textured fabric behind Haldi, Mehandi, Wedding, Reception */
+.world-pasupu, .world-mehandi, .world-vivaham, .world-reception { background: linear-gradient(rgba(30,0,4,.22), rgba(30,0,4,.12)), url(./img/red-fabric.jpg) center / cover no-repeat, #7a0f16; color: var(--ivory); }
+.world-pasupu .eyebrow, .world-pasupu .divider, .world-pasupu .corner { color: var(--gold); }
+.world-pasupu .h2gold, .world-pasupu h2.gold, .world-pasupu h3.gold { background-image: linear-gradient(100deg, #b98322 0%, #f6dc8e 22%, #d9a73e 40%, #fff1b8 52%, #c8932b 66%, #f3d37a 85%, #b98322 100%); }
+.world-pasupu .btn.ghost { color: var(--ivory); }
+.world-pasupu .alt-name { color: #f3dfb0; }
+.world-pasupu .ev-img, .world-mehandi .ev-img { -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 52%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 52%, rgba(0,0,0,0) 100%); }
+.world-pasupu .welcome { color: #f6dc8e; }
+
+/* v14b: red fabric on Pellikuthuru too */
+.world-pellikuthuru, .world-pellikuthuru.sec { background: linear-gradient(rgba(30,0,4,.22), rgba(30,0,4,.12)), url(./img/red-fabric.jpg) center / cover no-repeat, #7a0f16 !important; color: var(--ivory); padding-bottom: 36px; }
+.world-pellikuthuru::before, .world-pellikuthuru::after { display: none !important; content: none !important; }
+.world-pellikuthuru .eyebrow, .world-pellikuthuru .divider, .world-pellikuthuru .corner { color: var(--gold); }
+.world-pellikuthuru .h2gold, .world-pellikuthuru h2.gold, .world-pellikuthuru h3.gold { background-image: linear-gradient(100deg, #b98322 0%, #f6dc8e 22%, #d9a73e 40%, #fff1b8 52%, #c8932b 66%, #f3d37a 85%, #b98322 100%); }
+.world-pellikuthuru .btn.ghost { color: var(--ivory); border-color: currentColor; }
+
+/* v15: vine-border template on all five events, images placed diagonally */
+.event { background: url(./img/border-m.jpg) 0 54px / 100% calc(100% - 82px) no-repeat, #440a05 !important; color: var(--ivory); padding: 112px 40px 44px; }
+.event::before, .event::after { display: none !important; content: none !important; }
+.event .card { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 520px; width: 100%; }
+.event .card > * { order: 2; }
+.event .card > .ganesha, .event .card > .eyebrow, .event .card > h2, .event .card > .alt-name { order: 0; }
+.event .card > .f1 { order: 1; align-self: flex-start; }
+.event .card > .f2 { order: 3; align-self: flex-end; }
+.event .card > .btn { order: 4; }
+.event figure { margin: 4px 0; width: min(44vw, 170px); max-width: none; }
+.event figure.solo { align-self: center; width: min(60vw, 240px); }
+.event figure .ev-img { aspect-ratio: 1 / 1 !important; width: 100%; }
+.event figure figcaption { font-size: 13px; font-style: italic; margin-top: -4px; opacity: .9; }
+@media (min-width: 900px) {
+  .event { background-image: url(./img/border-d.jpg); background-size: 100% calc(100% - 82px); padding: 100px 7vw 50px; }
+  .event .card { max-width: 1200px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px) minmax(0, 1fr); column-gap: 2vw; justify-items: center; align-content: stretch; min-height: min(560px, calc(100vh - 190px)); }
+  .event .card > * { grid-column: 2; order: 0; }
+  .event .card > .f1 { grid-column: 1; grid-row: 1 / span 5; align-self: start; justify-self: start; width: min(26vw, 300px); }
+  .event .card > .f2 { grid-column: 3; grid-row: 5 / span 5; align-self: end; justify-self: end; width: min(26vw, 300px); }
+  .event .card > .f1.solo { grid-row: 1 / span 9; align-self: center; justify-self: center; width: min(30vw, 380px); }
+  .event .card > .btn { order: 0; }
+}
+.sec.event, .sec.event.world-pellikuthuru { background: url(./img/border-m.jpg) 0 54px / 100% calc(100% - 82px) no-repeat, #440a05 !important; }
+@media (min-width: 900px) { .sec.event, .sec.event.world-pellikuthuru { background: url(./img/border-d.jpg) 0 54px / 100% calc(100% - 82px) no-repeat, #440a05 !important; } }
+.event figure { width: min(38vw, 150px); }
+.event figure.solo { width: min(56vw, 220px); }
+.event .ganesha { height: 52px; }
+@media (min-width: 900px) {
+  .event .card > .f1, .event .card > .f2 { width: min(100%, 300px); }
+  .event .card > .f1.solo { width: min(100%, 340px); justify-self: center; }
+  .event .ganesha { height: 64px; }
+}
+
+/* v16: everything fits inside the frame; art melts into the maroon */
+.sec.event { height: 100%; min-height: 0; overflow: hidden; box-sizing: border-box; padding: 98px 46px 70px; align-items: center; }
+.event .card { display: grid; width: 100%; max-width: 560px; height: 100%; max-height: 100%; align-content: space-between; justify-items: center; column-gap: 8px; row-gap: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "g g" "e e" "h h" "a a" "f1 v" "f1 w" "b b" "fa f2" "btn btn"; }
+.event .card.solo { grid-template-areas: "g g" "e e" "h h" "f1 f1" "b b" "fa fa" "btn btn"; }
+.event .card > * { order: 0 !important; grid-column: auto; grid-row: auto; margin: 0; }
+.event .card > .ganesha { grid-area: g; height: clamp(34px, 6vh, 56px); margin: 0 auto; }
+.event .card > .eyebrow { grid-area: e; font-size: 10px; }
+.event .card > h2 { grid-area: h; font-size: clamp(24px, 4.4vh, 34px); line-height: 1.15; }
+.event .card > .alt-name { grid-area: a; font-size: clamp(12px, 1.9vh, 15px); }
+.event .card > .f1 { grid-area: f1; align-self: center; justify-self: start; width: 100%; max-width: clamp(110px, 20vh, 190px); }
+.event .card > .f2 { grid-area: f2; align-self: center; justify-self: end; width: 100%; max-width: clamp(110px, 20vh, 190px); }
+.event .card > .f1.solo { justify-self: center; max-width: clamp(130px, 28vh, 280px); }
+.event .card > .verse { grid-area: v; font-size: clamp(10.5px, 1.75vh, 14px); line-height: 1.45; align-self: end; }
+.event .card > .welcome { grid-area: w; font-size: clamp(11px, 1.8vh, 14px); align-self: start; margin-top: 4px; }
+.event .card > .blurb { grid-area: b; font-size: clamp(11.5px, 1.85vh, 14px); line-height: 1.35; margin: 2px 0; }
+.event .card > .facts { grid-area: fa; width: 100%; display: grid; grid-template-columns: 1fr; gap: 3px; align-self: center; text-align: left; }
+.event .card > .facts div { grid-column: auto !important; }
+.event .card.solo > .facts { grid-template-columns: 1fr 1fr; gap: 3px 10px; }
+.event .card > .facts dt { font-size: 9px; } .event .card > .facts dd { font-size: clamp(11.5px, 1.8vh, 14px); line-height: 1.25; }
+.event .card > .btn { grid-area: btn; min-height: 34px; font-size: 12px; padding: 0 16px; }
+.event .card > .f1 figcaption, .event .card > .f2 figcaption { font-size: 11px; margin-top: -2px; }
+.event figure .ev-img { aspect-ratio: 1 / 1 !important; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 40%, rgba(0,0,0,0) 98%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 40%, rgba(0,0,0,0) 98%); }
+.world-pellikuthuru .ev-img { -webkit-mask-image: none !important; mask-image: none !important; }
+.world-vivaham .f1 .ev-img { -webkit-mask-image: none !important; mask-image: none !important; aspect-ratio: 3/2 !important; }
+.event figure.solo .ev-img { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 52%, rgba(0,0,0,0) 99%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 52%, rgba(0,0,0,0) 99%); }
+@media (max-height: 700px) { .event .card > .blurb { display: none; } .sec.event { padding: 88px 42px 62px; } .event .card > .ganesha { height: 28px; } }
+@media (min-width: 900px) {
+  .sec.event { padding: 96px 8vw 66px; }
+  .event .card { max-width: 1200px; grid-template-columns: minmax(0, 1fr) minmax(0, 520px) minmax(0, 1fr); column-gap: 2vw; align-content: stretch; min-height: 0;
+    grid-template-areas: "f1 g ." "f1 e ." "f1 h ." "f1 a ." "f1 v ." "f1 w ." ". b ." ". fa f2" ". btn f2"; grid-template-rows: auto; }
+  .event .card.solo { grid-template-areas: ". g ." "f1 e ." "f1 h ." "f1 b ." "f1 fa ." "f1 btn ."; }
+  .event .card > .f1 { max-width: clamp(160px, 38vh, 330px); align-self: start; }
+  .event .card > .f2 { max-width: clamp(160px, 38vh, 330px); align-self: end; justify-self: end; }
+  .event .card > .f1.solo { align-self: center; max-width: clamp(200px, 44vh, 360px); }
+  .event .card > .facts { grid-template-columns: 1fr 1fr; gap: 4px 14px; max-width: 440px; justify-self: center; }
+  .event .card > .verse { align-self: start; font-size: clamp(13px, 2.1vh, 16px); }
+  .event .card > h2 { font-size: clamp(30px, 5.5vh, 46px); }
+  .event .card > .blurb { font-size: clamp(13px, 2vh, 16px); }
+  .event .card > .facts dd { font-size: clamp(13px, 2vh, 16px); }
+}
+
+@media (min-width: 900px) { .world-pellikuthuru .card { grid-template-areas: "f1 g ." "f1 e ." "f1 h ." "f1 b ." ". fa f2" ". btn f2"; align-content: center; } .world-pellikuthuru .card > .f1 { align-self: center; } }
+.event .ev-wrap { border: 0 !important; background: none !important; box-shadow: none !important; border-radius: 0 !important; }
+.world-vivaham .f2 .ev-img { aspect-ratio: 4 / 3 !important; }
+@media (min-width: 900px) { .world-vivaham .card { grid-template-areas: "f1 g ." "f1 e ." "f1 h ." "f1 b ." ". fa f2" ". btn f2"; align-content: center; } .world-vivaham .card > .f1 { align-self: center; max-width: clamp(220px, 46vh, 400px); } }
+
+/* v18: 2x2 fill layout. Big diagonal pictures, text beside top picture and before bottom picture */
+section.event .card { grid-template-columns: minmax(0,5fr) minmax(0,4fr) !important; column-gap: 8px !important; align-content: stretch !important;
+  grid-template-rows: auto auto auto minmax(0,1fr) minmax(0,1fr) auto !important;
+  grid-template-areas: "g g" "e e" "h h" "f1 t" "fa f2" "btn btn" !important; }
+section.event .card.solo { grid-template-areas: "g g" "e e" "h h" "f1 t" "fa fa" "btn btn" !important; }
+section.event .card > .txt { grid-area: t; align-self: center; justify-self: stretch; display: flex; flex-direction: column; gap: 6px; text-align: center; min-height: 0; }
+section.event .card > .txt > * { margin: 0; align-self: auto; grid-area: auto; }
+section.event .card > .txt .verse { font-size: clamp(11px, 1.9vh, 15px); }
+section.event .card > .f1, section.event .card > .f2 { max-width: none !important; width: 100%; height: 100%; min-height: 0; position: relative; align-self: stretch !important; justify-self: stretch !important; }
+section.event .card > .f1 .ev-wrap, section.event .card > .f2 .ev-wrap { height: 100%; margin: 0; }
+section.event .card > .f1 .ev-img, section.event .card > .f2 .ev-img { width: 100% !important; height: 100% !important; aspect-ratio: auto !important; max-width: none !important; object-fit: contain; }
+section.event .card > .f1 figcaption, section.event .card > .f2 figcaption { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; text-align: center; }
+section.event .card > .facts { align-self: center; grid-template-columns: 1fr !important; max-width: none; justify-self: stretch; }
+section.event .card.solo > .facts { grid-template-columns: 1fr 1fr !important; justify-self: center; }
+section.event .card > .btn { margin-top: 4px; }
+@media (min-width: 900px) {
+  section.event .card { max-width: 1100px; grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; column-gap: 3vw !important;
+    grid-template-areas: "g g" "e e" "h h" "f1 t" "fa f2" "btn btn" !important; }
+  section.event .card.solo { grid-template-areas: "g g" "e e" "h h" "f1 t" "fa fa" "btn btn" !important; }
+  section.event .card > .facts { grid-template-columns: 1fr 1fr !important; max-width: 480px; justify-self: center; }
+  section.event .card > .txt .verse { font-size: clamp(14px, 2.4vh, 19px); }
+  section.event .card > .txt .blurb { font-size: clamp(13px, 2.1vh, 17px); }
+  section.event .card > .facts dd { font-size: clamp(13px, 2.1vh, 17px); }
+  section.event .card > .f1 { justify-self: end !important; } section.event .card > .f2 { justify-self: start !important; }
+}
+section.event .card > .txt { gap: 4px; }
+section.event .card > .txt .alt-name { display: none; }
+section.event .card > .txt .verse { font-size: clamp(10px, 1.65vh, 14px); line-height: 1.35; }
+section.event .card > .txt .welcome { font-size: clamp(10.5px, 1.6vh, 13px); margin: 0; }
+section.event .card > .txt .blurb { font-size: clamp(10px, 1.55vh, 13px); line-height: 1.3; }
+section.event .card > .ganesha { height: clamp(30px, 4.6vh, 44px) !important; }
+section.event .card > h2 { font-size: clamp(22px, 3.8vh, 30px) !important; }
+@media (min-width: 900px) { section.event .card > .txt .alt-name { display: block; font-size: 15px; } section.event .card > .txt .verse { font-size: clamp(14px, 2.4vh, 19px); } section.event .card > .txt .welcome { font-size: clamp(13px, 2vh, 16px); } section.event .card > .txt .blurb { font-size: clamp(13px, 2.1vh, 17px); } section.event .card > h2 { font-size: clamp(30px, 5vh, 42px) !important; } }
+
+/* v19: Haldi uses the marigold backdrop */
+.sec.event.world-pasupu { background: url(./img/haldi-bg.jpg) center / cover no-repeat, #f7edc8 !important; color: #3d1c04; padding-left: 52px; padding-right: 52px; }
+@media (min-width: 900px) { .sec.event.world-pasupu { background: url(./img/haldi-bg-d.jpg) center 80% / cover no-repeat, #f7edc8 !important; } }
+.world-pasupu .card, .world-pasupu .card * { color: #3d1c04 !important; text-shadow: 0 0 6px rgba(255,248,220,.95), 0 0 2px rgba(255,248,220,.9); }
+.world-pasupu .card h2, .world-pasupu .card h2.gold { color: #8a4b00 !important; background: none !important; -webkit-text-fill-color: #8a4b00 !important; }
+.world-pasupu .card .welcome { color: #a04400 !important; }
+.world-pasupu .card .eyebrow, .world-pasupu .card dt { color: #7a4a10 !important; }
+.world-pasupu .card .btn { border-color: #8a4b00; background: rgba(255,248,220,.7); }
+
+/* v20: Haldi pictures are cutouts sitting straight on the backdrop, bigger */
+.world-pasupu .ev-img, .world-pasupu figure .ev-img { -webkit-mask-image: none !important; mask-image: none !important; object-fit: contain !important; }
+.sec.event.world-pasupu { padding-left: 26px; padding-right: 26px; }
+.world-pasupu .card > .f1 .ev-img { transform: scale(1.14); transform-origin: left top; }
+.world-pasupu .card > .f2 .ev-img { transform: scale(1.14); transform-origin: right bottom; }
+.world-pasupu .card > .f1, .world-pasupu .card > .f2 { overflow: visible; }
+.world-pasupu .ev-img { filter: drop-shadow(0 1px 1px rgba(60,30,0,.25)); }
+@media (min-width: 900px) { .world-pasupu .card { max-width: 1240px !important; } .world-pasupu .card > .f1 .ev-img, .world-pasupu .card > .f2 .ev-img { transform: scale(1.08); } }
+.world-pasupu .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+.world-pasupu .card > .f1 .ev-img { transform: scale(1.1); }
+.world-pasupu .card > .f2 .ev-img { transform: scale(1.38); }
+.world-pasupu .card > .facts { padding-right: 34px; }
+@media (min-width: 900px) { .world-pasupu .card > .f2 .ev-img { transform: scale(1.12); } .world-pasupu .card > .facts { padding-right: 0; } }
+.world-pasupu .ev-wrap, .world-pasupu figure { overflow: visible !important; }
+.world-pasupu .card > .f2 .ev-img { transform-origin: right 88%; }
+.world-pasupu .card > .f2 figcaption { bottom: -16px !important; z-index: 2; }
+.world-pasupu .card > .f1 figcaption { bottom: -12px !important; }
+.world-pasupu .card > .f1 .ev-img { transform: scale(1.04) translateX(-3%); transform-origin: left top; }
+.world-pasupu .card > .f2 .ev-img { transform-origin: right 62%; }
+.world-pasupu .card > .f2 figcaption { bottom: 0 !important; }
+.world-pasupu .card > .f1 figcaption { bottom: -6px !important; }
+@media (min-width: 900px) {
+  .world-pasupu .card > .f1 .ev-img { transform: scale(1.3) translateX(-4%); transform-origin: 60% 50%; }
+  .world-pasupu .card > .f2 .ev-img { transform: scale(1.3); transform-origin: right 60%; }
+  .world-pasupu .card > .f1 figcaption, .world-pasupu .card > .f2 figcaption { bottom: -30px !important; }
+}
+@media (max-height: 700px) {
+  .world-pasupu .card > .txt .blurb, .world-pasupu .card figcaption, .world-pasupu .card > .eyebrow { display: none; }
+  .world-pasupu .card > .facts dd { font-size: 11px; line-height: 1.2; }
+}
+@media (min-width: 900px) {
+  .world-pasupu .card > .f2 .ev-img { transform: scale(1.2); transform-origin: right 45%; }
+  .world-pasupu .card > .f1 figcaption, .world-pasupu .card > .f2 figcaption { display: none; }
+}
+
+/* v21: other events: cutouts straight on the maroon template, bigger */
+.world-mehandi .ev-img, .world-vivaham .ev-img, .world-reception .ev-img, .world-pellikuthuru .ev-img { -webkit-mask-image: none !important; mask-image: none !important; object-fit: contain !important; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+.world-mehandi .ev-wrap, .world-vivaham .ev-wrap, .world-reception .ev-wrap, .world-pellikuthuru .ev-wrap, .world-mehandi figure, .world-vivaham figure, .world-reception figure, .world-pellikuthuru figure { overflow: visible !important; }
+.world-mehandi .card > .f1 .ev-img, .world-vivaham .card > .f1 .ev-img, .world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.3); transform-origin: left top; }
+.world-mehandi .card > .f2 .ev-img, .world-vivaham .card > .f2 .ev-img, .world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.35); transform-origin: right 70%; }
+.world-reception .card > .f1 .ev-img { transform: scale(1.1); }
+.world-vivaham .f1 .ev-img, .world-vivaham .f2 .ev-img { aspect-ratio: auto !important; }
+@media (min-width: 900px) {
+  .world-mehandi .card > .f1 .ev-img, .world-vivaham .card > .f1 .ev-img, .world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.25); transform-origin: 60% 50%; }
+  .world-mehandi .card > .f2 .ev-img, .world-vivaham .card > .f2 .ev-img, .world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.2); transform-origin: right 50%; }
+  .world-reception .card > .f1 .ev-img { transform: scale(1.2); }
+}
+.world-mehandi .card, .world-vivaham .card, .world-pellikuthuru .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+.world-mehandi .card > .f1 .ev-img, .world-vivaham .card > .f1 .ev-img, .world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.22); transform-origin: 25% 50%; }
+.world-mehandi .card > .f2 .ev-img, .world-vivaham .card > .f2 .ev-img, .world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.4); transform-origin: right 62%; }
+.world-reception .card > .f1 .ev-img { transform: scale(1.3); transform-origin: 30% 50%; }
+.world-vivaham .ev-img { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%) !important; mask-image: linear-gradient(to bottom, transparent 0, #000 22%) !important; }
+.world-mehandi .card > .f2 figcaption, .world-vivaham .card > .f2 figcaption, .world-pellikuthuru .card > .f2 figcaption { bottom: 0 !important; }
+@media (min-width: 900px) {
+  .world-mehandi .card, .world-vivaham .card, .world-pellikuthuru .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+  .world-mehandi .card > .f1 .ev-img, .world-vivaham .card > .f1 .ev-img, .world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.2); transform-origin: 60% 50%; }
+  .world-mehandi .card > .f2 .ev-img, .world-vivaham .card > .f2 .ev-img, .world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.15); transform-origin: right 50%; }
+  .world-reception .card > .f1 .ev-img { transform: scale(1.15); transform-origin: 60% 50%; }
+  .world-mehandi .card > figure figcaption, .world-vivaham .card > figure figcaption, .world-pellikuthuru .card > figure figcaption { display: none; }
+}
+@media (max-width: 899px) {
+  section.event.world-reception .card { grid-template-columns: minmax(0,1fr) !important; grid-template-rows: auto auto auto minmax(0,1fr) auto auto auto !important;
+    grid-template-areas: "g" "e" "h" "f1" "t" "fa" "btn" !important; }
+  .world-reception .card > .f1 .ev-img { transform: scale(1.0); transform-origin: center; }
+  .world-reception .card > .txt { text-align: center; }
+}
+section.event.world-vivaham .card .ev-img { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 20%) !important; mask-image: linear-gradient(to bottom, transparent 0, #000 20%) !important; }
+@media (min-width: 900px) {
+  .world-reception .card > .f1 .ev-img { transform: scale(1.0); transform-origin: 60% 50%; }
+  .world-vivaham .card > .f1 .ev-img { transform: scale(1.08); transform-origin: 60% 100%; }
+}
+@media (min-width: 900px) {
+  .world-reception .card > .f1 .ev-img { transform: translate(44vw, 85px) scale(1.0); transform-origin: center; }
+}
+@media (min-width: 900px) {
+  section.event.world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: translate(44vw, 85px) scale(1.0) !important; transform-origin: center !important; }
+}
+
+/* v22: Mehandi on the pale floral template, dark text; Haldi + Mehandi facts on top, verse/blurb at bottom */
+.sec.event.world-mehandi { background: url(./img/mehandi-bg.jpg) center bottom / cover no-repeat, #f1ecd6 !important; color: #3d1c04; padding-left: 26px; padding-right: 26px; }
+@media (min-width: 900px) { .sec.event.world-mehandi { background: url(./img/mehandi-bg-d.jpg) center bottom / cover no-repeat, #f1ecd6 !important; } }
+.world-mehandi .card, .world-mehandi .card * { color: #3d1c04 !important; text-shadow: 0 0 6px rgba(255,250,232,.95), 0 0 2px rgba(255,250,232,.9); }
+.world-mehandi .card h2, .world-mehandi .card h2.gold { color: #8a4b00 !important; background: none !important; -webkit-text-fill-color: #8a4b00 !important; }
+.world-mehandi .card .welcome { color: #a04400 !important; }
+.world-mehandi .card .eyebrow, .world-mehandi .card dt { color: #7a4a10 !important; }
+.world-mehandi .card .btn { border-color: #8a4b00; background: rgba(255,250,232,.75); }
+.world-mehandi .ev-img { filter: drop-shadow(0 1px 1px rgba(60,30,0,.25)); }
+.world-mehandi .corner { color: #8a5a00 !important; opacity: .5; }
+section.event.world-pasupu .card, section.event.world-mehandi .card { grid-template-areas: "g g" "e e" "h h" "f1 fa" "t f2" "btn btn" !important; }
+section.event.world-pasupu .card > .facts, section.event.world-mehandi .card > .facts { align-self: center; }
+section.event.world-pasupu .card > .txt, section.event.world-mehandi .card > .txt { align-self: center; }
+@media (max-width: 899px) {
+  section.event.world-pasupu .card, section.event.world-mehandi .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+  .world-mehandi .card > .f1 .ev-img { transform: scale(1.0) !important; transform-origin: left center !important; }
+  .world-mehandi .card > .f2 .ev-img { transform: scale(1.08) !important; transform-origin: right center !important; }
+  .world-pasupu .card > .f1 .ev-img { transform: scale(1.0) !important; transform-origin: left center !important; }
+  .world-pasupu .card > .f2 .ev-img { transform: scale(1.12) !important; transform-origin: right center !important; }
+}
+
+/* v23: all-caps titles; tighter, bigger pictures on Haldi/Mehandi */
+section.event .card > h2, .sec.rsvp h2 { text-transform: uppercase; letter-spacing: .08em; }
+@media (max-width: 899px) {
+  section.event.world-pasupu .card, section.event.world-mehandi .card { grid-template-columns: repeat(12, minmax(0,1fr)) !important;
+    grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 f1 f1 fa fa fa fa fa" "t t t t t f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  .world-mehandi .card > .f1 .ev-img, .world-pasupu .card > .f1 .ev-img { transform: scale(1.15) !important; transform-origin: left center !important; }
+  .world-mehandi .card > .f2 .ev-img, .world-pasupu .card > .f2 .ev-img { transform: scale(1.15) !important; transform-origin: right center !important; }
+}
+@media (max-width: 899px) {
+  .world-mehandi .card > .f1 .ev-img, .world-pasupu .card > .f1 .ev-img { transform: scale(1.0) !important; transform-origin: left center !important; }
+  .world-mehandi .card > .f2 .ev-img, .world-pasupu .card > .f2 .ev-img { transform: scale(1.05) !important; transform-origin: right center !important; }
+}
+@media (max-width: 899px) and (max-height: 700px) {
+  section.event.world-pasupu .card > .txt .blurb, section.event.world-mehandi .card > .txt .blurb, section.event .card figcaption, section.event.world-pasupu .card > .txt .alt-name { display: none !important; }
+  section.event.world-pasupu .card > .txt .verse, section.event.world-mehandi .card > .txt .verse { font-size: 10.5px !important; line-height: 1.3 !important; }
+  section.event.world-pasupu .card > .txt .welcome { font-size: 10.5px !important; }
+  section.event .card > .facts dd { font-size: 11.5px !important; line-height: 1.2 !important; }
+  section.event .card > h2 { font-size: 22px !important; }
+}
+
+/* v24: Pellikuthuru on cream garland backdrop, dark text */
+.sec.event.world-pellikuthuru { background: url(./img/pk-bg.jpg) center / 100% 100% no-repeat, #efe6dc !important; color: #3d1c04; padding-left: 30px; padding-right: 30px; }
+@media (min-width: 900px) { .sec.event.world-pellikuthuru { background: url(./img/pk-bg-d.jpg) center / cover no-repeat, #efe6dc !important; } }
+.world-pellikuthuru .card, .world-pellikuthuru .card * { color: #3d1c04 !important; text-shadow: 0 0 6px rgba(255,248,240,.95), 0 0 2px rgba(255,248,240,.9); }
+.world-pellikuthuru .card h2, .world-pellikuthuru .card h2.gold { color: #8a2a3a !important; background: none !important; -webkit-text-fill-color: #8a2a3a !important; }
+.world-pellikuthuru .card .welcome { color: #a03050 !important; }
+.world-pellikuthuru .card .eyebrow, .world-pellikuthuru .card dt { color: #7a4a30 !important; }
+.world-pellikuthuru .card .btn { border-color: #8a2a3a; background: rgba(255,248,240,.8); }
+.world-pellikuthuru .ev-img { filter: drop-shadow(0 1px 1px rgba(60,30,0,.25)); }
+.world-pellikuthuru .corner { display: none; }
+@media (max-width: 899px) {
+  section.event.world-pellikuthuru .card { grid-template-columns: repeat(12, minmax(0,1fr)) !important;
+    grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 f1 f1 t t t t t" "fa fa fa fa fa f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  .world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.0) !important; transform-origin: left center !important; }
+  .world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.05) !important; transform-origin: right center !important; }
+}
+@media (max-width: 899px) and (max-height: 700px) {
+  section.event.world-pellikuthuru .card > .txt .blurb, .world-pellikuthuru .card figcaption { display: none !important; }
+  section.event.world-pellikuthuru .card > .txt .verse { font-size: 10.5px !important; }
+}
+@media (min-width: 900px) { .sec.event.world-pellikuthuru { background: url(./img/pk-bg-d.jpg) center / 100% 100% no-repeat, #efe6dc !important; } }
+@media (max-width: 899px) {
+  section.event.world-pellikuthuru .card { grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 f1 f1 t t t t t" "f2 f2 f2 f2 f2 fa fa fa fa fa fa ." "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  section.event.world-pellikuthuru .card > h2 { font-size: 19px !important; letter-spacing: .03em; white-space: nowrap; }
+  .world-pellikuthuru .card > .f2 .ev-img { transform-origin: left center !important; }
+}
+
+/* v25: Pellikuthuru, Wedding, Reception use the Haldi/Mehandi layout; no captions */
+section.event .card figcaption { display: none !important; }
+section.event.world-pellikuthuru .card, section.event.world-vivaham .card, section.event.world-reception .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; grid-template-rows: auto auto auto minmax(0,1fr) minmax(0,1fr) auto !important;
+  grid-template-areas: "g g" "e e" "h h" "f1 fa" "t f2" "btn btn" !important; }
+section.event.world-pellikuthuru .card > .facts, section.event.world-vivaham .card > .facts, section.event.world-reception .card > .facts,
+section.event.world-pellikuthuru .card > .txt, section.event.world-vivaham .card > .txt, section.event.world-reception .card > .txt { align-self: center; text-align: left; }
+@media (max-width: 899px) {
+  section.event.world-pellikuthuru .card, section.event.world-vivaham .card, section.event.world-reception .card { grid-template-columns: repeat(12, minmax(0,1fr)) !important;
+    grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 f1 f1 fa fa fa fa fa" "t t t t t f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  section.event.world-pellikuthuru .card > h2 { font-size: 17px !important; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 0 8px #fff8f0, 0 0 4px #fff8f0, 0 0 2px #fff8f0; }
+}
+.world-pellikuthuru .card > .f1 .ev-img, .world-vivaham .card > .f1 .ev-img, .world-reception .card > .f1 .ev-img { transform: scale(1.0) !important; transform-origin: left center !important; }
+.world-pellikuthuru .card > .f2 .ev-img, .world-vivaham .card > .f2 .ev-img, .world-reception .card > .f2 .ev-img { transform: scale(1.05) !important; transform-origin: right center !important; }
+section.event.world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: scale(1.0) !important; transform-origin: left center !important; }
+@media (max-width: 899px) and (max-height: 700px) {
+  section.event.world-vivaham .card > .txt .blurb, section.event.world-reception .card > .txt .blurb { display: none !important; }
+  section.event.world-vivaham .card > .txt .verse, section.event.world-reception .card > .txt .verse { font-size: 10.5px !important; line-height: 1.3 !important; }
+}
+
+/* v25b: bigger pictures, reception couple spans both rows */
+@media (max-width: 899px) {
+  .world-pellikuthuru .card > .f1 .ev-img, .world-vivaham .card > .f1 .ev-img { transform: scale(1.4) !important; transform-origin: 25% 50% !important; }
+  .world-pellikuthuru .card > .f2 .ev-img, .world-vivaham .card > .f2 .ev-img { transform: scale(1.45) !important; transform-origin: 75% 50% !important; }
+  section.event.world-reception .card { grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 f1 f1 fa fa fa fa fa" "f1 f1 f1 f1 f1 f1 f1 t t t t t" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  .world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: scale(1.35) !important; transform-origin: 40% 50% !important; }
+  .world-reception .card > .facts { grid-template-columns: 1fr !important; }
+  .world-pellikuthuru .card > .txt { background: radial-gradient(ellipse at center, rgba(255,248,240,.9) 30%, rgba(255,248,240,0) 78%); padding: 8px 4px; }
+}
+@media (max-width: 899px) {
+  .world-vivaham .card > .f1 .ev-img { transform: scale(1.08) !important; transform-origin: left center !important; }
+  .world-vivaham .card > .f2 .ev-img { transform: scale(1.12) !important; transform-origin: right center !important; }
+  section.event.world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: scale(1.85) !important; transform-origin: 45% 50% !important; }
+  section.event.world-reception .card > dl.facts, section.event.world-reception .card > .facts { display: block !important; }
+}
+@media (min-width: 900px) {
+  section.event.world-reception .card { grid-template-areas: "g g" "e e" "h h" "f1 fa" "f1 t" "btn btn" !important; }
+  section.event.world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: scale(1.5) !important; transform-origin: 50% 45% !important; }
+  .world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.5) !important; transform-origin: 50% 30% !important; }
+  .world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.45) !important; transform-origin: 60% 65% !important; }
+  .world-vivaham .card > .f1 .ev-img { transform: scale(1.05) !important; transform-origin: 50% 20% !important; }
+  .world-vivaham .card > .f2 .ev-img { transform: scale(1.0) !important; }
+}
+
+/* v26: Wedding on the user's feet backdrop, dark text */
+.sec.event.world-vivaham { background: url(./img/wd-bg.jpg) center / 100% 100% no-repeat, #f3ead8 !important; color: #3d1c04; padding-left: 26px; padding-right: 26px; }
+@media (min-width: 900px) { .sec.event.world-vivaham { background: url(./img/wd-bg-d.jpg) center / 100% 100% no-repeat, #f3ead8 !important; } }
+.world-vivaham .card, .world-vivaham .card * { color: #3d1c04 !important; text-shadow: 0 0 6px rgba(250,244,230,.95), 0 0 2px rgba(250,244,230,.9); }
+.world-vivaham .card h2, .world-vivaham .card h2.gold { color: #8a2a1a !important; background: none !important; -webkit-text-fill-color: #8a2a1a !important; }
+.world-vivaham .card .eyebrow, .world-vivaham .card dt { color: #7a4a30 !important; }
+.world-vivaham .card .btn { border-color: #8a2a1a; background: rgba(250,244,230,.85); }
+.world-vivaham .corner, .world-vivaham .card::before, .world-vivaham .card::after, .sec.event.world-vivaham::before, .sec.event.world-vivaham::after { display: none !important; }
+.world-vivaham .ev-img { filter: drop-shadow(0 1px 1px rgba(60,30,0,.3)); -webkit-mask-image: none !important; mask-image: none !important; }
+@media (max-width: 899px) {
+  section.event.world-vivaham .card { padding-top: 34vh !important; }
+  .world-vivaham .card > .f1 .ev-img { transform: scale(1.0) !important; transform-origin: left center !important; }
+  .world-vivaham .card > .f2 .ev-img { transform: scale(1.05) !important; transform-origin: right center !important; }
+}
+@media (min-width: 900px) { section.event.world-vivaham .card { padding-top: 30vh !important; } }
+section.event.world-vivaham .card > .f1 { display: none !important; }
+section.event.world-vivaham .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; grid-template-rows: auto auto auto auto minmax(0,1fr) auto !important; grid-template-areas: "g g" "e e" "h h" "fa fa" "t f2" "btn btn" !important; }
+section.event.world-vivaham .card > .facts { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px 18px; align-self: start; margin-top: 6px; }
+@media (max-width: 899px) { section.event.world-vivaham .card { grid-template-columns: repeat(12, minmax(0,1fr)) !important; grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "fa fa fa fa fa fa fa fa fa fa fa fa" "t t t t t f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; padding-top: 38vh !important; }
+  .world-vivaham .card > .f2 .ev-img { transform: scale(1.3) !important; transform-origin: right bottom !important; } }
+@media (min-width: 900px) { .world-vivaham .card > .f2 .ev-img { transform: scale(1.2) !important; transform-origin: right bottom !important; } }
+section.event.world-vivaham .card > .f2 { display: none !important; }
+section.event.world-vivaham .card { grid-template-columns: minmax(0,1fr) !important; grid-template-rows: auto auto auto auto auto minmax(0,1fr) auto !important; grid-template-areas: "g" "e" "h" "fa" "t" "." "btn" !important; }
+section.event.world-vivaham .card > .txt { text-align: center; align-self: start; margin-top: 14px; }
+section.event.world-vivaham .card > .facts { max-width: 560px; margin-left: auto; margin-right: auto; width: 100%; }
+@media (max-width: 899px) { section.event.world-vivaham .card { grid-template-columns: minmax(0,1fr) !important; grid-template-areas: "g" "e" "h" "fa" "t" "." "btn" !important; } }
+@media (min-width: 900px) { .sec.event.world-vivaham { background: url(./img/wd-bg-d.jpg) center / cover no-repeat, #f6efe2 !important; } section.event.world-vivaham .card { padding-top: 6vh !important; } }
+@media (min-width: 900px) { section.event.world-vivaham .card { padding-top: 33vh !important; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card { padding-top: 29vh !important; } section.event.world-vivaham .card > .txt .blurb { display: none !important; } section.event.world-vivaham .card > h2 { font-size: 22px !important; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card { padding-top: 22vh !important; } section.event.world-vivaham .card > .facts { gap: 2px 14px; } section.event.world-vivaham .card > .facts dd { font-size: 11px !important; line-height: 1.15 !important; } section.event.world-vivaham .card > .txt { margin-top: 6px; } }
+/* v27 mehandi: green template */
+.sec.event.world-mehandi { background: url(./img/me-bg.jpg) center / 100% 100% no-repeat, #476a1e !important; color: #fbf1d6; }
+@media (min-width: 900px) { .sec.event.world-mehandi { background: url(./img/me-bg-d.jpg) center / 100% 100% no-repeat, #476a1e !important; } }
+.world-mehandi .card, .world-mehandi .card * { color: #fbf1d6 !important; text-shadow: 0 1px 2px rgba(10,25,0,.55) !important; }
+.world-mehandi .card h2, .world-mehandi .card h2.gold { color: #f3d98a !important; -webkit-text-fill-color: #f3d98a !important; background: none !important; }
+.world-mehandi .card .welcome, .world-mehandi .card .eyebrow, .world-mehandi .card dt { color: #f3d98a !important; }
+.world-mehandi .card .btn { border-color: #f3d98a; background: rgba(10,30,0,.3); }
+.world-mehandi .ev-img { filter: drop-shadow(0 1px 2px rgba(10,25,0,.5)); }
+.world-mehandi .corner { display: none; }
+@media (max-height: 700px) and (max-width: 899px) { section.event.world-mehandi .card > .txt .blurb { display: none !important; } }
+.world-pellikuthuru .card > .f1 .ev-img { transform: scale(1.12); transform-origin: left top; }
+.world-pellikuthuru .card > .f2 .ev-img { transform: scale(1.3); }
+.world-pellikuthuru .card > .f1 .ev-img { transform: translateX(-10px) scale(1.08) !important; transform-origin: left top !important; }
+@media (min-width: 900px) { .world-pellikuthuru .card > .f1 .ev-img { transform: translateY(35px) scale(1.2) !important; transform-origin: center top !important; } }
+/* v32: Wedding uses the two couple cutouts in the same layout as the other events */
+section.event.world-vivaham .card > .f1, section.event.world-vivaham .card > .f2 { display: block !important; }
+section.event.world-vivaham .card { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; grid-template-rows: auto auto auto minmax(0,1fr) minmax(0,1fr) auto !important; grid-template-areas: "g g" "e e" "h h" "f1 fa" "t f2" "btn btn" !important; }
+section.event.world-vivaham .card > .facts { display: grid !important; grid-template-columns: 1fr; gap: 4px; align-self: center; margin: 0; max-width: none; width: auto; text-align: left; }
+section.event.world-vivaham .card > .txt { text-align: left; align-self: center; margin-top: 0; }
+@media (max-width: 899px) { section.event.world-vivaham .card { grid-template-columns: repeat(12, minmax(0,1fr)) !important; grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 f1 f1 fa fa fa fa fa" "t t t t t f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; } }
+.world-vivaham .ev-img, section.event.world-vivaham .card .ev-img { -webkit-mask-image: none !important; mask-image: none !important; object-fit: contain !important; aspect-ratio: 1 / 1 !important; filter: drop-shadow(0 1px 2px rgba(60,30,0,.3)); }
+.world-vivaham .card > .f1 .ev-img { transform: scale(1.1) !important; transform-origin: left top !important; }
+.world-vivaham .card > .f2 .ev-img { transform: scale(1.3) !important; transform-origin: right 70% !important; }
+@media (max-width: 899px) { section.event.world-vivaham .card { padding-top: 33vh !important; } }
+@media (max-width: 899px) { section.event.world-vivaham .card { padding-top: 23vh !important; } section.event.world-vivaham .card > .facts dd { font-size: 13px !important; line-height: 1.2 !important; } }
+@media (max-width: 899px) { section.event.world-vivaham .card { padding-top: 24.5vh !important; } section.event.world-vivaham .card > .facts { gap: 2px !important; } section.event.world-vivaham .card > .facts dd { font-size: 12.5px !important; } section.event.world-vivaham .card > .facts dt { font-size: 9px !important; }
+ .world-vivaham .card > .f1 .ev-img { transform: scale(1.0) !important; } .world-vivaham .card > .f2 .ev-img { transform: scale(1.2) !important; transform-origin: right bottom !important; } }
+@media (max-width: 899px) { section.event.world-vivaham .card > .facts { align-self: start !important; margin-top: 8px !important; } section.event.world-vivaham .card > .f1 { align-self: start; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card > .facts dd { font-size: 11px !important; line-height: 1.12 !important; } section.event.world-vivaham .card > .facts dt { font-size: 8px !important; } .world-vivaham .card > .f2 .ev-img { transform: scale(1.0) !important; } section.event.world-vivaham .card { padding-top: 25vh !important; } }
+@media (min-width: 900px) {
+  section.event.world-vivaham { position: relative; }
+  section.event.world-vivaham .card { grid-template-columns: minmax(0,1fr) !important; grid-template-rows: auto auto auto auto auto minmax(0,1fr) auto !important; grid-template-areas: "g" "e" "h" "fa" "t" "." "btn" !important; padding-top: 33vh !important; }
+  section.event.world-vivaham .card > .facts { grid-template-columns: 1fr 1fr; max-width: 520px; margin: 6px auto 0 !important; align-self: start !important; }
+  section.event.world-vivaham .card > .txt { text-align: center; align-self: start; margin-top: 10px; }
+  section.event.world-vivaham .card > .f1, section.event.world-vivaham .card > .f2 { position: absolute !important; width: min(31vw, 62vh); max-width: none; z-index: 1; }
+  section.event.world-vivaham .card > .f1 { left: 3%; top: 17vh; }
+  section.event.world-vivaham .card > .f2 { right: 3%; bottom: 8vh; width: min(33vw, 56vh); }
+  .world-vivaham .card > .f1 .ev-img, .world-vivaham .card > .f2 .ev-img { transform: none !important; }
+}
+@media (min-width: 900px) { section.event.world-vivaham .card { position: static !important; } section.event.world-vivaham .card > .facts, section.event.world-vivaham .card > .txt, section.event.world-vivaham .card > h2, section.event.world-vivaham .card > .btn { position: relative; z-index: 2; }
+  section.event.world-vivaham .card > .f1 { left: 2.5%; top: 22vh; width: min(29vw, 52vh); }
+  section.event.world-vivaham .card > .f2 { right: 2.5%; bottom: 8vh; width: min(30vw, 52vh); } }
+@media (min-width: 900px) { section.event.world-vivaham .card > .facts { max-width: 440px; gap: 4px 14px; } section.event.world-vivaham .card > .f1 { left: 2%; top: 20vh; width: min(27vw, 50vh); } section.event.world-vivaham .card > .txt { max-width: 440px; margin-left: auto; margin-right: auto; } }
+@media (max-width: 899px) { section.event.world-vivaham .card { grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "f1 f1 f1 f1 f1 fa fa fa fa fa fa fa" "t t t t t f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  .world-vivaham .card > .f2 .ev-img { transform: scale(1.05) !important; transform-origin: right bottom !important; } .world-vivaham .card > .f1 .ev-img { transform: scale(1.1) !important; } }
+@media (max-width: 899px) and (max-height: 700px) { .world-vivaham .card > .f2 .ev-img { transform: scale(0.95) !important; } }
+/* v33 temple backdrop */
+.sec.event.world-vivaham { background: url(./img/wd-temple.jpg) center / cover no-repeat, #f3e6c9 !important; }
+@media (min-width: 900px) { .sec.event.world-vivaham { background: url(./img/wd-temple.jpg) center / auto 100% no-repeat, #f4e8cc !important; } }
+@media (max-width: 899px) { section.event.world-vivaham .card { padding-top: 13vh !important; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card { padding-top: 12vh !important; } }
+@media (min-width: 900px) { section.event.world-vivaham .card > .facts { max-width: 360px !important; gap: 4px 12px !important; } section.event.world-vivaham .card > .facts dd { font-size: 15px !important; line-height: 1.2 !important; } section.event.world-vivaham .card > .txt { max-width: 360px !important; } section.event.world-vivaham .card > .txt .blurb, section.event.world-vivaham .card > .txt .verse { font-size: 14px !important; } }
+/* v35 verses on wedding only */
+section.event.world-vivaham .card > .txt .blurb { display: none !important; }
+section.event.world-vivaham .card > .txt .verse { display: block !important; font-size: 12px !important; line-height: 1.4 !important; font-style: normal; }
+section.event.world-vivaham .card > .txt .verse span { display: block; }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card > .txt .verse { font-size: 10.5px !important; line-height: 1.3 !important; } }
+@media (min-width: 900px) { section.event.world-vivaham .card > .txt .verse { font-size: 15px !important; } }
+section.event.world-vivaham .card > .txt .verse span:nth-child(3) { margin-top: 5px; }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card > .txt .verse { font-size: 9.5px !important; line-height: 1.22 !important; } section.event.world-vivaham .card > .txt .verse span:nth-child(3) { margin-top: 2px; } section.event.world-vivaham .card > .txt { margin-top: -6px; } }
+/* v36 tighter top, bigger pictures */
+@media (max-width: 899px) { section.event.world-vivaham .card { padding-top: 4vh !important; } .world-vivaham .card > .f1 .ev-img { transform: scale(1.5) !important; transform-origin: 30% 40% !important; } .world-vivaham .card > .f2 .ev-img { transform: scale(1.5) !important; transform-origin: right bottom !important; } section.event.world-vivaham .card > .txt { align-self: end !important; margin-bottom: 8px; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-vivaham .card { padding-top: 2vh !important; } .world-vivaham .card > .f1 .ev-img { transform: scale(1.2) !important; } .world-vivaham .card > .f2 .ev-img { transform: scale(1.2) !important; } }
+@media (max-width: 899px) { section.event.world-vivaham .card { padding-top: 0 !important; } .world-vivaham .card > .f1 .ev-img { transform: scale(1.22) !important; transform-origin: 20% 30% !important; } .world-vivaham .card > .f2 .ev-img { transform: scale(1.25) !important; transform-origin: right bottom !important; } }
+@media (max-width: 899px) { .world-vivaham .card > .f1 .ev-img { transform: translateY(34px) scale(1.25) !important; transform-origin: 15% 30% !important; } .world-vivaham .card > .f2 .ev-img { transform: translateY(-4px) scale(1.3) !important; } }
+@media (max-width: 899px) and (max-height: 700px) { .world-vivaham .card > .f1 .ev-img { transform: translateY(10px) scale(1.1) !important; } .world-vivaham .card > .f2 .ev-img { transform: scale(1.1) !important; } }
+@media (max-width: 899px) and (max-height: 700px) { .world-vivaham .card > .f1 .ev-img { transform: translateY(-16px) scale(1.05) !important; } .world-vivaham .card > .f2 .ev-img { transform: translateY(-14px) scale(1.0) !important; } section.event.world-vivaham .card > .txt .verse { font-size: 9px !important; line-height: 1.15 !important; } section.event.world-vivaham .card > .txt { margin-top: -26px !important; margin-bottom: 0 !important; } section.event.world-vivaham .card > .btn { margin-top: -6px !important; } }
+@media (min-width: 900px) {
+  section.event.world-vivaham .card { padding-top: 15vh !important; }
+  section.event.world-vivaham .card > .f1 { top: 12vh !important; bottom: auto !important; height: auto !important; left: 1.5% !important; width: min(29vw, 56vh) !important; }
+  section.event.world-vivaham .card > .f2 { top: auto !important; bottom: 7vh !important; height: auto !important; right: 1.5% !important; width: min(30vw, 58vh) !important; }
+  .world-vivaham .card > .f1 .ev-img, .world-vivaham .card > .f2 .ev-img { height: auto !important; width: 100% !important; }
+}
+@media (max-width: 899px) and (max-height: 700px) { .world-vivaham .card > .f1 .ev-img { transform: translateY(-8px) scale(1.2) !important; } .world-vivaham .card > .f2 .ev-img { transform: translateY(-34px) scale(1.15) !important; } section.event.world-vivaham .card > .txt { transform: translateY(-34px); } }
+/* v37 first picture top-right, facts left */
+@media (max-width: 899px) { section.event.world-vivaham .card { grid-template-areas: "g g g g g g g g g g g g" "e e e e e e e e e e e e" "h h h h h h h h h h h h" "fa fa fa fa fa f1 f1 f1 f1 f1 f1 f1" "t t t t t f2 f2 f2 f2 f2 f2 f2" "btn btn btn btn btn btn btn btn btn btn btn btn" !important; }
+  section.event.world-vivaham .card > .facts { align-self: center !important; margin-top: 0 !important; }
+  .world-vivaham .card > .f1 .ev-img { transform: scale(1.3) !important; transform-origin: right center !important; } }
+@media (max-width: 899px) and (max-height: 700px) { .world-vivaham .card > .f1 .ev-img { transform: scale(1.2) !important; transform-origin: right center !important; } }
+@media (max-width: 899px) { .world-vivaham .card > .f1 .ev-img { transform: translateY(-6px) scale(1.04) !important; transform-origin: right center !important; } section.event.world-vivaham .card > .facts dd { font-size: 12px !important; } }
+@media (max-width: 899px) and (max-height: 700px) { .world-vivaham .card > .f1 .ev-img { transform: scale(0.95) !important; } section.event.world-vivaham .card > .facts dd { font-size: 10.5px !important; } }
+/* v38 cocktail backdrop */
+.sec.event.world-reception { background: url(./img/cocktail-bg.jpg) center / 100% 100% no-repeat, #0a1738 !important; color: #f6ecd2; }
+@media (min-width: 900px) { .sec.event.world-reception { background: url(./img/cocktail-bg.jpg) center / auto 100% no-repeat, #0b1a3c !important; } }
+.world-reception .card, .world-reception .card * { color: #f6ecd2 !important; text-shadow: 0 1px 3px rgba(0,0,10,.7) !important; }
+.world-reception .card h2, .world-reception .card h2.gold { color: #e9cf8e !important; -webkit-text-fill-color: #e9cf8e !important; background: none !important; }
+.world-reception .card .eyebrow, .world-reception .card dt { color: #e9cf8e !important; }
+.world-reception .card .btn { border-color: #e9cf8e; background: rgba(8,16,48,.55); }
+.world-reception .corner, .world-reception .card::before, .world-reception .card::after, .sec.event.world-reception::before, .sec.event.world-reception::after { display: none !important; }
+@media (min-width: 900px) { .sec.event.world-reception { background: url(./img/cocktail-bg.jpg) center / 100% 100% no-repeat, #0b1a3c !important; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: scale(1.0) !important; } section.event.world-reception .card > .txt .blurb { display: none !important; } section.event.world-reception .card { padding-top: 0 !important; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-reception .card .blurb, section.event.world-reception .card .txt { display: none !important; } section.event.world-reception .card > .facts dd { font-size: 11px !important; line-height: 1.15 !important; } section.event.world-reception .card { padding-top: 0 !important; } }
+@media (max-width: 899px) and (max-height: 700px) { section.event.world-reception .card .f1 .ev-img, section.event.world-reception .card .f1 img { transform: scale(1.7) translateY(14px) !important; transform-origin: 50% 40% !important; } }
+/* v39 cocktail: no picture, centred text */
+section.event.world-reception .card > .f1, section.event.world-reception .card > .f2 { display: none !important; }
+section.event.world-reception .card { grid-template-columns: minmax(0,1fr) !important; grid-template-rows: auto auto auto auto auto auto auto !important; grid-template-areas: "g" "e" "h" "fa" "t" "btn" "." !important; align-content: center !important; row-gap: 14px; padding-top: 6vh !important; }
+section.event.world-reception .card > .facts { display: grid !important; grid-template-columns: 1fr !important; text-align: center !important; max-width: 420px; margin: 0 auto !important; width: 100%; gap: 10px !important; align-self: center !important; }
+section.event.world-reception .card > .facts dd { font-size: 17px !important; line-height: 1.25 !important; }
+section.event.world-reception .card > .txt { display: block !important; text-align: center !important; max-width: 380px; margin: 8px auto 0 !important; align-self: center !important; transform: none !important; }
+section.event.world-reception .card > .txt .blurb { display: block !important; font-size: 15px !important; }
+@media (max-height: 700px) { section.event.world-reception .card > .facts dd { font-size: 14px !important; } section.event.world-reception .card { row-gap: 8px; padding-top: 3vh !important; } }
+/* v40 desktop wide temple backdrop, full screen */
+@media (min-width: 900px) { .sec.event.world-vivaham { background: url(./img/wd-temple-wide.jpg) center / 100% 100% no-repeat, #f4e8cc !important; } }
+/* desktop opener: full-screen door, his board image scaled to the screen width */
+@media (min-width: 900px) {
+  .gate { width: auto !important; left: 0 !important; right: 0 !important; margin: 0 !important; }
+  .door { background-size: 200% auto !important; background-position-y: 60% !important; }
+  .gate-in { top: 30% !important; }
+  .gate-om { font-size: 16px !important; }
+  .gate-names { font-size: clamp(34px, 3.4vw, 54px) !important; max-width: none !important; }
+  .gate-h { font-size: 22px !important; }
+  .gate-t { font-size: 16px !important; padding: 11px 24px !important; }
+}
+.door.l, .door.r { box-shadow: none !important; }
+.gate-in { top: 30% !important; }
+.gate-in .ganesha { height: 60px; margin: 0 auto 2px; }
+@media (min-width: 900px) { .gate-in { top: 24% !important; } .gate-in .ganesha { height: 84px; } }
+
+/* Wedding assistant (chat bubble, bottom right) */
+.wa { position: absolute; right: 12px; bottom: 34px; z-index: 65; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; pointer-events: none; }
+.wa > * { pointer-events: auto; }
+.wa-fab { width: 52px; height: 52px; border-radius: 50%; background: var(--gold); border: 2px solid #fff3d6; box-shadow: 0 4px 14px rgba(0,0,0,.45); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+.wa-fab svg { width: 26px; height: 26px; fill: var(--deep); }
+.wa-fab-x { color: var(--deep); font-size: 26px; font-weight: 700; line-height: 1; font-family: system-ui, sans-serif; }
+.wa-panel { width: min(330px, calc(100vw - 24px)); max-height: 72vh; display: flex; flex-direction: column; background: linear-gradient(160deg, #5c0d18, #38060d); border: 1.5px solid var(--gold); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.5); font-family: system-ui, 'Noto Sans Telugu', sans-serif; }
+.wa-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(226,184,102,.15); border-bottom: 1px solid rgba(226,184,102,.5); color: var(--gold); font-weight: 700; font-size: 14px; letter-spacing: .04em; }
+.wa-x { background: none; border: 0; color: var(--gold); font-size: 22px; cursor: pointer; line-height: 1; min-width: 40px; min-height: 40px; margin: -8px -10px -8px 0; }
+.wa-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; min-height: 70px; }
+.wa-msg { margin: 0; padding: 8px 12px; border-radius: 12px; font-size: 13.5px; line-height: 1.45; max-width: 88%; }
+.wa-a { background: var(--ivory); color: #4a0a12; align-self: flex-start; border-bottom-left-radius: 3px; }
+.wa-q { background: var(--gold); color: #4a0a12; align-self: flex-end; border-bottom-right-radius: 3px; font-weight: 600; }
+.wa-line { display: block; margin: 2px 0; }
+.wa-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border-top: 1px solid rgba(226,184,102,.4); overflow-y: auto; flex: none; max-height: 42vh; }
+.wa-chips:has(+ .wa-input) { max-height: 24vh; }
+.wa-chips button { background: none; border: 1px solid var(--gold); color: var(--gold); border-radius: 999px; padding: 0 13px; min-height: 36px; font: 600 13px system-ui, 'Noto Sans Telugu', sans-serif; cursor: pointer; }
+.wa-chips button:hover { background: rgba(226,184,102,.18); }
+@media (min-width:900px) { .wa { right: 18px; bottom: 40px; } }
+
+/* Approved event motion: active page only, layout-preserving transforms. */
+.stage { --music-energy:0; }
+.playback-pills { display:flex; gap:6px; }
+.motion-pause { min-width:40px; border-radius:999px; }
+.event { isolation:isolate; }
+.event-glow { position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 45%,rgba(255,206,86,.38),transparent 67%);opacity:0;transition:opacity 1.8s ease-in-out; }
+.event.motion-active .event-glow { opacity:calc(.07 + var(--music-energy)*.22); }
+.world-mehandi .event-glow { background:radial-gradient(ellipse at 50% 45%,rgba(221,245,168,.3),transparent 67%); }
+.world-reception .event-glow { background:radial-gradient(ellipse at 50% 45%,rgba(238,193,105,.28),transparent 67%); }
+/* A calm, overlapping sequence rather than simultaneous quick entrances. */
+.event.motion-active .card > .ganesha { animation:event-reveal 2s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > .eyebrow { animation:event-reveal 2s .35s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > h2 { animation:event-reveal 2.6s .8s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > .f1 { animation:event-arrive-left 3.2s 1.6s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > .f2 { animation:event-arrive-right 3.2s 2.8s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > .txt { animation:event-reveal 2.8s 3.9s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > .facts { animation:event-reveal 2.8s 4.8s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .card > .btn { animation:event-reveal 2.5s 5.8s cubic-bezier(.22,.61,.36,1) both; }
+.event.motion-active .ev-wrap { animation:event-float 14s 4.8s ease-in-out infinite alternate; }
+.event.motion-active .f2 .ev-wrap { animation-delay:6s;animation-direction:alternate-reverse; }
+/* Cocktail intentionally keeps its no-picture layout. Its title and facts animate. */
+@keyframes event-reveal { from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0} }
+@keyframes event-arrive-left { from{opacity:0;translate:-14px 0}to{opacity:1;translate:0 0} }
+@keyframes event-arrive-right { from{opacity:0;translate:14px 0}to{opacity:1;translate:0 0} }
+@keyframes event-float { from{translate:0 2px;rotate:-.15deg}to{translate:0 -3px;rotate:.15deg} }
+.motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state:paused!important; }
+.motion-paused .event-glow { opacity:.12!important; }
+@media(prefers-reduced-motion:reduce) {
+ .event.motion-active .card > *, .event.motion-active .ev-wrap { animation:none!important;opacity:1!important;translate:none!important;rotate:none!important; }
+ .event-glow { display:none!important; }
+ .scroller { scroll-behavior:auto!important; }
+}
+
+/* User-arranged event layouts, imported from Layout Studio on Oct 19. */
+section.sec.event.saved-event {padding:0!important;display:block!important;height:100%!important;min-height:100%!important;box-sizing:border-box;overflow:hidden;}
+.saved-layout {position:absolute;inset:0;pointer-events:none;}
+.saved-piece {position:absolute;pointer-events:none;}
+.saved-piece[data-piece="map"] {pointer-events:auto;}
+.ev-facts {margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(calc(128px * var(--k)),1fr));gap:calc(8px * var(--k)) 14px;color:#3d2600;text-align:left;}
+.ev-facts dt {font:700 max(12px, calc(12.5px * var(--k)))/1.2 system-ui,'Noto Sans Telugu',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#8a4b08;}
+.ev-facts dd {margin:2px 0 0;font:calc(17px * var(--k))/1.25 Georgia,'Noto Serif Telugu','Telugu Sangam MN',serif;}
+.ev-facts.light {color:#fbf1d6;}
+.ev-facts.light dt {color:#f2cf7e;}
+.saved-content {position:absolute;left:0;top:0;transform-origin:top left;}
+.saved-rich {white-space:pre-wrap;overflow-wrap:anywhere;font:16px/1.5 Georgia,serif;}
+.saved-content *, .saved-content {animation:none!important;transition:none!important;}
+.saved-content .ev-wrap {translate:none!important;rotate:none!important;}
+.saved-float,.saved-still {position:relative;width:100%;height:100%;}
+.event.motion-active .saved-piece {animation:event-reveal 2.8s 3.9s cubic-bezier(.22,.61,.36,1) both;}
+.event.motion-active .motion-g {animation-duration:2s;animation-delay:0s;}
+.event.motion-active .motion-n {animation-duration:2s;animation-delay:.35s;}
+.event.motion-active .motion-title {animation-duration:2.6s;animation-delay:.8s;}
+.event.motion-active .motion-a1 {animation-name:event-arrive-left;animation-duration:3.2s;animation-delay:1.6s;}
+.event.motion-active .motion-a2 {animation-name:event-arrive-right;animation-duration:3.2s;animation-delay:2.8s;}
+.event.motion-active .motion-details {animation-delay:4.8s;}
+.event.motion-active .motion-map {animation-duration:2.5s;animation-delay:5.8s;}
+.event.motion-active .saved-float {animation:event-float 14s 4.8s ease-in-out infinite alternate;}
+.event.motion-active .motion-a2 .saved-float {animation-delay:6s;animation-direction:alternate-reverse;}
+@media(prefers-reduced-motion:reduce){.event.motion-active .saved-piece,.event.motion-active .saved-float{animation:none!important;opacity:1!important;translate:none!important;rotate:none!important;}}
+
+/* Softer navigation: fade between requested pages, never race through intervening events. */
+.scroller{transition:opacity .55s cubic-bezier(.22,.61,.36,1);}
+.scroller.page-switching{opacity:0;pointer-events:none;transition-duration:.35s;}
+.event.motion-active .saved-piece{animation-duration:2.4s;animation-delay:1s;animation-timing-function:cubic-bezier(.25,.46,.45,.94);}
+.event.motion-active .motion-g{animation-duration:1.8s;animation-delay:0s;}
+.event.motion-active .motion-n{animation-delay:.1s;}
+.event.motion-active .motion-title{animation-duration:2.2s;animation-delay:.2s;}
+.event.motion-active .motion-a1{animation-duration:3s;animation-delay:.45s;}
+.event.motion-active .motion-a2{animation-duration:3.2s;animation-delay:.8s;}
+.event.motion-active .motion-details{animation-delay:.65s;}
+.event.motion-active .motion-map{animation-delay:1.2s;}
+@media(min-width:900px){
+ .saved-event::after{content:'';position:absolute;inset:72px 28px 42px;border:1px solid #c59b4b55;pointer-events:none;z-index:0;}
+ .saved-layout{z-index:1;}
+ .saved-event .saved-piece{filter:none;}
+}
+.glimpse{background:#fbf5e6!important;color:#153f35!important;display:block!important;padding:102px 16px 42px!important;overflow-y:auto!important;}
+.glimpse-inner{max-width:1040px;margin:auto;}
+.glimpse-head{text-align:center;border-bottom:1px solid #c6a15d;padding-bottom:16px;margin-bottom:8px;}
+.glimpse-head p{font:italic 28px Georgia,serif;margin:0 0 6px;}
+.glimpse-head em{color:#b18535;}
+.glimpse-head h2{font:20px Georgia,serif;letter-spacing:.13em;margin:5px 0 10px;}
+.glimpse-head span{font:11px Georgia,serif;letter-spacing:.08em;}
+.glimpse-row{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr) 106px;gap:8px;align-items:center;min-height:180px;border-bottom:1px solid #c6a15d77;padding:14px 0;isolation:isolate;}
+.glimpse-date{align-self:start;padding-top:8px;text-align:center;position:relative;border-right:1px solid #c6a15d77;}
+.glimpse-date b{display:block;font:11px Georgia,serif;letter-spacing:.06em;}
+.glimpse-date strong{font:28px Georgia,serif;}
+.glimpse-copy h3{font:20px/1.12 Georgia,serif;text-transform:uppercase;color:#a26714;margin:0 0 9px;}
+.glimpse-copy p{font:13px/1.4 Georgia,serif;margin:4px 0;}
+.glimpse-copy .glimpse-time{font-weight:bold;}
+.glimpse-copy small{display:block;font:8px Georgia,serif;letter-spacing:.16em;color:#a26714;margin-top:12px;}
+.glimpse-copy .glimpse-dress{font-style:italic;font-size:12px;}
+.glimpse-row img{width:100%;max-height:190px;object-fit:contain;mix-blend-mode:multiply;}
+.g-mehandi h3{color:#315d29;}.g-pellikuthuru h3,.g-vivaham h3{color:#a43222;}.g-reception h3{color:#51317e;}
+@media(min-width:900px){
+ .glimpse{padding:100px 42px 42px!important;}
+ .glimpse-head p{font-size:38px;}.glimpse-head h2{font-size:22px;}
+ .glimpse-events{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;}
+ .glimpse-row{grid-template-columns:48px minmax(0,1fr) 150px;min-height:215px;}
+ .glimpse-row:last-child{grid-column:1/-1;max-width:620px;width:100%;justify-self:center;}
+ .glimpse-copy h3{font-size:23px;}.glimpse-copy p{font-size:15px;}.glimpse-copy .glimpse-dress{font-size:14px;}
+}
+@media(prefers-reduced-motion:reduce){.scroller{transition:none!important;}}
+.glimpse{height:100%!important;min-height:100%!important;max-height:100%!important;box-sizing:border-box;overscroll-behavior:contain;}
+/* All Events is a single-screen invitation overview, like each event page. */
+.glimpse{overflow:hidden!important;padding:100px 16px 32px!important;}
+.glimpse-inner{height:100%;display:flex;flex-direction:column;}
+.glimpse-head{flex:none;padding-bottom:10px;margin-bottom:4px;}
+.glimpse-head p{font-size:24px;margin-bottom:4px;}
+.glimpse-head h2{font-size:15px;margin:3px 0 7px;}
+.glimpse-head span{font-size:9px;}
+.glimpse-events{flex:1;min-height:0;display:grid;grid-template-rows:repeat(5,minmax(0,1fr));}
+.glimpse-row{min-height:0;padding:6px 0;grid-template-columns:30px minmax(0,1fr) 86px;gap:8px;}
+.glimpse-date{padding-top:3px;}.glimpse-date b{font-size:9px;}.glimpse-date strong{font-size:23px;}
+.glimpse-copy h3{font-size:15px;margin:0 0 4px;line-height:1.1;}
+.glimpse-copy p{font-size:11px;line-height:1.25;margin:2px 0;}
+.glimpse-copy small{display:none;}.glimpse-copy .glimpse-dress{font-size:10px;}
+.glimpse-row img{max-height:100px;max-width:86px;}
+@media(max-height:740px) and (max-width:899px){
+ .glimpse{padding-top:97px!important;padding-bottom:29px!important;}
+ .glimpse-head{padding-bottom:7px;}.glimpse-head p{font-size:20px;}.glimpse-head h2{font-size:12px;margin:2px 0 4px;}.glimpse-head span{font-size:8px;}
+ .glimpse-row{grid-template-columns:25px minmax(0,1fr) 65px;gap:6px;padding:3px 0;}
+ .glimpse-row img{max-height:75px;max-width:65px;}
+ .glimpse-copy h3{font-size:12px;margin-bottom:3px;}.glimpse-copy p{font-size:10px;line-height:1.15;margin:2px 0;}.glimpse-copy .glimpse-dress{font-size:9px;}
+ .glimpse-date strong{font-size:20px;}.glimpse-date b{font-size:8px;}
+}
+@media(min-width:900px){
+ .glimpse{padding:105px 70px 38px!important;}
+ .glimpse-head{padding-bottom:14px;}.glimpse-head p{font-size:34px;}.glimpse-head h2{font-size:20px;}.glimpse-head span{font-size:10px;}
+ .glimpse-events{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,minmax(0,1fr));column-gap:40px;}
+ .glimpse-row{grid-template-columns:38px minmax(0,1fr) 120px;gap:10px;padding:8px 0;}
+ .glimpse-row:last-child{max-width:520px;}
+ .glimpse-row img{max-width:120px;max-height:145px;}
+ .glimpse-copy h3{font-size:21px;}.glimpse-copy p{font-size:14px;line-height:1.3;}.glimpse-copy .glimpse-dress{font-size:12px;}
+ .glimpse-date b{font-size:10px;}.glimpse-date strong{font-size:27px;}
+}
+
+@media(max-width:899px){.glimpse-row:last-child img{translate:-55px 0;}}
+@media(max-height:740px) and (max-width:899px){.glimpse-row:last-child img{translate:-48px 0;}}
+
+/* Cocktail: the supplied starlit invitation, composed for each screen. */
+section.cocktail-reel{padding:0!important;display:block!important;isolation:isolate;overflow:hidden!important;height:100%!important;min-height:100%!important;background:#050b15!important;color:#f7e8c8!important;}
+.cocktail-scene{position:absolute;inset:52px 0 24px;background:url(./img/cocktail-starlit-m.webp) center/100% 100% no-repeat;z-index:0;}
+.cocktail-copy{position:absolute;top:28%;left:5%;width:90%;text-align:center;color:#fff2d5;text-shadow:0 2px 8px #000;z-index:3;}
+.cocktail-map{display:inline-flex;align-items:center;min-height:36px;margin-top:10px;padding:0 16px;border:1px solid #f5dfa9;border-radius:999px;background:rgba(10,14,30,.55);color:#f5dfa9;font:600 13px system-ui,'Noto Sans Telugu',sans-serif;text-decoration:none;text-shadow:none;}
+.cocktail-kicker{font:11px/1.3 Georgia,serif;letter-spacing:.22em;margin:0 0 9px;}
+.cocktail-copy h2{font:400 29px/1.15 Georgia,serif;letter-spacing:.1em;color:#f5dfa9!important;-webkit-text-fill-color:#f5dfa9!important;background:none!important;margin:0 0 10px;}
+.cocktail-theme{font:italic 27px/1.2 Georgia,serif;margin:0 0 17px;color:#f4e2be;}
+.cocktail-details p{margin:0 0 5px;font:13px/1.3 Georgia,serif;}
+.cocktail-details .cocktail-time{font-size:14px;letter-spacing:.15em;}
+.cocktail-details .cocktail-venue{font-size:17px;margin-top:9px;}
+.cocktail-details .cocktail-dress{font-size:12px;font-style:italic;margin-top:7px;}
+.cocktail-stars{position:absolute;inset:90px 0 40px;pointer-events:none;z-index:2;}
+.cocktail-stars i{position:absolute;width:2px;height:2px;background:#fff4c4;box-shadow:0 0 5px 1px #f1c775;opacity:.4;}
+.cocktail-reel.motion-active .cocktail-stars i{animation:cocktail-twinkle 5s ease-in-out infinite alternate;}
+.cocktail-toast{position:absolute;z-index:4;inset:52px 0 24px;background:linear-gradient(#030814,#070d18);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;}
+.cocktail-toast img{width:100%;max-width:900px;mix-blend-mode:screen;}
+.cocktail-reel.motion-active .cocktail-toast{animation:cocktail-toast 4.5s ease-in-out both;}
+.cocktail-reel.motion-active .cocktail-toast img{animation:cocktail-clink 4.5s ease-in-out both;}
+.cocktail-reel.motion-active .cocktail-copy{animation:cocktail-copy 2.8s 1.9s ease-out both;}
+@keyframes cocktail-toast{0%,45%{opacity:1}100%{opacity:0;visibility:hidden}}
+@keyframes cocktail-clink{0%{scale:.87;opacity:0}22%,52%{scale:1;opacity:1}100%{scale:1.06;opacity:0}}
+@keyframes cocktail-copy{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+@keyframes cocktail-twinkle{from{opacity:.1;scale:.7}to{opacity:.9;scale:1.25}}
+@media(max-height:740px) and (max-width:899px){.cocktail-copy{top:28%;}.cocktail-kicker{font-size:9px;margin-bottom:6px;}.cocktail-copy h2{font-size:24px;margin-bottom:7px;}.cocktail-theme{font-size:22px;margin-bottom:12px;}.cocktail-details p{font-size:11px;margin-bottom:3px;}.cocktail-details .cocktail-venue{font-size:15px;margin-top:6px;}.cocktail-details .cocktail-dress{font-size:10px;margin-top:5px;}}
+@media(min-width:900px){.cocktail-scene{inset:56px 0 24px;background-image:url(./img/cocktail-starlit-d.webp);}.cocktail-copy{top:31%;left:10%;width:54%;}.cocktail-kicker{font-size:15px;margin-bottom:14px;}.cocktail-copy h2{font-size:43px;margin-bottom:16px;}.cocktail-theme{font-size:36px;margin-bottom:24px;}.cocktail-details p{font-size:18px;margin-bottom:8px;}.cocktail-details .cocktail-time{font-size:20px;}.cocktail-details .cocktail-venue{font-size:25px;margin-top:17px;}.cocktail-details .cocktail-dress{font-size:15px;margin-top:12px;}}
+@media(prefers-reduced-motion:reduce){.cocktail-reel.motion-active .cocktail-toast{display:none!important;}.cocktail-reel.motion-active .cocktail-copy,.cocktail-reel.motion-active .cocktail-stars i{animation:none!important;opacity:1!important;}}
+.stage:has(.cocktail-reel.motion-active) .petals{display:none!important;}
+.cocktail-toast{background:repeating-linear-gradient(90deg,transparent 0,transparent 18px,rgba(190,166,106,.08) 19px,transparent 20px),radial-gradient(ellipse at 50% 20%,#182334,#030713 70%);}
+.cocktail-toast::before{content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(241,219,159,.26) 1px,transparent 3px) 4px 8px/39px 47px;filter:blur(1px);opacity:.6;}
+.cocktail-toast img{position:relative;}
+/* Actual cleaned screen-recorded motion, not a slideshow. */
+.cocktail-video-back{position:absolute;inset:52px 0 24px;background:radial-gradient(ellipse at 50% 20%,#172332,#030713 80%);}
+.cocktail-original-video{position:absolute;inset:52px 0 24px;width:100%;height:calc(100% - 76px);object-fit:fill;display:block;}
+.cocktail-video-page .cocktail-copy{top:24%;left:5%;width:90%;}
+.cocktail-video-page .cocktail-kicker{font-size:10px;margin-bottom:6px;}
+.cocktail-video-page .cocktail-copy h2{font-size:25px;margin-bottom:8px;}
+.cocktail-video-page .cocktail-theme{font-size:24px;margin-bottom:12px;}
+.cocktail-video-page .cocktail-details p{font-size:12px;}
+.cocktail-video-page .cocktail-details .cocktail-venue{font-size:16px;margin-top:6px;}
+.cocktail-video-page .cocktail-details .cocktail-dress{font-size:11px;margin-top:6px;}
+.cocktail-video-page.motion-active .cocktail-copy{animation:cocktail-copy 3.2s 4.4s ease-out both;}
+@media(max-height:740px) and (max-width:899px){.cocktail-video-page .cocktail-copy{top:24%;}.cocktail-video-page .cocktail-kicker{font-size:8px;margin-bottom:4px;}.cocktail-video-page .cocktail-copy h2{font-size:20px;margin-bottom:5px;}.cocktail-video-page .cocktail-theme{font-size:19px;margin-bottom:8px;}.cocktail-video-page .cocktail-details p{font-size:10px;margin-bottom:2px;}.cocktail-video-page .cocktail-details .cocktail-venue{font-size:13px;margin-top:5px;}.cocktail-video-page .cocktail-details .cocktail-dress{font-size:9px;margin-top:5px;}}
+@media(min-width:900px){.cocktail-video-back{inset:56px 0 24px;}.cocktail-original-video{inset:56px 0 24px;width:100%;height:calc(100% - 80px);object-fit:contain;background:#060b13;}.cocktail-video-page .cocktail-copy{top:28%;left:4%;width:28%;}.cocktail-video-page .cocktail-kicker{font-size:12px;}.cocktail-video-page .cocktail-copy h2{font-size:30px;}.cocktail-video-page .cocktail-theme{font-size:27px;margin-bottom:22px;}.cocktail-video-page .cocktail-details p{font-size:15px;}.cocktail-video-page .cocktail-details .cocktail-venue{font-size:20px;margin-top:13px;}.cocktail-video-page .cocktail-details .cocktail-dress{font-size:13px;margin-top:13px;}}
+@media(min-width:900px){.cocktail-video-page .cocktail-original-video{left:40%;width:60%;object-fit:contain;}.cocktail-video-page .cocktail-copy{left:3%;width:36%;}.cocktail-video-back{background:repeating-linear-gradient(90deg,transparent 0,transparent 47px,rgba(206,185,132,.12) 48px,transparent 49px),radial-gradient(ellipse at 30% 20%,#172332,#030713 80%);}}
+
+/* Safari can block autoplay in Low Power Mode. Always leave a usable play path. */
+.cocktail-play-video{position:absolute;z-index:8;left:50%;top:56%;transform:translateX(-50%);min-height:48px;padding:12px 22px;border:1px solid #e4bd68;border-radius:30px;background:#2c0710ed;color:#ffe9b6;font:600 14px/1.3 Arial,sans-serif;white-space:nowrap;cursor:pointer;box-shadow:0 4px 22px #0008;}
+.cocktail-video-page.video-waiting .cocktail-copy{animation:none!important;opacity:1!important;translate:0 0!important;}
+@media(min-width:900px){.cocktail-play-video{left:70%;top:42%;}}
+
+.cocktail-video-poster{pointer-events:none;z-index:1;}
+
+.cocktail-video-page.motion-active .cocktail-copy{animation:none!important;}
+
+@media(max-width:899px){.cocktail-twirl-page .cocktail-copy{top:12%;}.cocktail-twirl-page .cocktail-theme{font-size:21px;margin-bottom:8px;}.cocktail-twirl-page .cocktail-kicker{margin-bottom:4px;}.cocktail-twirl-page .cocktail-copy h2{margin-bottom:5px;}.cocktail-twirl-page .cocktail-details p{margin-bottom:2px;}.cocktail-twirl-page .cocktail-details .cocktail-venue{margin-top:4px;}.cocktail-twirl-page .cocktail-details .cocktail-dress{margin-top:4px;}}
+
+@media(max-height:740px) and (max-width:899px){.cocktail-twirl-page .cocktail-copy{top:15%;}.cocktail-twirl-page .cocktail-theme{font-size:19px;}}
+/* The frame animation has no media autoplay gate and uses the same loop clock. */
+.cocktail-frame-animation{z-index:1;pointer-events:none;}
+/* Supplied itinerary remains intact, with room outside it for page controls. */
+.sec.supplied-itinerary{box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:104px 34px 36px;background:#fffef7;overflow:hidden;}
+.supplied-itinerary-image{display:block;width:100%;height:100%;object-fit:contain;object-position:center;min-width:0;min-height:0;}
+@media(min-width:900px){.sec.supplied-itinerary{padding:104px 80px 36px;}}
+.sec.supplied-itinerary{height:100svh;min-height:100svh;max-height:100svh;flex:0 0 100svh;}
+/* Match Safari's visible viewport, including when its toolbars expand. */
+.stage{height:100dvh;min-height:0;max-height:none;}
+.sec.supplied-itinerary{height:100%;min-height:100%;max-height:100%;flex:0 0 100%;padding:100px 0 24px;background:#fffef9;}
+@media(min-width:900px){.sec.supplied-itinerary{padding:100px 0 24px;}}
+.itinerary-active{background:#fffef9;}
+.itinerary-active .dots{display:none;}
+/* Phone itinerary uses the full available width, with no cropped event text. */
+@media(max-width:899px){.supplied-itinerary-image{object-fit:fill;}}
+/* Let the itinerary begin directly below the phone navigation. */
+@media(max-width:899px){.sec.supplied-itinerary{padding-top:52px;}}
+@media(max-width:899px){
+ .itinerary-active .topbar{left:6px;right:6px;}
+ .itinerary-active .pill,.itinerary-active .lang button{min-height:24px;height:24px;font-size:10px;}
+ .itinerary-active .pill{width:24px;}
+ .itinerary-active .lang button{padding:0 9px;}
+}
+@media(max-width:899px) and (max-height:740px){
+ .itinerary-active .pill,.itinerary-active .lang button{min-height:18px;height:18px;font-size:9px;}
+ .itinerary-active .pill{width:20px;}
+}
+.wa-a a { color: inherit; text-decoration: underline; }
+
+/* Readability floor: dates, times, venues and small labels stay legible on every screen. */
+.countdown span { font-size: 12px; }
+.eyebrow { font-size: 12.5px; }
+.credits { font-size: 12px; }
+@media (max-width: 899px) {
+  section.cocktail-twirl-page .cocktail-kicker { font-size: 12px; }
+  section.cocktail-twirl-page .cocktail-details p { font-size: 15px; }
+  section.cocktail-twirl-page .cocktail-details .cocktail-time { font-size: 19px; letter-spacing: .08em; }
+  section.cocktail-twirl-page .cocktail-details .cocktail-venue { font-size: 18px; }
+  section.cocktail-twirl-page .cocktail-details .cocktail-dress { font-size: 14px; }
+}
+.wa-ai { white-space: pre-wrap; }
+.wa-typing { display: flex; gap: 4px; padding: 12px 14px; }
+.wa-typing span { width: 7px; height: 7px; border-radius: 50%; background: #8a4b08; animation: wa-dot 1s infinite ease-in-out; }
+.wa-typing span:nth-child(2) { animation-delay: .15s; } .wa-typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes wa-dot { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+.wa-input { display: flex; gap: 8px; padding: 10px 12px 12px; border-top: 1px solid rgba(226,184,102,.4); }
+.wa-input input { flex: 1; min-width: 0; min-height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(226,184,102,.6); background: rgba(255,255,255,.08); color: var(--ivory); font: 16px system-ui, 'Noto Sans Telugu', sans-serif; }
+.wa-input button { min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--gold); color: var(--deep); font: 600 14px system-ui, 'Noto Sans Telugu', sans-serif; cursor: pointer; }
+.wa-input button:disabled { opacity: .55; cursor: default; }
+.photo-msg { min-height: 1.4em; margin: 10px 0 0; font: 600 14px/1.4 system-ui, 'Noto Sans Telugu', sans-serif; color: var(--gold); }
+.photo-msg.bad { color: #ffc9b8; }
+.photos .drop label.btn { cursor: pointer; }
+.photos .drop label.btn.busy { opacity: .75; cursor: progress; }
+
+/* Scrolling performance: the menu bar is nearly opaque, so a solid colour replaces the per-frame background blur. */
+.tabs { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(40,6,12,.97); }
+
+/* Home */
+@font-face { font-family: 'Cinzel'; src: url(./fonts/cinzel-latin.woff2) format('woff2'); font-weight: 400 900; font-display: swap; }
+/* The invitation artwork sits below the top bar at its own 2:3 shape; a blurred copy fills any space around it. */
+.sec.cover { display: block; padding: 0; overflow: hidden; background: #4a0a12; }
+.cover-bg { position: absolute; inset: -40px; background: center / cover no-repeat; filter: blur(24px) brightness(.55); }
+.cover-art { position: absolute; top: 96px; left: 50%; height: calc(100% - 96px); aspect-ratio: 1024 / 1536; transform: translateX(-50%); container-type: inline-size; }
+.cover-art img { display: block; width: 100%; height: 100%; }
+/* Positions are in the artwork's own proportions: centred under the caption, above the border, clear of the bowl. */
+.cover-count { position: absolute; left: 44.6%; top: 83.6%; transform: translateX(-50%); }
+.cover-count .countdown { gap: .8cqw; margin: 0; }
+.cover-count .countdown div { min-width: 0; width: 6.6cqw; padding: .7cqw 0 .6cqw; border-radius: .9cqw; border-color: rgba(226,184,102,.75); background: rgba(60,6,12,.45); }
+.cover-count .countdown b { font: 600 3.3cqw/1.05 'Cinzel', Georgia, serif; }
+.cover-count .countdown span { font-size: max(8.5px, 1.55cqw); line-height: 1.2; }
+.is-te .cover-count .countdown span { font-size: max(7.5px, 1.45cqw); letter-spacing: -.02em; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Type system: one look across every page, matching the Home invitation ----------
+   Display: Cinzel (the gold Roman capitals of the names) for titles, labels, buttons and tabs.
+   Body: Georgia for everything people read. Telugu falls back to a Telugu serif in both roles. */
+:root {
+  --font-display: 'Cinzel', 'Noto Serif Telugu', 'Telugu Sangam MN', 'Noto Sans Telugu', Georgia, serif;
+  --font-body: Georgia, 'Noto Serif Telugu', 'Telugu Sangam MN', 'Noto Sans Telugu', serif;
+}
+.wed, .wed input, .wed textarea, .wed select,
+.note, .credits, .blurb, .photo-msg, .rsvp-msg, .wa-msg, .wa-input input,
+.rc-when, .rc-venue, .ev-facts dd, .cocktail-theme, .cocktail-dress, .cocktail-details p { font-family: var(--font-body) !important; }
+
+.wed h1, .wed h2, .wed h3, .rc-name, .cocktail-kicker, .cocktail-copy h2, .cocktail-details .cocktail-time,
+.saved-piece[data-piece="title"] *, .saved-piece[data-piece^="extra-"] *, .saved-piece[data-piece="map"] *,
+.tabs button, .lang button, .btn, .seg button, .chips button, .wa-chips button, .wa-head, .wa-input button, .cocktail-map,
+.ev-facts dt, .rc-label, .field > span, .countdown b, .countdown span, .sample-bar, .gate-t, .gate-h, .gate-names, .gate-om,
+.stepper output { font-family: var(--font-display) !important; }
+
+/* Cinzel is wide: keep small labels and buttons compact so nothing wraps or overflows. */
+.tabs button { letter-spacing: .02em; }
+.btn, .seg button, .chips button, .wa-chips button, .wa-input button, .cocktail-map { letter-spacing: .02em; font-weight: 600; }
+.ev-facts dt, .rc-label, .field > span { letter-spacing: .08em; }
+.card h2, .cocktail-copy h2 { letter-spacing: .06em; }
+/* Event titles sit in fixed-size boxes from the saved layout: keep Cinzel tight so they stay inside. */
+.saved-piece[data-piece="title"] *, .saved-piece[data-piece^="extra-"] * { letter-spacing: 0 !important; font-style: normal !important; font-weight: 600 !important; }
+.world-pellikuthuru .saved-piece[data-piece="title"] .saved-rich > div { font-size: 17.5px !important; }
+.rsvp-card .seg button { font-size: 12.5px; letter-spacing: -.01em; padding: 0 4px; }
+
+/* Floating buttons: RSVP bottom-left and the assistant bottom-right, in the same place on every page. */
+.wa { left: auto; right: 12px; top: auto; bottom: 34px; transform: none; }
+.rsvp-fab { position: absolute; left: 12px; bottom: 34px; z-index: 65; width: 52px; height: 52px; padding: 0; border-radius: 50%; background: var(--gold); color: var(--deep); border: 2px solid #fff3d6; box-shadow: 0 4px 14px rgba(0,0,0,.45); font: 700 12px/1 var(--font-display); letter-spacing: .04em; cursor: pointer; }
+.rsvp-fab.on { outline: 2px solid #fff3d6; outline-offset: 3px; }
+@media (min-width: 900px) { .wa { right: 18px; bottom: 40px; } .rsvp-fab { left: 18px; bottom: 40px; } }
+.sec.rsvp, .sec.photos { padding-bottom: 104px; }
+
+/* Desktop alignment: event pages share one centre line. */
+.ev-title { position: absolute; margin: 0; text-align: center; font-weight: 600; line-height: 1.1; letter-spacing: .06em; text-transform: uppercase; pointer-events: none; }
+@media (min-width: 900px) {
+  .ev-facts { text-align: center; justify-items: center; grid-template-columns: 1fr 1fr; }
+  .rsvp-cards { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; }
+  .rsvp-cards > .rsvp-card { flex: 0 1 calc((100% - 28px) / 3); box-sizing: border-box; }
+  .rsvp-cards > .rsvp-card { display: flex; flex-direction: column; }
+  .rsvp-cards > .rsvp-card > .seg { margin-top: auto; }
+  .rsvp-cards > .rsvp-card > .rc-venue { margin-bottom: 14px; }
+  /* Cocktail: text and video as two balanced halves on one background. */
+  .cocktail-video-page .cocktail-original-video { left: 51%; right: auto; width: calc((100vh - 80px) * .575); background: transparent; }
+  .cocktail-video-page .cocktail-copy { left: 13%; width: 35%; }
+  .cocktail-video-back { background: radial-gradient(ellipse at 50% 35%, #172332, #030713 80%); }
+  .cocktail-play-video { left: calc(51% + (100vh - 80px) * .2875); }
+}

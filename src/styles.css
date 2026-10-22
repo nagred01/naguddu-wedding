@@ -1,0 +1,2 @@
+/* The frame animation has no media autoplay gate and uses the same loop clock. */
+.cocktail-frame-animation{z-index:1;pointer-events:none;}

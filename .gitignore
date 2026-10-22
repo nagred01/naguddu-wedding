@@ -1,0 +1,27 @@
+# Installed packages and build output (rebuilt by `node build.mjs` and by the publish workflow)
+node_modules/
+dist/
+inline/
+Wedding-Invitation.html
+.DS_Store
+
+# Draft artwork and videos not used by the site (kept locally only)
+src/img/c-feet.png
+src/img/c-knot.png
+src/img/cocktail-clean.mp4
+src/img/cocktail-flow-v3.mp4
+src/img/cocktail-poster.jpg
+src/img/cocktail-safari-v2.mp4
+src/img/cocktail-toast.webp
+src/img/cocktail-twirl-poster.jpg
+src/img/cocktail-twirl-v4.mp4
+src/img/glimpse-*.webp
+src/img/haldi.jpg
+src/img/hero.jpg
+src/img/mangala.jpg
+src/img/mehandi-swing.jpg
+src/img/mehandi.jpg
+src/img/reception.jpg
+src/img/wed-feet.jpg
+src/img/wed-knot.webp
+src/img/wedding.jpg
