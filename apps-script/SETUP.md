@@ -57,3 +57,16 @@ Delete your test rows and photos afterwards.
   so the URL stays the same.
 - **Spam:** forms have a hidden field that bots fill in, and those are skipped. Anyone with the link could
   still send a fake reply or photo, so glance over things before final counts.
+
+## RSVP notifications on your phone
+Every time a reply raises the number of guests attending any event, the script sends you the
+reply plus the updated totals per event (each guest's latest reply only, so changed RSVPs aren't counted twice).
+
+- **Email (on by default):** goes to the Google account that owns the script. Your phone's Gmail app shows it.
+  To send it elsewhere add a script property `NOTIFY_EMAIL` with that address; set it to `off` to stop emails.
+- **Instant push (optional):** install the free **ntfy** app (App Store / Google Play), tap **+**, subscribe to
+  your private topic name, then add a script property `NTFY_TOPIC` with the same name. Anyone who knows the
+  topic name can read it, so keep it long and random.
+
+After pasting the updated `Code.gs`: **Deploy → Manage deployments → Edit → Version: New version → Deploy**,
+and allow the new "Send email as you" permission when Google asks.

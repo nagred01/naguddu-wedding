@@ -100,14 +100,65 @@ function saveRsvp_(data) {
   if (!rows.length) return { ok: false, error: 'events' };
 
   var lock = LockService.getScriptLock();
+  var totals, previous;
   lock.waitLock(10000);
   try {
     var sheet = sheet_();
     sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, HEADERS.length).setValues(rows);
+    // Recount under the lock so two replies arriving together each compare against the right previous totals.
+    totals = totals_(sheet);
+    var props = PropertiesService.getScriptProperties();
+    previous = JSON.parse(props.getProperty('LAST_TOTALS') || '{}');
+    props.setProperty('LAST_TOTALS', JSON.stringify(totals));
   } finally {
     lock.releaseLock();
   }
+  try {
+    if (EVENTS.some(function (e) { return totals[e] > (previous[e] || 0); })) notify_(name, rows, totals);
+  } catch (err) {
+    console.error('Notification failed: ' + err); // The RSVP is saved either way.
+  }
   return { ok: true, id: id };
+}
+
+// Guests attending each event, counting only each person's latest reply (rows from one send share a Reply ID).
+function totals_(sheet) {
+  var values = sheet.getDataRange().getValues().slice(1);
+  var latest = {};
+  values.forEach(function (r) {
+    var who = String(r[2]).trim().toLowerCase();
+    var at = new Date(r[0]).getTime();
+    if (!latest[who] || at >= latest[who].at) latest[who] = { at: at, id: r[1] };
+  });
+  var totals = {};
+  EVENTS.forEach(function (e) { totals[e] = 0; });
+  values.forEach(function (r) {
+    var who = String(r[2]).trim().toLowerCase();
+    if (latest[who].id === r[1] && r[4] === 'Yes' && r[3] in totals) totals[r[3]] += Number(r[5]) || 0;
+  });
+  return totals;
+}
+
+// Sends the new totals by email (on unless NOTIFY_EMAIL is "off") and as a phone push via ntfy when NTFY_TOPIC is set.
+function notify_(name, rows, totals) {
+  var reply = rows.map(function (r) {
+    return r[3] + ': ' + (r[4] === 'Yes' ? r[5] + (r[5] > 1 ? ' guests' : ' guest') + (r[6] ? ', ' + r[6] : '') : "can't make it");
+  }).join('\n');
+  var all = 0;
+  var lines = EVENTS.map(function (e) { all += totals[e]; return e + ': ' + totals[e]; });
+  var body = name + ' replied:\n' + reply + '\n\nGuests attending so far:\n' + lines.join('\n') + '\n(Sum across events: ' + all + ')';
+
+  var props = PropertiesService.getScriptProperties();
+  var email = props.getProperty('NOTIFY_EMAIL') || Session.getEffectiveUser().getEmail();
+  if (email && email.toLowerCase() !== 'off') MailApp.sendEmail(email, 'New RSVP from ' + name, body);
+
+  var topic = props.getProperty('NTFY_TOPIC');
+  if (topic) {
+    UrlFetchApp.fetch('https://ntfy.sh/' + encodeURIComponent(topic), {
+      method: 'post', payload: body, muteHttpExceptions: true,
+      headers: { Title: 'New wedding RSVP', Tags: 'tada' }
+    });
+  }
 }
 
 function sheet_() {
