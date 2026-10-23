@@ -23,7 +23,7 @@ const LYRICS:Record<string,Record<Lang,string[]>>={
   te:['చక్కంధాల చుక్క','కుదిరిందే పెళ్లేంచక్కా','రెక్కల గుర్రం రాజు','తరలొచ్చే వేగంగా…']}
 };
 // A line under the title.
-const SUBTITLE:Record<string,Record<Lang,string>>={pasupu:{en:'Mangala Snanam',te:'మంగళ స్నానం'}};
+const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
 // Phone song-line box [x, y, width] in layout units where the saved verse box sits on busy artwork; shown on a soft card.
