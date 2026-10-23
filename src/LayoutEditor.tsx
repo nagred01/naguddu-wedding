@@ -8,8 +8,9 @@ import type { Lang } from './i18n';
 const PIECES: Record<string, string> = {
   ganesha: 'Ganesha', title: 'Title', details: 'Date / time / venue', verse: 'Song lyrics',
   image1: 'Left picture', image2: 'Right picture', map: 'Open in Maps button', number: 'Number',
+  kicker: 'Names line', sub: 'Subtitle', theme: 'Theme line', date: 'Date', time: 'Time', venue: 'Venue', dress: 'Dress code',
 };
-const PAGES: Record<string, string> = { pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding' };
+const PAGES: Record<string, string> = { pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
 const FONTS: [string, string][] = [
   ['', 'Default'],
   ["'Cinzel', Georgia, serif", 'Cinzel (titles)'],
@@ -18,7 +19,7 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'verse']);
+const WORDING = new Set(['title', 'verse', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
 
 export function LayoutEditor({ lang }: { lang: Lang }) {
@@ -46,9 +47,9 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
     const down = (e: PointerEvent) => {
       const t = e.target as HTMLElement;
       if (t.closest('.le-panel')) return;
-      const el = t.closest<HTMLElement>('.saved-event [data-piece]');
+      const el = t.closest<HTMLElement>('[data-editable] [data-piece]');
       if (!el) return;
-      const sec = el.closest<HTMLElement>('.saved-event')!;
+      const sec = el.closest<HTMLElement>('[data-editable]')!;
       const s = { page: sec.dataset.sec!, mode: sec.dataset.mode!, piece: el.dataset.piece! };
       const k = editKey(s.page, s.mode, s.piece);
       const cur = getEdit(k);
@@ -93,7 +94,7 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
   return (
     <>
       {/* Outline every piece and highlight the selected one. */}
-      <style>{`.saved-event [data-piece]{outline:1px dashed rgba(63,208,255,.55);cursor:move;pointer-events:auto!important;touch-action:none}
+      <style>{`[data-editable] [data-piece]{outline:1px dashed rgba(63,208,255,.55);cursor:move;pointer-events:auto!important;touch-action:none}
         ${sel ? `[data-sec="${sel.page}"] [data-piece="${sel.piece}"]{outline:2px solid #3fd0ff!important;outline-offset:2px}` : ''}`}</style>
       <div className={'le-panel' + (hidden ? ' le-min' : '')}>
         <div className="le-head">
@@ -125,8 +126,8 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
                   </select>
                 </label>
                 {WORDING.has(sel.piece) && (
-                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' ? ' — 2nd line is the subtitle' : ' — one line per row'}</span>
-                    <textarea rows={sel.piece === 'title' ? 2 : 4} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
+                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : sel.piece === 'verse' ? ' — one line per row' : ''}</span>
+                    <textarea rows={sel.piece === 'verse' ? 4 : 2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
                     <small>Switch the site language (top right) to edit the other language.</small>
                   </label>
                 )}

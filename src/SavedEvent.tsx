@@ -42,7 +42,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
  const fx=(p:string,st:React.CSSProperties):React.CSSProperties=>{const d=E(p);return {...st,marginLeft:(d.dx||0)*unit,marginTop:(d.dy||0)*unit,scale:d.scale?String(d.scale):undefined,['--piece-font' as any]:d.font||undefined};};
  const fontAttr=(p:string)=>E(p).font?'':undefined;
  const titleLines=(fallback:string)=>{const o=E('title').text?.[lang];return o?o.split('\n'):[fallback];};
- return <section ref={ref} id={id} data-sec={id} data-mode={mode} data-unit={unit} className={'sec event saved-event world-'+id+(active?' motion-active':'')}>
+ return <section ref={ref} id={id} data-sec={id} data-editable="" data-mode={mode} data-unit={unit} className={'sec event saved-event world-'+id+(active?' motion-active':'')}>
   <div className="event-glow" aria-hidden="true"/>
   <div className="saved-layout" aria-label={id+' event'}>
    {items.filter((i:any)=>(!i.hidden||(i.id==='verse'&&LYRICS[id]))&&(i.id!=='map'||MAPS[id])).map((i:any)=>{

@@ -1,5 +1,6 @@
 import React,{useRef,useEffect,useState} from 'react';
 import {EVENTS,mapUrl,type Lang} from './i18n';
+import {EDIT_MODE,editKey,useEdits} from './editStore';
 import clip from './img/cocktail-full-twirl-v5.mp4';
 import poster from './img/cocktail-full-twirl-poster.jpg';
 import motion1 from './img/cocktail-motion-01.jpg';
@@ -17,6 +18,18 @@ export function Cocktail({lang,active,near,paused}:{lang:Lang;active:boolean;nea
  const [warm,setWarm]=useState(false);
  useEffect(()=>{if(near)setWarm(true);},[near]);
  const e=EVENTS.find(e=>e.id==='reception')!;const video=useRef<HTMLVideoElement>(null);
+ // Layout editor support: every text line is a piece that can be moved, resized, restyled and reworded.
+ const edits=useEdits();
+ const [wide,setWide]=useState(()=>typeof window!=='undefined'&&window.innerWidth>=900);
+ useEffect(()=>{const on=()=>setWide(window.innerWidth>=900);window.addEventListener('resize',on);return()=>window.removeEventListener('resize',on);},[]);
+ const mode=wide?'desktop':'phone';
+ const E=(p:string)=>edits[editKey('reception',mode,p)]||{};
+ const piece=(p:string,text:string,cls?:string,Tag:any='p',extra:any={})=>{
+  const d=E(p);const words=d.text?.[lang];
+  return <Tag className={cls} data-piece={p} data-font={d.font?'':undefined} {...extra}
+   style={{marginLeft:d.dx||0,marginTop:d.dy||0,scale:d.scale?String(d.scale):undefined,['--piece-font' as any]:d.font||undefined,zoom:d.fs||undefined,display:Tag==='a'?'inline-flex':undefined,position:'relative'}}>
+   {words??text}</Tag>;
+ };
  const copy=useRef<HTMLDivElement>(null),canvas=useRef<HTMLCanvasElement>(null);
  const [fallback,setFallback]=useState(true);
  const state=useRef({active,paused,fallback:true,time:0,last:0,frame:-1,shown:false});
@@ -31,22 +44,22 @@ export function Cocktail({lang,active,near,paused}:{lang:Lang;active:boolean;nea
  if(st.fallback){if(!st.paused&&document.visibilityState==='visible'&&sheets.current.every(i=>i.complete&&i.naturalWidth)){if(st.last)st.time=(st.time+Math.min((now-st.last)/1000,.15))%LOOP;st.last=now;}else st.last=0;
  const f=Math.min(FRAMES-1,Math.floor(st.time*FPS));const img=sheets.current[Math.floor(f/12)];const ctx=canvas.current?.getContext('2d');if(img?.complete&&img.naturalWidth&&ctx&&f!==st.frame){ctx.drawImage(img,(f%4)*352,Math.floor((f%12)/4)*614,352,614,0,0,352,614);st.frame=f;}}
  else if(v){st.time=v.currentTime;st.last=0;st.frame=-1;}
- const t=st.time;if(c){const reveal=Math.max(0,Math.min(1,(t-2.7)/1.3)),outro=Math.max(0,Math.min(1,(LOOP-t)/.65));if(reveal>=1)st.shown=true;c.style.opacity=st.shown?'1':String(reveal*outro);c.style.translate=st.shown?'0 0':'0 '+((1-reveal)*6)+'px';}if(canvas.current)canvas.current.dataset.time=t.toFixed(3);frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);},[active]);
- return <section id="reception" data-sec="reception" className={'sec event cocktail-reel cocktail-video-page cocktail-twirl-page'+(active?' motion-active':'')+(fallback?' frame-fallback':'')} aria-label={lang==='en'?'Cocktail party':'కాక్‌టెయిల్'}>
+ const t=st.time;if(c){const reveal=Math.max(0,Math.min(1,(t-2.7)/1.3)),outro=Math.max(0,Math.min(1,(LOOP-t)/.65));if(reveal>=1||EDIT_MODE)st.shown=true;c.style.opacity=st.shown?'1':String(reveal*outro);c.style.translate=st.shown?'0 0':'0 '+((1-reveal)*6)+'px';}if(canvas.current)canvas.current.dataset.time=t.toFixed(3);frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);},[active]);
+ return <section id="reception" data-sec="reception" data-editable="" data-mode={mode} data-unit={1} className={'sec event cocktail-reel cocktail-video-page cocktail-twirl-page'+(active?' motion-active':'')+(fallback?' frame-fallback':'')} aria-label={lang==='en'?'Cocktail party':'కాక్‌టెయిల్'}>
   <div className="cocktail-video-back" aria-hidden="true"/>
   <video ref={video} poster={poster} autoPlay={active&&!paused} onPlaying={()=>{if(state.current.active&&!state.current.paused)setFallback(false);}} onPause={useFallback} onError={useFallback} src={clip} className="cocktail-original-video" muted playsInline loop preload={warm?"auto":"none"} aria-label="Cocktail invitation animation"/>
   <canvas ref={canvas} width={352} height={614} className="cocktail-original-video cocktail-frame-animation" style={{visibility:fallback?'visible':'hidden'}} aria-label="Cocktail invitation animation"/>
-  <div ref={copy} className="cocktail-copy" style={{opacity:0}}>
-   <p className="cocktail-kicker">{lang==='en'?'BHAVITHA & NAGENDER':'భవిత & నాగేందర్'}</p>
-   <h2>{lang==='en'?'COCKTAIL PARTY':'కాక్‌టెయిల్ పార్టీ'}</h2>
-   <p className="cocktail-sub">{lang==='en'?'An After-Wedding Celebration':'వివాహానంతర వేడుక'}</p>
-   <p className="cocktail-theme">{lang==='en'?'A Night under the Stars':'నక్షత్రాల కింద ఓ వేడుక'}</p>
+  <div ref={copy} className="cocktail-copy" style={{opacity:EDIT_MODE?1:0}}>
+   {piece('kicker',lang==='en'?'BHAVITHA & NAGENDER':'భవిత & నాగేందర్','cocktail-kicker')}
+   {piece('title',lang==='en'?'COCKTAIL PARTY':'కాక్‌టెయిల్ పార్టీ',undefined,'h2')}
+   {piece('sub',lang==='en'?'An After-Wedding Celebration':'వివాహానంతర వేడుక','cocktail-sub')}
+   {piece('theme',lang==='en'?'A Night under the Stars':'నక్షత్రాల కింద ఓ వేడుక','cocktail-theme')}
    <div className="cocktail-details">
-    <p>{lang==='en'?'FRIDAY, DECEMBER 4, 2026':'శుక్రవారం, డిసెంబర్ 4, 2026'}</p>
-    <p className="cocktail-time">{e.time[lang]}</p>
-    <p className="cocktail-venue">{e.venue[lang]}</p>
-    <p className="cocktail-dress">{e.dress[lang]}</p>
-    <a className="cocktail-map" href={mapUrl(e.address)} target="_blank" rel="noopener">{lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి'}</a>
+    {piece('date',lang==='en'?'FRIDAY, DECEMBER 4, 2026':'శుక్రవారం, డిసెంబర్ 4, 2026')}
+    {piece('time',e.time[lang],'cocktail-time')}
+    {piece('venue',e.venue[lang],'cocktail-venue')}
+    {piece('dress',e.dress[lang],'cocktail-dress')}
+    {piece('map',lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి','cocktail-map','a',{href:mapUrl(e.address),target:'_blank',rel:'noopener'})}
    </div>
   </div>
  </section>;
