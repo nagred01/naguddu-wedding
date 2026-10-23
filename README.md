@@ -28,3 +28,10 @@ Every push to `main` builds the site and publishes it to GitHub Pages (`.github/
 - Event dates, times, venues, addresses, dress codes, hotels: `src/i18n.ts`
 - What the assistant knows: `WEDDING_FACTS` in `apps-script/Code.gs` (then redeploy the script as a new version)
 - Hotel notes: `hotels.md`
+
+## Layout editor (local only)
+Open `http://localhost:8080/?edit` while the local preview is running. On the event pages, click a piece
+(title, pictures, details, lyrics, Maps button) to select it, drag to move it, and use the panel for size,
+text size, font and wording. Desktop and phone layouts are edited separately ("Open phone window").
+"Save layout" downloads `layoutEdits.json`; put it in `src/` (replacing the old one) and rebuild to publish.
+The editor never appears on the published site.

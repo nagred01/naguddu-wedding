@@ -5,7 +5,7 @@ import pellikuthuru from './audio/pellikuthuru.mp3';
 import vivaham from './audio/vivaham.mp3';
 import reception from './audio/reception.mp3';
 
-const SRC: Record<string, string> = { cover, pasupu, mehandi, pellikuthuru, vivaham, reception, rsvp: cover, photos: reception, glimpse: reception };
+const SRC: Record<string, string> = { cover, pasupu, mehandi, pellikuthuru, vivaham, reception, rsvp: cover, photos: cover, glimpse: cover };
 // Web Audio is used instead of <audio>: the host serves files without Range support, which iPhone Safari needs for <audio>.
 class Player {
   ctx: AudioContext | null = null;

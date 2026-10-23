@@ -16,6 +16,8 @@ const EVIMG: Record<string, string> = { pasupu: haldi, mehandi, pellikuthuru, vi
 import { EVENTS, HOTELS, T, mapUrl, type Lang } from './i18n';
 import { SCRIPT_URL } from './config';
 import { PhotoUpload } from './PhotoUpload';
+import { EDIT_MODE } from './editStore';
+import { LayoutEditor } from './LayoutEditor';
 const EXTRA: Record<string, { img: string; cap: Record<Lang, string> }> = {
   vivaham: { img: wedFeet, cap: { en: '', te: '' } },
   pasupu: { img: mangalaC, cap: { en: 'Mangala Snanam', te: 'మంగళ స్నానం' } },
@@ -322,6 +324,7 @@ export function App() {
       </nav>
 
       {entered && <Assistant lang={lang} />}
+      {entered && EDIT_MODE && <LayoutEditor lang={lang} />}
       {entered && (
         <button className={'rsvp-fab' + (active === 'rsvp' ? ' on' : '')} onClick={() => go('rsvp')} aria-current={active === 'rsvp' ? 'true' : undefined} aria-label={lang === 'en' ? 'RSVP: tell us if you can come' : 'RSVP: మీరు వస్తారో తెలియజేయండి'}>RSVP</button>
       )}
