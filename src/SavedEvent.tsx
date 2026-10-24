@@ -28,6 +28,8 @@ const LYRICS:Record<string,Record<Lang,string[]>>={
 // A line under the title.
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
+// Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
+const PHONE_NUDGE:Record<string,Record<string,[number,number]>>={pellikuthuru:{details:[0,-22],image2:[0,16]}};
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
 // Phone song-line box [x, y, width, on a soft card?] in layout units, where the saved verse box is too narrow or sits on busy artwork.
 const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[4,500,156],pasupu:[10,440,190],mehandi:[18,448,124],vivaham:[206,548,178]};
@@ -68,6 +70,8 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
     }
     const grow=!desktop&&PHONE_ART_SCALE[id]?.[i.id];
     if(grow){x-=width*(grow-1);width*=grow;height*=grow;s*=grow;}
+    const nudge=!desktop&&PHONE_NUDGE[id]?.[i.id];
+    if(nudge){x+=nudge[0]*fit;y+=nudge[1]*fit;}
     if(desktop){
      // A composed landscape spread rather than scattering small pieces across a laptop.
      const u=Math.min(size.w/1280,size.h/800);const cx=size.w/2;const cy=size.h/2;
