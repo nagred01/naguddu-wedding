@@ -27,7 +27,7 @@ const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మం�
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
 // Phone song-line box [x, y, width, on a soft card?] in layout units, where the saved verse box is too narrow or sits on busy artwork.
-const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[12,506,120,true],pasupu:[10,440,190]};
+const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[12,506,120,true],pasupu:[10,440,190],mehandi:[18,448,124]};
 function htmlEscape(s:string){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}){
  const ref=useRef<HTMLElement>(null);const [size,setSize]=useState({w:390,h:844});
