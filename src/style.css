@@ -709,9 +709,9 @@ section.event.world-reception .card > .txt .blurb { display: block !important; f
   .gate-t { font-size: 16px !important; padding: 11px 24px !important; }
 }
 .door.l, .door.r { box-shadow: none !important; }
-.gate-in { top: 24% !important; }
-.gate-in .ganesha { height: 60px; margin: 0 auto 2px; }
-@media (min-width: 900px) { .gate-in { top: 22% !important; } .gate-in .ganesha { height: 84px; } }
+.gate-in { top: 21% !important; }
+.gate-in .ganesha { height: 84px; margin: 0 auto 2px; }
+@media (min-width: 900px) { .gate-in { top: 20% !important; } .gate-in .ganesha { height: 110px; } }
 
 /* Wedding assistant (chat bubble, bottom right) */
 .wa { position: absolute; right: 12px; bottom: 34px; z-index: 65; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; pointer-events: none; }
