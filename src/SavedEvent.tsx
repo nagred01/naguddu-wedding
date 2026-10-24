@@ -57,7 +57,8 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
     const art=i.id==='image1'||i.id==='image2';
     let s=fit,width=i.w*s,height=i.h*s,x=offset+i.x*s,y=top+i.y*fit;
     const ev=EVENTS.find(x=>x.id===id)!;const sub=SUBTITLE[id]?.[lang];
-    if(!desktop&&i.id==='title'&&id!=='pellikuthuru'){
+    // Wedding keeps its original layout title on phones.
+    if(!desktop&&i.id==='title'&&id!=='pellikuthuru'&&id!=='vivaham'){
      // One clear line at the layout's title spot, in either language.
      const [tt,ts=sub]=titleLines(lang==='en'?ev.en:ev.te);
      return <h2 key={i.id} className="saved-piece motion-title ev-title" data-piece="title" data-font={fontAttr('title')} style={fx('title',{left:offset+(i.x+i.w/2)*fit,top:y,transform:'translateX(-50%)',fontSize:28*fit*(E('title').fs||1),color:TITLE_COLOR[id],zIndex:i.z,whiteSpace:'nowrap'})}>{tt}{ts&&<span className="ev-sub">{ts}</span>}</h2>;
@@ -98,8 +99,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      // On desktop the block is centred on the page axis, under the title.
      if(desktop){const u=Math.min(size.w/1280,size.h/800);width=340*u;x=size.w/2-width/2;}
      // On phones the canvas shrinks and leaves side margins: let the text use them instead of wrapping.
-     // Wide blocks (Wedding) stay inside the page's decorated border.
-     else if(i.w>=300){x=offset+40*fit;width=310*fit;}
+     else if(i.w>=300){x=16;width=size.w-32;}
      else if(sub){y+=24*fit;width=Math.max(width,size.w-14-x);}
      else width=Math.max(width,size.w-14-x);
      const rows:[string,string][]=[[T.date[lang],ev.date[lang]],[T.time[lang],ev.time[lang]],[T.venue[lang],ev.venue[lang]],[T.dress[lang],ev.dress[lang]]];
