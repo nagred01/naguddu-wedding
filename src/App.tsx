@@ -300,7 +300,7 @@ export function App() {
 
   return (
     <div className={'wed ' + (lang === 'te' ? 'is-te' : '')} lang={lang}>
-     <div className={'stage' + (motionPaused ? ' motion-paused' : '') + (active === 'glimpse' ? ' itinerary-active' : '')}>
+     <div className={'stage' + (motionPaused ? ' motion-paused' : '') + (active === 'glimpse' ? ' itinerary-active' : '') + (active === 'cover' ? ' home-active' : '')}>
       <div className="sample-bar">{t('sample')}</div>
       <div className="topbar">
         <div className="playback-pills"><button className="pill" onClick={() => setMuted(!muted)} aria-pressed={muted} aria-label={t('sound')}>{muted ? '🔇' : '🔊'}</button><button className="pill motion-pause" onClick={() => setMotionPaused(!motionPaused)} aria-pressed={motionPaused} aria-label={lang === 'en' ? (motionPaused ? 'Resume music and animation' : 'Pause music and animation') : (motionPaused ? 'కొనసాగించు' : 'విరామం')}>{motionPaused ? '▶' : 'Ⅱ'}</button></div>
