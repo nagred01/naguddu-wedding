@@ -1126,3 +1126,5 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 /* Song lines wrap into even halves rather than ragged fragments. */
 .ev-lyrics { gap: .15em; line-height: 1.35; }
 .ev-lyrics span { text-wrap: balance; }
+/* Wedding song lines sit on the temple artwork: a soft cream glow keeps them readable without a box. */
+.world-vivaham .ev-lyrics { text-shadow: 0 0 6px rgba(251,246,236,.95), 0 0 12px rgba(251,246,236,.8); }
