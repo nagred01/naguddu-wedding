@@ -26,8 +26,8 @@ const LYRICS:Record<string,Record<Lang,string[]>>={
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
-// Phone song-line box [x, y, width] in layout units where the saved verse box sits on busy artwork; shown on a soft card.
-const PHONE_LYRIC_BOX:Record<string,[number,number,number]>={pellikuthuru:[12,506,120]};
+// Phone song-line box [x, y, width, on a soft card?] in layout units, where the saved verse box is too narrow or sits on busy artwork.
+const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[12,506,120,true],pasupu:[10,440,190]};
 function htmlEscape(s:string){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}){
  const ref=useRef<HTMLElement>(null);const [size,setSize]=useState({w:390,h:844});
@@ -86,10 +86,10 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
     if(i.id==='verse'&&LYRICS[id]){
      let fs=desktop?16*Math.min(size.w/1280,size.h/800):14.5*Math.max(.9,Math.min(1,fit));
      const box=!desktop&&PHONE_LYRIC_BOX[id];
-     if(box){x=offset+box[0]*fit;y=top+box[1]*fit;width=box[2]*fit;fs*=.9;}
+     if(box){x=offset+box[0]*fit;y=top+box[1]*fit;width=box[2]*fit;if(box[3])fs*=.9;}
      else if(!desktop)width=Math.max(width,150*fit);
      const lines=E('verse').text?.[lang]?.split('\n')??LYRICS[id][lang];
-     return <p key={i.id} className={'saved-piece motion-text ev-lyrics'+(id==='mehandi'?' light':'')+(box?' lyric-card':'')} data-piece="verse" data-font={fontAttr('verse')} style={fx('verse',{left:x,top:y,width,fontSize:fs*(E('verse').fs||1),zIndex:i.z})} lang={lang}>{lines.map((l,n)=><span key={n}>{l}</span>)}</p>;
+     return <p key={i.id} className={'saved-piece motion-text ev-lyrics'+(id==='mehandi'?' light':'')+(box&&box[3]?' lyric-card':'')} data-piece="verse" data-font={fontAttr('verse')} style={fx('verse',{left:x,top:y,width,fontSize:fs*(E('verse').fs||1),zIndex:i.z})} lang={lang}>{lines.map((l,n)=><span key={n}>{l}</span>)}</p>;
     }
     if(i.id==='details'){
      // Rendered outside the scaled canvas so date, time and venue keep a readable size on small phones.

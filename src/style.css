@@ -1123,3 +1123,6 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .le-foot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; }
 .le-panel .le-save { background: #1a73e8; border-color: #1a73e8; color: #fff; font-weight: 600; }
 @media (max-width: 899px) { .le-panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto; max-height: 46vh; } }
+/* Song lines wrap into even halves rather than ragged fragments. */
+.ev-lyrics { gap: .15em; line-height: 1.35; }
+.ev-lyrics span { text-wrap: balance; }
