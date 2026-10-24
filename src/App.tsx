@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './style.css';
 import homeArt from './img/home-invite.webp';
-import gate from './img/board.jpg';
+import gate from './img/gate-garland.jpg';
 import ganesha from './img/ganesha.webp';
 import haldi from './img/haldi-c1.webp';
 import mangalaC from './img/haldi-c2.webp';
