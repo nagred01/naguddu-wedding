@@ -1102,8 +1102,6 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 
 /* Event page title subtitle */
 .ev-sub { display: block; margin-top: .25em; font: italic .5em/1.2 var(--font-body); letter-spacing: .02em; text-transform: none; opacity: .9; }
-.cocktail-sub { margin: -2px 0 8px; font: 600 13px/1.3 var(--font-display); letter-spacing: .12em; color: #f5dfa9; }
-@media (min-width: 900px) { .cocktail-sub { font-size: 16px; margin-bottom: 12px; } }
 
 /* Layout editor (local only) */
 .saved-piece[data-font], .saved-piece[data-font] * { font-family: var(--piece-font) !important; }

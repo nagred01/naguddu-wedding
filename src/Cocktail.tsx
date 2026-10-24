@@ -51,9 +51,6 @@ const o=EDIT_MODE?1:reveal*outro;c.style.opacity=String(o);c.style.translate=EDI
   <video ref={video} poster={poster} autoPlay={active&&!paused} onPlaying={()=>{if(state.current.active&&!state.current.paused)setFallback(false);}} onPause={useFallback} onError={useFallback} src={clip} className="cocktail-original-video" muted playsInline loop preload={warm?"auto":"none"} aria-label="Cocktail invitation animation"/>
   <canvas ref={canvas} width={352} height={614} className="cocktail-original-video cocktail-frame-animation" style={{visibility:fallback?'visible':'hidden'}} aria-label="Cocktail invitation animation"/>
   <div ref={copy} className="cocktail-copy" style={{opacity:EDIT_MODE?1:0}}>
-   {piece('kicker',lang==='en'?'BHAVITHA & NAGENDER':'భవిత & నాగేందర్','cocktail-kicker')}
-   {piece('title',lang==='en'?'COCKTAIL PARTY':'కాక్‌టెయిల్ పార్టీ',undefined,'h2')}
-   {piece('sub',lang==='en'?'An After-Wedding Celebration':'వివాహానంతర వేడుక','cocktail-sub')}
    {piece('theme',lang==='en'?'A Night under the Stars':'నక్షత్రాల కింద ఓ వేడుక','cocktail-theme')}
    <div className="cocktail-details">
     {piece('date',lang==='en'?'FRIDAY, DECEMBER 4, 2026':'శుక్రవారం, డిసెంబర్ 4, 2026')}
