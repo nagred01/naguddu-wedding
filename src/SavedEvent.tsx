@@ -12,27 +12,12 @@ const MAPS:Record<string,string>=Object.fromEntries(EVENTS.map(e=>[e.id,e.addres
 const teluguEdits:Record<string,Record<string,string>>={
  pellikuthuru:{title:'పెళ్లికూతురు',[extraId]:'పెళ్లికొడుకు'}
 };
-// Song lines per event: English letters in English mode, Telugu script in Telugu mode.
-const LYRICS:Record<string,Record<Lang,string[]>>={
- pasupu:{
-  en:['Muthaiduvulantha mudamaara ee baalaki','Mangala snaanaalu cheyinchare','Sriraama rakshana ane ksheeraabdhi kanyaki','Mummaaru dishti theesi deevinchare'],
-  te:['ముత్తైదువులంతా ముదమారా ఈ బాలకి','మంగళ స్నానాలు చేయించరే','శ్రీరామ రక్షణ అనే క్షీరాబ్ధి కన్యకి','ముమ్మారు దిష్టి తీసి దీవించరే']},
- mehandi:{en:['Ramachakkani Seethaki arachetha gorinta…'],te:['రామచక్కని సీతకి అరచేత గోరింట…']},
- pellikuthuru:{
-  en:['Chakkandala chukka','Kudirindhe pellenchakka','Rekkala gurram raju','Taralochhe veganga…'],
-  te:['చక్కంధాల చుక్క','కుదిరిందే పెళ్లేంచక్కా','రెక్కల గుర్రం రాజు','తరలొచ్చే వేగంగా…']},
- vivaham:{
-  en:['Chakkandala chukka','Kudirindhe pellenchakka','Rekkala gurram raju','Taralochhe veganga…'],
-  te:['చక్కంధాల చుక్క','కుదిరిందే పెళ్లేంచక్కా','రెక్కల గుర్రం రాజు','తరలొచ్చే వేగంగా…']}
-};
 // A line under the title.
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 // Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
 const PHONE_NUDGE:Record<string,Record<string,[number,number]>>={pellikuthuru:{details:[0,-22],image2:[0,16]}};
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
-// Phone song-line box [x, y, width, on a soft card?] in layout units, where the saved verse box is too narrow or sits on busy artwork.
-const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[4,500,156],pasupu:[10,440,190],mehandi:[18,448,124],vivaham:[206,548,178]};
 function htmlEscape(s:string){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}){
  const ref=useRef<HTMLElement>(null);const [size,setSize]=useState({w:390,h:844});
@@ -50,7 +35,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
  return <section ref={ref} id={id} data-sec={id} data-editable="" data-mode={mode} data-unit={unit} className={'sec event saved-event world-'+id+(active?' motion-active':'')}>
   <div className="event-glow" aria-hidden="true"/>
   <div className="saved-layout" aria-label={id+' event'}>
-   {items.filter((i:any)=>(!i.hidden||(i.id==='verse'&&LYRICS[id]))&&(i.id!=='map'||MAPS[id])).map((i:any)=>{
+   {items.filter((i:any)=>!i.hidden&&i.id!=='verse'&&(i.id!=='map'||MAPS[id])).map((i:any)=>{
     const t=e.items.find((x:any)=>x.id===i.id);const original=base.items.find((x:any)=>x.id===i.id);
     let html='';const rich=i.type==='rich';const edited=i.text!==null&&i.text!==undefined;
     if(rich){html=i.rich;if(lang==='te'&&teluguEdits[id]?.[i.id]){const div=document.createElement('div');div.innerHTML=html;const walker=document.createTreeWalker(div,NodeFilter.SHOW_TEXT);let first=true,n;while(n=walker.nextNode()){if(first){n.textContent=teluguEdits[id][i.id];first=false;}else n.textContent='';}html=div.innerHTML;}}
@@ -88,16 +73,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      // Artworks mirror each other around the centre line, leaving the middle column for the text.
      else if(art){s=1.9*u;width=i.w*s;height=i.h*s;const [dx,dy]=ART_NUDGE[id]?.[i.id]??[0,0];x=(i.id==='image1'?cx-215*u-width:cx+215*u)+dx*u;y=cy-height/2+(20+dy)*u;}
      else if(i.id==='details'){y=(sub?262:238)*u;}
-     else if(i.id==='verse'){s=.95*u;width=LYRICS[id]?360*u:i.w*s;height=i.h*s;x=cx-width/2;y=480*u;}
      else if(i.id==='map'){s=1.1*u;width=i.w*s;height=i.h*s;x=cx-width/2;y=size.h-76*u;}
-    }
-    if(i.id==='verse'&&LYRICS[id]){
-     let fs=desktop?16*Math.min(size.w/1280,size.h/800):14.5*Math.max(.9,Math.min(1,fit));
-     const box=!desktop&&PHONE_LYRIC_BOX[id];
-     if(box){x=offset+box[0]*fit;y=top+box[1]*fit;width=Math.min(box[2]*fit,size.w-(box[3]?28:10)-x);if(box[3])fs*=.9;}
-     else if(!desktop)width=Math.max(width,150*fit);
-     const lines=E('verse').text?.[lang]?.split('\n')??LYRICS[id][lang];
-     return <p key={i.id} className={'saved-piece motion-text ev-lyrics'+(id==='mehandi'?' light':'')+(box&&box[3]?' lyric-card':'')} data-piece="verse" data-font={fontAttr('verse')} style={fx('verse',{left:x,top:y,width,fontSize:fs*(E('verse').fs||1),zIndex:i.z})} lang={lang}>{lines.map((l,n)=><span key={n}>{l}</span>)}</p>;
     }
     if(i.id==='details'){
      // Rendered outside the scaled canvas so date, time and venue keep a readable size on small phones.

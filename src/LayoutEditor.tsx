@@ -6,7 +6,7 @@ import type { Lang } from './i18n';
 // panel for size, text size, font and wording. Opened with http://localhost:8080/?edit.
 
 const PIECES: Record<string, string> = {
-  ganesha: 'Ganesha', title: 'Title', details: 'Date / time / venue', verse: 'Song lyrics',
+  ganesha: 'Ganesha', title: 'Title', details: 'Date / time / venue',
   image1: 'Left picture', image2: 'Right picture', map: 'Open in Maps button', number: 'Number',
   kicker: 'Names line', sub: 'Subtitle', theme: 'Theme line', date: 'Date', time: 'Time', venue: 'Venue', dress: 'Dress code',
 };
@@ -19,7 +19,7 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'verse', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
+const WORDING = new Set(['title', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
 
 export function LayoutEditor({ lang }: { lang: Lang }) {
@@ -108,7 +108,7 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
               {window.innerWidth >= 900 && <button onClick={() => window.open(location.href, 'naguddu-phone', 'width=410,height=900')}>Open phone window</button>}
             </p>
             {!sel ? (
-              <p className="le-hint">Click any title, picture, details, lyrics or button on an event page to select it. Drag to move; arrow keys nudge (Shift = bigger steps).</p>
+              <p className="le-hint">Click any title, picture, details or button on an event page to select it. Drag to move; arrow keys nudge (Shift = bigger steps).</p>
             ) : (
               <div className="le-body">
                 <p className="le-sel">{PAGES[sel.page] || sel.page} · <b>{pieceLabel(sel.piece)}</b> <span>({sel.mode})</span></p>
@@ -126,8 +126,8 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
                   </select>
                 </label>
                 {WORDING.has(sel.piece) && (
-                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : sel.piece === 'verse' ? ' — one line per row' : ''}</span>
-                    <textarea rows={sel.piece === 'verse' ? 4 : 2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
+                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : ''}</span>
+                    <textarea rows={2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
                     <small>Switch the site language (top right) to edit the other language.</small>
                   </label>
                 )}
