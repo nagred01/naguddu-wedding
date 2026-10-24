@@ -129,7 +129,7 @@ body { background: #3a070d; }
 
 .gate-in { gap: 3px; }
 .gate-om { font-size: 12px; }
-.gate-names { font-size: clamp(20px, 6vw, 25px); line-height: 1.2; max-width: 250px; }
+.gate-names { font-size: min(6.8vw, 30px); line-height: 1.2; white-space: nowrap; } /* both names on one line */
 .gate-h { font-size: 15px; }
 
 .world-pasupu .ev-img { aspect-ratio: 1 / 1; animation: none; }
