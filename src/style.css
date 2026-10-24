@@ -994,6 +994,9 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .cover-bg { position: absolute; inset: -40px; background: center / cover no-repeat; filter: blur(24px) brightness(.55); }
 .cover-art { position: absolute; top: 96px; left: 50%; height: calc(100% - 96px); aspect-ratio: 1024 / 1536; transform: translateX(-50%); container-type: inline-size; }
 .cover-art img { display: block; width: 100%; height: 100%; }
+/* Phones: end above the #NaGuddu bar so the whole invitation shows; start just high enough that the sound and
+   language buttons sit over the bells and garland, clear of the top line of text. */
+@media (max-width: 899px) { .cover-art { top: 74px; height: calc(100% - 74px - 27px); max-width: 100%; } }
 /* Positions are in the artwork's own proportions: centred under the caption, above the border, clear of the bowl. */
 .cover-count { position: absolute; left: 44.6%; top: 83.6%; transform: translateX(-50%); }
 .cover-count .countdown { gap: .8cqw; margin: 0; }
