@@ -20,6 +20,9 @@ const LYRICS:Record<string,Record<Lang,string[]>>={
  mehandi:{en:['Ramachakkani Seethaki arachetha gorinta…'],te:['రామచక్కని సీతకి అరచేత గోరింట…']},
  pellikuthuru:{
   en:['Chakkandala chukka','Kudirindhe pellenchakka','Rekkala gurram raju','Taralochhe veganga…'],
+  te:['చక్కంధాల చుక్క','కుదిరిందే పెళ్లేంచక్కా','రెక్కల గుర్రం రాజు','తరలొచ్చే వేగంగా…']},
+ vivaham:{
+  en:['Chakkandala chukka','Kudirindhe pellenchakka','Rekkala gurram raju','Taralochhe veganga…'],
   te:['చక్కంధాల చుక్క','కుదిరిందే పెళ్లేంచక్కా','రెక్కల గుర్రం రాజు','తరలొచ్చే వేగంగా…']}
 };
 // A line under the title.
@@ -27,7 +30,7 @@ const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మం�
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
 // Phone song-line box [x, y, width, on a soft card?] in layout units, where the saved verse box is too narrow or sits on busy artwork.
-const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[12,506,120,true],pasupu:[10,440,190],mehandi:[18,448,124]};
+const PHONE_LYRIC_BOX:Record<string,[number,number,number,boolean?]>={pellikuthuru:[12,506,120,true],pasupu:[10,440,190],mehandi:[18,448,124],vivaham:[206,548,178,true]};
 function htmlEscape(s:string){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}){
  const ref=useRef<HTMLElement>(null);const [size,setSize]=useState({w:390,h:844});
@@ -87,7 +90,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
     if(i.id==='verse'&&LYRICS[id]){
      let fs=desktop?16*Math.min(size.w/1280,size.h/800):14.5*Math.max(.9,Math.min(1,fit));
      const box=!desktop&&PHONE_LYRIC_BOX[id];
-     if(box){x=offset+box[0]*fit;y=top+box[1]*fit;width=box[2]*fit;if(box[3])fs*=.9;}
+     if(box){x=offset+box[0]*fit;y=top+box[1]*fit;width=Math.min(box[2]*fit,size.w-(box[3]?28:10)-x);if(box[3])fs*=.9;}
      else if(!desktop)width=Math.max(width,150*fit);
      const lines=E('verse').text?.[lang]?.split('\n')??LYRICS[id][lang];
      return <p key={i.id} className={'saved-piece motion-text ev-lyrics'+(id==='mehandi'?' light':'')+(box&&box[3]?' lyric-card':'')} data-piece="verse" data-font={fontAttr('verse')} style={fx('verse',{left:x,top:y,width,fontSize:fs*(E('verse').fs||1),zIndex:i.z})} lang={lang}>{lines.map((l,n)=><span key={n}>{l}</span>)}</p>;
@@ -99,7 +102,8 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      // On desktop the block is centred on the page axis, under the title.
      if(desktop){const u=Math.min(size.w/1280,size.h/800);width=340*u;x=size.w/2-width/2;}
      // On phones the canvas shrinks and leaves side margins: let the text use them instead of wrapping.
-     else if(i.w>=300){x=16;width=size.w-32;}
+     // Wide phones: stay inside the artwork's column so the facts keep two columns and clear the lyrics.
+     else if(i.w>=300){width=Math.min(size.w-32,374*fit);x=Math.max(16,size.w/2-width/2);}
      else if(sub){y+=24*fit;width=Math.max(width,size.w-14-x);}
      else width=Math.max(width,size.w-14-x);
      const rows:[string,string][]=[[T.date[lang],ev.date[lang]],[T.time[lang],ev.time[lang]],[T.venue[lang],ev.venue[lang]],[T.dress[lang],ev.dress[lang]]];
