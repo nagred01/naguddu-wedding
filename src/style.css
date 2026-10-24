@@ -1127,4 +1127,8 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .ev-lyrics { gap: .15em; line-height: 1.35; }
 .ev-lyrics span { text-wrap: balance; }
 /* Wedding song lines sit on the temple artwork: a soft cream glow keeps them readable without a box. */
-.world-vivaham .ev-lyrics { text-shadow: 0 0 6px rgba(251,246,236,.95), 0 0 12px rgba(251,246,236,.8); }
+.world-vivaham .ev-lyrics, .world-pellikuthuru .ev-lyrics { text-shadow: 0 0 6px rgba(251,246,236,.95), 0 0 12px rgba(251,246,236,.8); }
+/* Pellikuthuru song lines cover busy artwork: a soft haze that fades into the page, with no edges. */
+.world-pellikuthuru .ev-lyrics { padding: 10px 6px; background: radial-gradient(ellipse closest-side, rgba(251,246,236,.92) 55%, rgba(251,246,236,0)); }
+.world-pellikuthuru .ev-lyrics[lang="en"] { gap: .05em; }
+.world-pellikuthuru .ev-lyrics[lang="en"] span { font-size: .84em; }
