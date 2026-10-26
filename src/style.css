@@ -790,6 +790,9 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-col-lines p {margin:0;font:1em/1.35 var(--font-body);white-space:nowrap;}
 .ev-col-lines p:first-child {font-weight:700;}
 .ev-col-map {margin-top:4px;padding:8px 22px;border:1.5px solid #8a4b08;border-radius:999px;background:rgba(255,248,230,.85);color:#5a3200;text-decoration:none;font:600 13px/1 var(--font-display);letter-spacing:.06em;}
+/* Mehendi: light text on the green cloth. */
+.world-mehandi .ev-column {color:#fbf1d6;text-shadow:0 1px 3px rgba(0,25,0,.75),0 0 10px rgba(0,25,0,.5);}
+.world-mehandi .ev-col-map {border-color:#f2cf7e;background:rgba(20,45,10,.6);color:#f5dfa9;}
 @media (min-width:900px) {.ev-column {padding:110px 30% 50px;} .ev-col-ganesha {top:11.5vh;height:8.75vh;}}
 /* Layout editor option: a field's label and value on one line. */
 .ev-facts .ev-inline {display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em;grid-column:1 / -1;}
