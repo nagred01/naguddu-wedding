@@ -9,7 +9,7 @@ const PIECES: Record<string, string> = {
   ganesha: 'Ganesha', title: 'Title', details: 'Date / time / venue',
   image1: 'Left picture', image2: 'Right picture', map: 'Open in Maps button', number: 'Number',
   kicker: 'Names line', sub: 'Subtitle', theme: 'Theme line', date: 'Date', time: 'Time', venue: 'Venue', dress: 'Dress code',
-  about: 'Description',
+  about: 'Description', lines: 'Event lines',
 };
 const PAGES: Record<string, string> = { pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
 const FONTS: [string, string][] = [
@@ -20,7 +20,7 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'about', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
+const WORDING = new Set(['title', 'about', 'lines', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
 const FIELDS = new Set(['date', 'time', 'venue', 'dress']);
 // Extra labels added in the saved layout (e.g. పెళ్లికొడుకు) can be reworded too.

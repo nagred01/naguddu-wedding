@@ -14,10 +14,14 @@ const teluguEdits:Record<string,Record<string,string>>={
 };
 // A line under the title.
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
-// A short line about the ceremony, placed in free space (phone: [x, y, width] in layout units; desktop: under the details).
-const ABOUT:Record<string,{en:string;te:string;phone:[number,number,number]}>={
- pasupu:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride for blessings and good luck.',
-  te:'వధువుకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.',phone:[10,440,190]},
+// Pages laid out as one centred column (title, picture, description, event lines, Maps button) instead of the
+// freely placed layout. Each text line can still be reworded in the layout editor.
+const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>}>={
+ pasupu:{
+  about:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride and groom for blessings and good luck.',
+   te:'వధూవరులకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.'},
+  lines:{en:["Tuesday, 1st Dec' 2026 from 9:30AM",'Serengeti Events (Airbnb)','Please join us in your favorite hue of yellow'],
+   te:['మంగళవారం, డిసెంబర్ 1, 2026 ఉదయం 9:30 నుండి','Serengeti Events (Airbnb)','మీకు ఇష్టమైన పసుపు రంగు దుస్తుల్లో రండి']}},
 };
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 // Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
@@ -39,7 +43,21 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
  const titleLines=(fallback:string)=>{const o=E('title').text?.[lang];return o?o.split('\n'):[fallback];};
  return <section ref={ref} id={id} data-sec={id} data-editable="" data-mode={mode} data-unit={unit} className={'sec event saved-event world-'+id+(active?' motion-active':'')}>
   <div className="event-glow" aria-hidden="true"/>
-  <div className="saved-layout" aria-label={id+' event'}>
+  {COLUMN[id]?(()=>{
+   const c=COLUMN[id],ev=EVENTS.find(x=>x.id===id)!;
+   // Artwork from the saved layout, by piece.
+   const art=(p:string)=>/src="([^"]+)"/.exec(e.items.find((x:any)=>x.id===p)?.html||base.items.find((x:any)=>x.id===p)?.html||items.find((x:any)=>x.id===p)?.rich||'')?.[1];
+   const say=(p:string,fallback:string)=>E(p).text?.[lang]??fallback;
+   const [tt,ts]=titleLines(lang==='en'?ev.en:ev.te);const sub=ts??SUBTITLE[id]?.[lang];
+   return <div className="ev-column" aria-label={id+' event'}>
+    <img className="ev-col-ganesha" src={art('ganesha')} alt=""/>
+    <h2 className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{position:'relative',color:TITLE_COLOR[id]})}>{tt}{sub&&<span className="ev-sub">{sub}</span>}</h2>
+    <img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>
+    <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang])}</p>
+    <div className="ev-col-lines" data-piece="lines" data-wh="" data-font={fontAttr('lines')} style={fx('lines',{})}>{(say('lines',c.lines[lang].join('\n'))).split('\n').map((l,n)=><p key={n}>{l}</p>)}</div>
+    {MAPS[id]&&<a className="ev-col-map" data-piece="map" href={MAPS[id]} target="_blank" rel="noopener" style={fx('map',{})}>{lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి'}</a>}
+   </div>;
+  })():<div className="saved-layout" aria-label={id+' event'}>
    {items.filter((i:any)=>!i.hidden&&i.id!=='verse'&&(i.id!=='map'||MAPS[id])).map((i:any)=>{
     const t=e.items.find((x:any)=>x.id===i.id);const original=base.items.find((x:any)=>x.id===i.id);
     let html='';const rich=i.type==='rich';const edited=i.text!==null&&i.text!==undefined;
@@ -112,13 +130,6 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      <div className={art?'saved-float':'saved-still'}><div className={'saved-content'+(rich?' saved-rich':'')} style={{width:rich?i.w:(original?.w??i.w),height:rich?i.h:(original?.h??i.h),transform:rich?`scale(${s})`:`scale(${width/(original?.w??i.w)},${height/(original?.h??i.h)})`}} dangerouslySetInnerHTML={{__html:html}}/></div>
     </div>;
    })}
-   {ABOUT[id]&&(()=>{
-    const a=ABOUT[id],d=E('about');const u=Math.min(size.w/1280,size.h/800);
-    const width=(desktop?360*u:a.phone[2]*fit)*(d.w||1);
-    const at=desktop?{left:size.w/2-width/2,top:(SUBTITLE[id]?.[lang]?262:238)*u+150*u}:{left:offset+a.phone[0]*fit,top:top+a.phone[1]*fit};
-    const fs=(desktop?16*u:14*Math.max(.9,Math.min(1,fit)))*(d.fs||1);
-    return <p className={'saved-piece motion-text ev-about'+(id==='mehandi'?' light':'')} data-piece="about" data-wh="w" data-font={fontAttr('about')} style={fx('about',{...at,width,fontSize:fs,zIndex:5})} lang={lang}>{d.text?.[lang]??a[lang]}</p>;
-   })()}
-  </div>
+  </div>}
  </section>;
 }
