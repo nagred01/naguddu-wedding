@@ -18,13 +18,13 @@ const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మం�
 // freely placed layout. Each text line can still be reworded in the layout editor.
 const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>}>={
  pasupu:{
-  about:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride and groom for blessings and good luck.',
-   te:'వధూవరులకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.'},
+  about:{en:'Turmeric paste is applied to the bride and groom for blessings and good luck.',
+   te:'శుభం, అదృష్టం కోసం వధూవరులకు పసుపు రాసే వేడుక.'},
   lines:{en:["Tuesday, 1st Dec' 2026 from 9:30AM",'Serengeti Events (Airbnb)','Please join us in your favorite hue of yellow'],
    te:['మంగళవారం, డిసెంబర్ 1, 2026 ఉదయం 9:30 నుండి','Serengeti Events (Airbnb)','మీకు ఇష్టమైన పసుపు రంగు దుస్తుల్లో రండి']}},
  mehandi:{
-  about:{en:"An intimate and joyous celebration where intricate henna designs adorn the bride's hands and feet, symbolizing love, promise, and new beginnings.",
-   te:'వధువు చేతులు, పాదాలను అందమైన గోరింటాకు డిజైన్లతో అలంకరించే ఆత్మీయమైన, ఆనందకరమైన వేడుక; ఇది ప్రేమ, వాగ్దానం, కొత్త ఆరంభాలకు ప్రతీక.'},
+  about:{en:"Henna adorns the bride's hands and feet, a symbol of love and new beginnings.",
+   te:'ప్రేమకు, కొత్త ఆరంభాలకు ప్రతీకగా వధువు చేతులు, పాదాలకు గోరింటాకు.'},
   lines:{en:["Tuesday, 1st Dec' 2026 from 4:00 PM",'Serengeti Events (Airbnb)','Festive attire in shades of green'],
    te:['మంగళవారం, డిసెంబర్ 1, 2026 సాయంత్రం 4:00 నుండి','Serengeti Events (Airbnb)','ఆకుపచ్చ రంగుల పండుగ దుస్తుల్లో రండి']}},
 };
