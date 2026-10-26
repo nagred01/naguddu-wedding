@@ -362,8 +362,8 @@ export function App() {
             <>
               <p className="cover-line cl-lead">ఇరు కుటుంబాల ఆశీస్సులతో,<br />ప్రేమ మరియు కృతజ్ఞతతో నిండిన హృదయాలతో,<br />మా వివాహ వేడుకకు మిమ్మల్ని ఆహ్వానిస్తున్నాము.</p>
               <p className="cover-line cl-sub">మా జీవిత ప్రయాణం మొదలయ్యే ఈ శుభవేళ,<br />మీ రాక మా ఆనందాన్ని సంపూర్ణం చేస్తుంది.</p>
-              <p className="cover-line cl-name cl-bride">భవిత రెడ్డి<br />గజ్జెల</p>
-              <p className="cover-line cl-name cl-groom">నాగేందర్ రెడ్డి<br />గోలి</p>
+              <p className="cover-line cl-name cl-bride">భవిత రెడ్డి గజ్జెల</p>
+              <p className="cover-line cl-name cl-groom">నాగేందర్ రెడ్డి గోలి</p>
               <p className="cover-line cl-cap">వివాహ వేడుకలకు కౌంట్‌డౌన్</p>
             </>
           )}
