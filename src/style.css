@@ -780,13 +780,13 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 /* Text stays in the clear middle, between the garlands and pots on either side. */
 .ev-column .ev-title {margin:0 0 clamp(4px,1.2vh,12px);font-size:clamp(26px,4.4vh,40px);}
 /* The title sits right under Ganesha with the picture a short gap below; any spare room goes under the Maps button. */
-.ev-column {justify-content:flex-start;padding-top:calc(max(66px,10vh) + clamp(48px,8.3vh,72px) + 2px) !important;}
+.ev-column {justify-content:flex-start;padding-top:calc(var(--ev-top) + clamp(48px,8.3vh,72px) + 2px) !important;}
 /* Pellikuthuru: the bride and groom side by side, each named underneath; the longer text wraps evenly. */
 .ev-col-pair {display:flex;justify-content:center;align-items:flex-end;gap:4vw;width:min(92vw,620px);}
 .ev-col-pair figure {margin:0;flex:1 1 0;display:flex;flex-direction:column;align-items:center;}
 .ev-col-pair .ev-col-art {height:clamp(130px,24vh,280px);max-width:100%;}
 .ev-col-pair figcaption {margin-top:4px;font:600 clamp(13px,2.2vh,18px)/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:#5a3a08;}
-.world-pellikuthuru .ev-about {width:min(92vw,640px);font-size:clamp(11.5px,1.9vh,16px);}
+.world-pellikuthuru .ev-about {width:min(92vw,640px);font-size:clamp(11px,1.75vh,16px);}
 .world-pellikuthuru .ev-col-lines p:last-child {white-space:normal;text-wrap:balance;}
 /* Description: the invitation line, then a smaller second paragraph. */
 .ev-about > span {display:block;}
@@ -796,21 +796,22 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .world-pellikuthuru .ev-col-lines {width:min(64vw,560px);font-size:clamp(12px,2.9vw,18px);}
 .is-te .world-pellikuthuru .ev-col-lines {width:min(56vw,560px);}
 .world-pellikuthuru .ev-col-lines p {white-space:normal;text-wrap:balance;}
-.world-pellikuthuru .ev-column {padding-left:6%;padding-right:6%;gap:clamp(4px,1vh,12px);}
+.world-pellikuthuru .ev-column {padding-left:6%;padding-right:6%;gap:clamp(3px,.6vh,12px);padding-top:calc(var(--ev-top) + clamp(42px,7vh,72px) + 2px) !important;}
+.world-pellikuthuru .ev-col-ganesha {height:clamp(42px,7vh,72px);}
 .world-pellikuthuru .ev-column .ev-title {white-space:nowrap;font-size:clamp(16px,min(4.3vw,3.6vh),34px);}
 /* The names under the two pictures are the page's titles, so the usual title is hidden (kept for screen readers). */
 .world-pellikuthuru .ev-column .ev-title {position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
 .world-pellikuthuru .ev-col-pair {gap:1.5vw;width:auto;margin-top:clamp(4px,1.2vh,12px);}
 .world-pellikuthuru .ev-col-pair figure {flex:none;min-width:max-content;}
 .world-pellikuthuru .ev-col-pair figcaption {white-space:nowrap;}
-.world-pellikuthuru .ev-col-pair .ev-col-art {height:clamp(88px,13vh,260px);}
+.world-pellikuthuru .ev-col-pair .ev-col-art {height:clamp(64px,10.5vh,260px);}
 @media (min-width:900px) {.world-pellikuthuru .ev-col-pair .ev-col-art {height:29vh;}}
 .world-pellikuthuru .ev-col-pair figcaption {margin-top:6px;font:700 clamp(12.5px,min(3.1vw,2.6vh),22px)/1.15 var(--font-display);font-style:normal;letter-spacing:.06em;color:#5a3a08;}
 .is-te .world-pellikuthuru .ev-col-pair figcaption {font-family:var(--font-body);letter-spacing:0;font-size:clamp(15px,min(3.9vw,2.8vh),24px);}
 .ev-col-gap {flex:1 1 0;min-height:0;margin:calc(-1 * clamp(6px,1.6vh,14px)) 0;}
 @media (min-width:900px) {.ev-column {padding-top:calc(20.25vh + 2px) !important;}}
 /* Ganesha at the top of the page, the same size and place as on the other event pages. */
-.ev-col-ganesha {position:absolute;top:max(66px,10vh);left:50%;transform:translateX(-50%);height:clamp(48px,8.3vh,72px);width:auto;}
+.ev-col-ganesha {position:absolute;top:var(--ev-top);left:50%;transform:translateX(-50%);height:clamp(48px,8.3vh,72px);width:auto;}
 .ev-col-art {display:block;height:clamp(150px,30vh,320px);width:auto;max-width:120%;object-fit:contain;}
 .ev-about {margin:0;width:min(90vw,640px);font:italic clamp(12.5px,2vh,16px)/1.4 var(--font-body);text-wrap:balance;white-space:pre-line;}
 .ev-about[lang="te"] {font-style:normal;}
@@ -1205,3 +1206,6 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
   .pill { width:34px; }
   .lang button { padding:0 9px; }
 }
+/* Event pages begin below the menu and the sound/language buttons (they end about 93px down on phones). */
+:root { --ev-top: 100px; }
+@media (max-width:374px) { :root { --ev-top: 94px; } }
