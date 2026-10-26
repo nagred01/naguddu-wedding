@@ -352,11 +352,20 @@ export function App() {
         {/* The couple's invitation artwork, with the live countdown placed in the space under its "Countdown" caption. */}
         <div className="cover-art">
           <img src={lang === 'en' ? homeArtEn : homeArtTe} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
-          {/* English: the blessing lines at the top. Telugu: the welcome, both names and the countdown caption. */}
+          {/* English: the blessing lines, the welcome and the couple with their parents. Telugu: the welcome, both names and the countdown caption. */}
           {lang === 'en' ? (
             <>
               <p className="cover-line cl-bless">Srirasthu <i>✦</i> Subhamasthu <i>✦</i> Avighnamasthu</p>
               <p className="cover-line cl-om">|| Om Sri Ganeshaya Namaha ||</p>
+              <p className="cover-line cl-lead cl-en">With the blessings of Lord Ganesha and both our families,<br />and hearts full of love and gratitude,<br />we invite you to celebrate our wedding.</p>
+              {/* Each name and each parents' line stays on one line. */}
+              <div className="cover-line cl-couple">
+                <p className="cl-who">Chi.La.Sow BHAVITHA REDDY GAJJELA</p>
+                <p className="cl-kin">Younger D/o Smt. Rajitha Reddy Gajjela &amp; Shri Yadav Reddy Gajjela</p>
+                <p className="cl-with">with</p>
+                <p className="cl-who">Chi. NAGENDER REDDY GOLI</p>
+                <p className="cl-kin">Elder S/o Smt. Laxmi Reddy Goli &amp; Shri Jayapal Reddy Goli (Late)</p>
+              </div>
             </>
           ) : (
             <>

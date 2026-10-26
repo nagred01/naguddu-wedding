@@ -1012,6 +1012,14 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .cl-bride { top: 56%; }
 .cl-groom { top: 66.2%; }
 .cl-cap { top: 81.9%; font: 2.1cqw/1.2 var(--font-body); }
+.cl-lead.cl-en { left: 46%; font-style: italic; font-size: 2.6cqw; width: 88%; }
+/* English couple block: names in the title face, parents' lines smaller; centred a little left of the card's middle to clear the leaves. */
+.cl-couple { top: 62.2%; left: 46%; width: 94%; text-shadow: 0 1px 3px rgba(40,0,0,.7); }
+.cl-couple p { margin: 0; white-space: nowrap; }
+.cl-who { font: 600 3.5cqw/1.25 var(--font-display); letter-spacing: .05em; color: #ffd384; }
+.cl-kin { font: italic 2.3cqw/1.4 var(--font-body); margin-bottom: .9em !important; }
+.cl-with { display: flex; align-items: center; justify-content: center; gap: .7em; font: italic 2.8cqw/1.2 var(--font-body); margin: .1em 0 .55em !important; }
+.cl-with::before, .cl-with::after { content: ''; width: 18%; height: 1px; background: linear-gradient(90deg, transparent, #e6b866, transparent); }
 /* Phones: the card spans the full width, starting just low enough that its top line of text clears the sound and
    language buttons, and only as wide as still keeps the countdown on screen (it ends about 89% down the card; a little margin below it).
    The #NaGuddu bar steps aside on Home (the card carries #NaGuddu itself). */
