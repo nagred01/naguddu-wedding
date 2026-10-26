@@ -779,6 +779,10 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-column {position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.6vh,14px);padding:58px 19% 40px;text-align:center;color:#4a2f00;text-shadow:0 0 6px rgba(255,250,235,.95),0 0 12px rgba(255,250,235,.8);}
 /* Text stays in the clear middle, between the garlands and pots on either side. */
 .ev-column .ev-title {margin:0;font-size:clamp(26px,4.4vh,40px);}
+/* The title sits right under Ganesha; the picture, description and details are centred in the space below it. */
+.ev-column {justify-content:flex-start;padding-top:calc(max(40px,6.6vh) + clamp(48px,8.3vh,72px) + 2px) !important;}
+.ev-col-gap {flex:1 1 0;min-height:0;margin:calc(-1 * clamp(6px,1.6vh,14px)) 0;}
+@media (min-width:900px) {.ev-column {padding-top:calc(20.25vh + 2px) !important;}}
 /* Ganesha at the top of the page, the same size and place as on the other event pages. */
 .ev-col-ganesha {position:absolute;top:max(40px,6.6vh);left:50%;transform:translateX(-50%);height:clamp(48px,8.3vh,72px);width:auto;}
 .ev-col-art {display:block;height:clamp(150px,30vh,320px);width:auto;max-width:120%;object-fit:contain;}
