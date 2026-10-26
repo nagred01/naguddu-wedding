@@ -779,7 +779,8 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-column {position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.6vh,14px);padding:58px 19% 40px;text-align:center;color:#4a2f00;text-shadow:0 0 6px rgba(255,250,235,.95),0 0 12px rgba(255,250,235,.8);}
 /* Text stays in the clear middle, between the garlands and pots on either side. */
 .ev-column .ev-title {margin:0;font-size:clamp(26px,4.4vh,40px);}
-.ev-col-ganesha {height:clamp(34px,6.5vh,64px);width:auto;}
+/* Ganesha at the top of the page, the same size and place as on the other event pages. */
+.ev-col-ganesha {position:absolute;top:max(40px,6.6vh);left:50%;transform:translateX(-50%);height:clamp(48px,8.3vh,72px);width:auto;}
 .ev-col-art {display:block;height:clamp(150px,30vh,320px);width:auto;max-width:120%;object-fit:contain;}
 .ev-about {margin:0;max-width:30em;font:italic clamp(12.5px,2vh,16px)/1.4 var(--font-body);text-wrap:balance;white-space:pre-line;}
 .ev-about[lang="te"] {font-style:normal;}
@@ -789,7 +790,7 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-col-lines p {margin:0;font:1em/1.35 var(--font-body);white-space:nowrap;}
 .ev-col-lines p:first-child {font-weight:700;}
 .ev-col-map {margin-top:4px;padding:8px 22px;border:1.5px solid #8a4b08;border-radius:999px;background:rgba(255,248,230,.85);color:#5a3200;text-decoration:none;font:600 13px/1 var(--font-display);letter-spacing:.06em;}
-@media (min-width:900px) {.ev-column {padding:110px 30% 50px;}}
+@media (min-width:900px) {.ev-column {padding:110px 30% 50px;} .ev-col-ganesha {top:11.5vh;height:8.75vh;}}
 /* Layout editor option: a field's label and value on one line. */
 .ev-facts .ev-inline {display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em;grid-column:1 / -1;}
 .ev-facts .ev-inline dd {margin:0;}
