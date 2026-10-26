@@ -788,15 +788,25 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-col-pair figcaption {margin-top:4px;font:600 clamp(13px,2.2vh,18px)/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:#5a3a08;}
 .world-pellikuthuru .ev-about {width:min(92vw,640px);font-size:clamp(11.5px,1.9vh,16px);}
 .world-pellikuthuru .ev-col-lines p:last-child {white-space:normal;text-wrap:balance;}
+/* Description: the invitation line, then a smaller second paragraph. */
+.ev-about > span {display:block;}
+.ev-about b {font-weight:700;font-style:normal;}
+.ev-about .ev-about-more {margin-top:.35em;font-size:.86em;}
+/* Event details kept to the clear middle, away from the elephant and lotuses at the sides. */
+.world-pellikuthuru .ev-col-lines {width:min(64vw,560px);font-size:clamp(12px,2.9vw,18px);}
+.is-te .world-pellikuthuru .ev-col-lines {width:min(56vw,560px);}
+.world-pellikuthuru .ev-col-lines p {white-space:normal;text-wrap:balance;}
 .world-pellikuthuru .ev-column {padding-left:6%;padding-right:6%;}
 .world-pellikuthuru .ev-column .ev-title {white-space:nowrap;font-size:clamp(16px,min(4.3vw,3.6vh),34px);}
 /* The names under the two pictures are the page's titles, so the usual title is hidden (kept for screen readers). */
 .world-pellikuthuru .ev-column .ev-title {position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
-.world-pellikuthuru .ev-col-pair {gap:5vw;width:auto;margin-top:clamp(4px,1.2vh,12px);}
-.world-pellikuthuru .ev-col-pair figure {flex:0 1 auto;}
+.world-pellikuthuru .ev-col-pair {gap:1.5vw;width:auto;margin-top:clamp(4px,1.2vh,12px);}
+.world-pellikuthuru .ev-col-pair figure {flex:none;min-width:max-content;}
+.world-pellikuthuru .ev-col-pair figcaption {white-space:nowrap;}
+.world-pellikuthuru .ev-col-pair .ev-col-art {height:clamp(96px,15.5vh,260px);}
 @media (min-width:900px) {.world-pellikuthuru .ev-col-pair .ev-col-art {height:29vh;}}
-.world-pellikuthuru .ev-col-pair figcaption {margin-top:6px;font:700 clamp(14px,min(3.7vw,3vh),26px)/1.15 var(--font-display);font-style:normal;letter-spacing:.06em;color:#5a3a08;}
-.is-te .world-pellikuthuru .ev-col-pair figcaption {font-family:var(--font-body);letter-spacing:0;font-size:clamp(17px,min(4.6vw,3vh),28px);}
+.world-pellikuthuru .ev-col-pair figcaption {margin-top:6px;font:700 clamp(12.5px,min(3.1vw,2.6vh),22px)/1.15 var(--font-display);font-style:normal;letter-spacing:.06em;color:#5a3a08;}
+.is-te .world-pellikuthuru .ev-col-pair figcaption {font-family:var(--font-body);letter-spacing:0;font-size:clamp(15px,min(3.9vw,2.8vh),24px);}
 .ev-col-gap {flex:1 1 0;min-height:0;margin:calc(-1 * clamp(6px,1.6vh,14px)) 0;}
 @media (min-width:900px) {.ev-column {padding-top:calc(20.25vh + 2px) !important;}}
 /* Ganesha at the top of the page, the same size and place as on the other event pages. */

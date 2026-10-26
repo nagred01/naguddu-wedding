@@ -30,8 +30,9 @@ const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]
  pellikuthuru:{
   // Bride and groom pictures side by side, each named underneath.
   pair:{en:['Pellikuthuru','Pellikoduku'],te:['పెళ్లికూతురు','పెళ్లికొడుకు']},
-  about:{en:'With the blessings of our families, we invite you to celebrate the making of the bride and groom, “PELLIKUTHURU & PELLIKODUKU”.\nA beautiful beginning to our wedding rituals, filled with turmeric hues, cherished customs, and heartfelt blessings, as we prepare for our new journey together.',
-   te:'మా కుటుంబాల ఆశీస్సులతో, వధూవరులను సిద్ధం చేసే “పెళ్లికూతురు & పెళ్లికొడుకు” వేడుకకు మిమ్మల్ని ఆహ్వానిస్తున్నాము.\nపసుపు రంగులు, ప్రియమైన సంప్రదాయాలు, హృదయపూర్వక ఆశీస్సులతో నిండిన ఈ వేడుక, మా కొత్త ప్రయాణానికి సిద్ధమవుతూ మా వివాహ వేడుకలకు అందమైన ఆరంభం.'},
+  // **…** is shown in bold; lines after the first are set smaller.
+  about:{en:'Please join us to celebrate the making of the bride and groom, **“PELLIKUTHURU & PELLIKODUKU”**.\nA beautiful beginning to our wedding rituals, filled with turmeric hues, cherished customs, and heartfelt blessings, as we prepare for our new journey together.',
+   te:'వధూవరులను సిద్ధం చేసే **“పెళ్లికూతురు & పెళ్లికొడుకు”** వేడుకను మాతో కలిసి జరుపుకోవడానికి రండి.\nపసుపు రంగులు, ప్రియమైన సంప్రదాయాలు, హృదయపూర్వక ఆశీస్సులతో నిండిన ఈ వేడుక, మా కొత్త ప్రయాణానికి సిద్ధమవుతూ మా వివాహ వేడుకలకు అందమైన ఆరంభం.'},
   lines:{en:["Wednesday, 2nd Dec' 2026 from 10:00 AM",'Serengeti Events (Airbnb)','Please join us as we celebrate in your favorite traditional Indian attire.'],
    te:['బుధవారం, డిసెంబర్ 2, 2026 ఉదయం 10:00 నుండి','Serengeti Events (Airbnb)','మీకు ఇష్టమైన సంప్రదాయ భారతీయ దుస్తుల్లో మాతో కలిసి వేడుక చేసుకోండి.']}},
 };
@@ -67,7 +68,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
     {c.pair?<div className="ev-col-pair">{(['image1','image2'] as const).map((p,n)=><figure key={p} data-piece={p} data-wh="" style={fx(p,{})}>
       <img className="ev-col-art" src={art(p)} alt=""/><figcaption data-piece={'name'+(n+1)}>{say('name'+(n+1),c.pair![lang][n])}</figcaption></figure>)}</div>
      :<img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>}
-    <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang])}</p>
+    <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang]).split('\n').map((para,n)=><span key={n} className={n?'ev-about-more':undefined}>{para.split('**').map((t,k)=>k%2?<b key={k}>{t}</b>:t)}</span>)}</p>
     <div className="ev-col-lines" data-piece="lines" data-wh="" data-font={fontAttr('lines')} style={fx('lines',{})}>{(say('lines',c.lines[lang].join('\n'))).split('\n').map((l,n)=><p key={n}>{l}</p>)}</div>
     {MAPS[id]&&<a className="ev-col-map" data-piece="map" href={MAPS[id]} target="_blank" rel="noopener" style={fx('map',{})}>{lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి'}</a>}
     <span className="ev-col-gap" aria-hidden="true"/>
