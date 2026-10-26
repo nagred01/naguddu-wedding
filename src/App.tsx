@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './style.css';
 import homeArt from './img/home-invite.webp';
-// The same artwork with its Telugu blessing lines painted out, for English mode (the lines are set as live English text).
+// The same artwork with one language's words painted out, so those lines can be set as live text in the other language.
 import homeArtEn from './img/home-invite-en.webp';
+import homeArtTe from './img/home-invite-te.webp';
 import gate from './img/gate-garland.jpg';
 import ganesha from './img/ganesha.webp';
 import haldi from './img/haldi-c1.webp';
@@ -350,11 +351,20 @@ export function App() {
         <div className="cover-bg" style={{ backgroundImage: `url(${homeArt})` }} aria-hidden="true" />
         {/* The couple's invitation artwork, with the live countdown placed in the space under its "Countdown" caption. */}
         <div className="cover-art">
-          <img src={lang === 'en' ? homeArtEn : homeArt} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
-          {lang === 'en' && (
+          <img src={lang === 'en' ? homeArtEn : homeArtTe} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
+          {/* English: the blessing lines at the top. Telugu: the welcome, both names and the countdown caption. */}
+          {lang === 'en' ? (
             <>
               <p className="cover-line cl-bless">Srirasthu <i>✦</i> Subhamasthu <i>✦</i> Avighnamasthu</p>
               <p className="cover-line cl-om">|| Om Sri Ganeshaya Namaha ||</p>
+            </>
+          ) : (
+            <>
+              <p className="cover-line cl-lead">ఇరు కుటుంబాల ఆశీస్సులతో,<br />ప్రేమ మరియు కృతజ్ఞతతో నిండిన హృదయాలతో,<br />మా వివాహ వేడుకకు మిమ్మల్ని ఆహ్వానిస్తున్నాము.</p>
+              <p className="cover-line cl-sub">మా జీవిత ప్రయాణం మొదలయ్యే ఈ శుభవేళ,<br />మీ రాక మా ఆనందాన్ని సంపూర్ణం చేస్తుంది.</p>
+              <p className="cover-line cl-name cl-bride">భవిత రెడ్డి<br />గజ్జెల</p>
+              <p className="cover-line cl-name cl-groom">నాగేందర్ రెడ్డి<br />గోలి</p>
+              <p className="cover-line cl-cap">వివాహ వేడుకలకు కౌంట్‌డౌన్</p>
             </>
           )}
           <h1 className="sr-only">{T.bride.en} &amp; {T.groom.en}</h1>
