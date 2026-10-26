@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './style.css';
 import homeArt from './img/home-invite.webp';
+// The same artwork with its Telugu blessing lines painted out, for English mode (the lines are set as live English text).
+import homeArtEn from './img/home-invite-en.webp';
 import gate from './img/gate-garland.jpg';
 import ganesha from './img/ganesha.webp';
 import haldi from './img/haldi-c1.webp';
@@ -348,7 +350,13 @@ export function App() {
         <div className="cover-bg" style={{ backgroundImage: `url(${homeArt})` }} aria-hidden="true" />
         {/* The couple's invitation artwork, with the live countdown placed in the space under its "Countdown" caption. */}
         <div className="cover-art">
-          <img src={homeArt} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
+          <img src={lang === 'en' ? homeArtEn : homeArt} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
+          {lang === 'en' && (
+            <>
+              <p className="cover-line cl-bless">Srirasthu <i>✦</i> Subhamasthu <i>✦</i> Avighnamasthu</p>
+              <p className="cover-line cl-om">|| Om Sri Ganeshaya Namaha ||</p>
+            </>
+          )}
           <h1 className="sr-only">{T.bride.en} &amp; {T.groom.en}</h1>
           <div className="cover-count"><Countdown lang={lang} /></div>
         </div>
