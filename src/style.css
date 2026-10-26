@@ -996,15 +996,15 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .cover-art img { display: block; width: 100%; height: 100%; }
 /* Live lines over the artwork, placed where the painted ones were (percent of the card; sizes in card widths). */
 .cover-line { position: absolute; left: 48.3%; width: 80%; margin: 0; transform: translate(-50%, -50%); text-align: center; color: #ffd894; text-shadow: 0 1px 2px rgba(40,0,0,.45); line-height: 1.3; }
-.cl-bless { top: 6.2%; font: 2.5cqw/1.2 var(--font-body); letter-spacing: .01em; }
+.cl-bless { top: 6.2%; font: calc(2.5cqw * var(--fs, 1))/1.2 var(--font-body); letter-spacing: .01em; }
 .cl-bless i { font-style: normal; font-size: .7em; margin: 0 .6em; vertical-align: .12em; }
-.cl-om { top: 10.2%; font: 2.5cqw/1.2 var(--font-body); letter-spacing: .03em; }
-.cl-lead { top: 38.2%; font: 2.75cqw/1.55 var(--font-body); }
-.cl-sub { top: 46.2%; font: 2.2cqw/1.55 var(--font-body); }
-.cl-name { font: 700 4.6cqw/1.3 var(--font-body); color: #ffd384; }
+.cl-om { top: 10.2%; font: calc(2.5cqw * var(--fs, 1))/1.2 var(--font-body); letter-spacing: .03em; }
+.cl-lead { top: 38.2%; font: calc(2.75cqw * var(--fs, 1))/1.55 var(--font-body); }
+.cl-sub { top: 46.2%; font: calc(2.2cqw * var(--fs, 1))/1.55 var(--font-body); }
+.cl-name { font: 700 calc(4.6cqw * var(--fs, 1))/1.3 var(--font-body); color: #ffd384; }
 .cl-bride { top: 54.8%; }
 .cl-groom { top: 67.4%; }
-.cl-cap { top: 81.9%; font: 2.1cqw/1.2 var(--font-body); }
+.cl-cap { top: 81.9%; font: calc(2.1cqw * var(--fs, 1))/1.2 var(--font-body); }
 /* Phones: the card spans the full width, starting just low enough that its top line of text clears the sound and
    language buttons, and only as wide as still keeps the countdown on screen (it ends about 89% down the card; a little margin below it).
    The #NaGuddu bar steps aside on Home (the card carries #NaGuddu itself). */
@@ -1115,7 +1115,7 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .ev-sub { display: block; margin-top: .25em; font: italic .5em/1.2 var(--font-body); letter-spacing: .02em; text-transform: none; opacity: .9; }
 
 /* Layout editor (local only) */
-.saved-piece[data-font], .saved-piece[data-font] * { font-family: var(--piece-font) !important; }
+[data-editable] [data-font], [data-editable] [data-font] * { font-family: var(--piece-font) !important; }
 .le-panel { position: fixed; top: 64px; right: 16px; z-index: 1000; width: 300px; max-height: calc(100vh - 90px); overflow: auto; padding: 12px 14px; border-radius: 12px; background: #fff; color: #222; box-shadow: 0 10px 30px rgba(0,0,0,.4); font: 13px/1.4 system-ui, sans-serif; }
 .le-panel * { font-family: system-ui, sans-serif !important; letter-spacing: normal !important; text-transform: none !important; }
 .le-panel.le-min { width: auto; }

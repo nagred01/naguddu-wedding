@@ -8,6 +8,7 @@ import type { Lang } from './i18n';
 export type PieceEdit = {
   dx?: number; dy?: number;          // move
   scale?: number;                    // overall size
+  w?: number; h?: number;            // width and height multipliers (pictures stretch; text boxes get wider or narrower)
   fs?: number;                       // text size multiplier
   font?: string;                     // font family
   text?: Partial<Record<Lang, string>>; // replacement wording (lines separated by new lines)
@@ -43,7 +44,7 @@ export function setEdit(key: string, patch: PieceEdit) {
   // Drop values that are back to their defaults so the saved file stays small.
   (Object.keys(next) as (keyof PieceEdit)[]).forEach((k) => {
     const v = next[k] as unknown;
-    if (v === undefined || ((k === 'dx' || k === 'dy') && v === 0) || ((k === 'scale' || k === 'fs') && v === 1) || (k === 'font' && v === '')) delete next[k];
+    if (v === undefined || ((k === 'dx' || k === 'dy') && v === 0) || ((k === 'scale' || k === 'fs' || k === 'w' || k === 'h') && v === 1) || (k === 'font' && v === '')) delete next[k];
   });
   edits = { ...edits };
   if (Object.keys(next).length) edits[key] = next; else delete edits[key];

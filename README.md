@@ -30,8 +30,9 @@ Every push to `main` builds the site and publishes it to GitHub Pages (`.github/
 - Hotel notes: `hotels.md`
 
 ## Layout editor (local only)
-Open `http://localhost:8080/?edit` while the local preview is running. On the event pages, click a piece
-(title, pictures, details, lyrics, Maps button) to select it, drag to move it, and use the panel for size,
-text size, font and wording. Desktop and phone layouts are edited separately ("Open phone window").
+Open `http://localhost:8080/?edit` while the local preview is running. On Home and every event page, click a piece
+(Home card lines and countdown, titles, labels, pictures, date/time/venue/dress details, Maps button) to select it,
+drag to move it, and use the panel for size, width, height, text size, font and wording. Wording is per language:
+switch the site language to edit the other one. Desktop and phone layouts are edited separately ("Open phone window").
 "Save layout" downloads `layoutEdits.json`; put it in `src/` (replacing the old one) and rebuild to publish.
 The editor never appears on the published site.

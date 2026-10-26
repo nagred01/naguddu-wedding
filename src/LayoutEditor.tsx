@@ -9,8 +9,10 @@ const PIECES: Record<string, string> = {
   ganesha: 'Ganesha', title: 'Title', details: 'Date / time / venue',
   image1: 'Left picture', image2: 'Right picture', map: 'Open in Maps button', number: 'Number',
   kicker: 'Names line', sub: 'Subtitle', theme: 'Theme line', date: 'Date', time: 'Time', venue: 'Venue', dress: 'Dress code',
+  blessing: 'Blessing line', om: 'Om line', welcome: 'Welcome lines', message: 'Second message', bride: 'Bride name', groom: 'Groom name',
+  caption: 'Countdown caption', countdown: 'Countdown',
 };
-const PAGES: Record<string, string> = { pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
+const PAGES: Record<string, string> = { cover: 'Home', pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
 const FONTS: [string, string][] = [
   ['', 'Default'],
   ["'Cinzel', Georgia, serif", 'Cinzel (titles)'],
@@ -19,8 +21,10 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
+const WORDING = new Set(['title', 'details', 'blessing', 'om', 'welcome', 'message', 'bride', 'groom', 'caption', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
+// Extra labels added in the saved layout (e.g. పెళ్లికొడుకు) can be reworded too.
+const hasWording = (piece: string) => WORDING.has(piece) || piece.startsWith('extra-');
 
 export function LayoutEditor({ lang }: { lang: Lang }) {
   useEdits(); // re-render when edits change
@@ -36,10 +40,13 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
 
   // Wording box shows the saved wording, or what the page shows now.
   useEffect(() => {
-    if (!sel || !WORDING.has(sel.piece)) return;
+    if (!sel || !hasWording(sel.piece)) return;
     const saved = getEdit(key).text?.[lang];
     const el = pieceEl(sel);
-    setDraft(saved ?? (el ? [...el.childNodes].map((n) => n.textContent).filter(Boolean).join('\n') : ''));
+    // Details: one line per value (date, time, venue, dress); other pieces: their lines as shown.
+    const shown = !el ? '' : sel.piece === 'details' ? [...el.querySelectorAll('dd')].map((d) => d.textContent).join('\n')
+      : [...el.childNodes].map((n) => n.textContent).filter(Boolean).join('\n');
+    setDraft(saved ?? shown);
   }, [key, lang]);
 
   // Select and drag pieces on the event pages.
@@ -86,10 +93,11 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
   }, [sel]);
 
   // Read the current value at click time, so quick repeated clicks all count.
-  const step = (field: 'scale' | 'fs', by: number) => setEdit(key, { [field]: Math.round(((getEdit(key)[field] || 1) + by) * 100) / 100 });
+  const step = (field: 'scale' | 'fs' | 'w' | 'h', by: number) => setEdit(key, { [field]: Math.round(((getEdit(key)[field] || 1) + by) * 100) / 100 });
   const nudge = (x: number, y: number) => { const cur = getEdit(key); setEdit(key, { dx: (cur.dx || 0) + x, dy: (cur.dy || 0) + y }); };
   const loadFile = async (f?: File) => { if (f) try { replaceEdits(JSON.parse(await f.text()) as Edits); } catch { alert('That file is not a saved layout.'); } };
   const pct = (v?: number) => Math.round((v || 1) * 100) + '%';
+  const wh = sel ? (pieceEl(sel)?.dataset.wh ?? 'wh') : '';
 
   return (
     <>
@@ -119,15 +127,18 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
                   <button onClick={() => nudge(1, 0)}>→</button>
                 </div>
                 <div className="le-row"><span>Size</span><button onClick={() => step('scale', -0.05)}>−</button><output>{pct(edit.scale)}</output><button onClick={() => step('scale', 0.05)}>+</button></div>
+                {/* Width and height where they apply: pictures and buttons both; text boxes width only; titles neither. */}
+                {wh.includes('w') && <div className="le-row"><span>Width</span><button onClick={() => step('w', -0.05)}>−</button><output>{pct(edit.w)}</output><button onClick={() => step('w', 0.05)}>+</button></div>}
+                {wh.includes('h') && <div className="le-row"><span>Height</span><button onClick={() => step('h', -0.05)}>−</button><output>{pct(edit.h)}</output><button onClick={() => step('h', 0.05)}>+</button></div>}
                 <div className="le-row"><span>Text size</span><button onClick={() => step('fs', -0.05)}>−</button><output>{pct(edit.fs)}</output><button onClick={() => step('fs', 0.05)}>+</button></div>
                 <label className="le-row"><span>Font</span>
                   <select value={edit.font || ''} onChange={(e) => setEdit(key, { font: e.target.value })}>
                     {FONTS.map(([v, n]) => <option key={n} value={v}>{n}</option>)}
                   </select>
                 </label>
-                {WORDING.has(sel.piece) && (
-                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : ''}</span>
-                    <textarea rows={2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
+                {hasWording(sel.piece) && (
+                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : sel.piece === 'details' ? ' — one line each: date, time, venue, dress code' : ''}</span>
+                    <textarea rows={sel.piece === 'details' || sel.piece === 'welcome' ? 4 : 2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
                     <small>Switch the site language (top right) to edit the other language.</small>
                   </label>
                 )}

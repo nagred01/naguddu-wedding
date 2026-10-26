@@ -26,8 +26,10 @@ export function Cocktail({lang,active,near,paused}:{lang:Lang;active:boolean;nea
  const E=(p:string)=>edits[editKey('reception',mode,p)]||{};
  const piece=(p:string,text:string,cls?:string,Tag:any='p',extra:any={})=>{
   const d=E(p);const words=d.text?.[lang];
-  return <Tag className={cls} data-piece={p} data-font={d.font?'':undefined} {...extra}
-   style={{marginLeft:d.dx||0,marginTop:d.dy||0,scale:d.scale?String(d.scale):undefined,['--piece-font' as any]:d.font||undefined,zoom:d.fs||undefined,display:Tag==='a'?'inline-flex':undefined,position:'relative'}}>
+  // Width: the line's box grows or shrinks around its centre.
+  const w=d.w||1;
+  return <Tag className={cls} data-piece={p} data-wh="w" data-font={d.font?'':undefined} {...extra}
+   style={{width:w!==1?(w*100)+'%':undefined,marginLeft:w!==1?`calc(${d.dx||0}px + ${(1-w)*50}%)`:d.dx||0,marginTop:d.dy||0,scale:d.scale?String(d.scale):undefined,['--piece-font' as any]:d.font||undefined,zoom:d.fs||undefined,display:Tag==='a'?'inline-flex':undefined,position:'relative'}}>
    {words??text}</Tag>;
  };
  const copy=useRef<HTMLDivElement>(null),canvas=useRef<HTMLCanvasElement>(null);

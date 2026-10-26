@@ -38,7 +38,8 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
    {items.filter((i:any)=>!i.hidden&&i.id!=='verse'&&(i.id!=='map'||MAPS[id])).map((i:any)=>{
     const t=e.items.find((x:any)=>x.id===i.id);const original=base.items.find((x:any)=>x.id===i.id);
     let html='';const rich=i.type==='rich';const edited=i.text!==null&&i.text!==undefined;
-    if(rich){html=i.rich;if(lang==='te'&&teluguEdits[id]?.[i.id]){const div=document.createElement('div');div.innerHTML=html;const walker=document.createTreeWalker(div,NodeFilter.SHOW_TEXT);let first=true,n;while(n=walker.nextNode()){if(first){n.textContent=teluguEdits[id][i.id];first=false;}else n.textContent='';}html=div.innerHTML;}}
+    const words=E(i.id).text?.[lang]??(lang==='te'?teluguEdits[id]?.[i.id]:undefined);
+    if(rich){html=i.rich;if(words){const div=document.createElement('div');div.innerHTML=html;const walker=document.createTreeWalker(div,NodeFilter.SHOW_TEXT);let first=true,n;while(n=walker.nextNode()){if(first){n.textContent=words;first=false;}else n.textContent='';}html=div.innerHTML;}}
     else if(edited){const text=lang==='te'?(teluguEdits[id]?.[i.id]??i.text):i.text;html='<div style="white-space:pre-wrap;font:'+(i.id==='title'?'28px Georgia,serif':'14px/1.5 Georgia,serif')+';text-align:'+(i.id==='details'?'left':'center')+';color:'+(id==='mehandi'||id==='reception'?'#f6e8bd':'#4a2f00')+'">'+htmlEscape(text)+'</div>';}
     else html=t?.html||original?.html||'';
     // Load artwork only as the guest scrolls near it, so the first visit stays light on phones.
@@ -51,7 +52,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
     if(!desktop&&i.id==='title'&&id!=='pellikuthuru'&&id!=='vivaham'){
      // One clear line at the layout's title spot, in either language.
      const [tt,ts=sub]=titleLines(lang==='en'?ev.en:ev.te);
-     return <h2 key={i.id} className="saved-piece motion-title ev-title" data-piece="title" data-font={fontAttr('title')} style={fx('title',{left:offset+(i.x+i.w/2)*fit,top:y,transform:'translateX(-50%)',fontSize:28*fit*(E('title').fs||1),color:TITLE_COLOR[id],zIndex:i.z,whiteSpace:'nowrap'})}>{tt}{ts&&<span className="ev-sub">{ts}</span>}</h2>;
+     return <h2 key={i.id} className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{left:offset+(i.x+i.w/2)*fit,top:y,transform:'translateX(-50%)',fontSize:28*fit*(E('title').fs||1),color:TITLE_COLOR[id],zIndex:i.z,whiteSpace:'nowrap'})}>{tt}{ts&&<span className="ev-sub">{ts}</span>}</h2>;
     }
     const grow=!desktop&&PHONE_ART_SCALE[id]?.[i.id];
     if(grow){x-=width*(grow-1);width*=grow;height*=grow;s*=grow;}
@@ -66,7 +67,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      else if(i.id==='title'){
       // One title style on every event page, centred under Ganesha; it names both sides on Pellikuthuru.
       const [tt,ts=sub]=titleLines(lang==='en'?ev.en:ev.te);
-      return <h2 key={i.id} className="saved-piece motion-title ev-title" data-piece="title" data-font={fontAttr('title')} style={fx('title',{left:0,right:0,top:168*u,fontSize:38*u*(E('title').fs||1),color:TITLE_COLOR[id],zIndex:i.z})}>{tt}{ts&&<span className="ev-sub">{ts}</span>}</h2>;
+      return <h2 key={i.id} className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{left:0,right:0,top:168*u,fontSize:38*u*(E('title').fs||1),color:TITLE_COLOR[id],zIndex:i.z})}>{tt}{ts&&<span className="ev-sub">{ts}</span>}</h2>;
      }
      else if(i.id.startsWith('extra-'))return null;
      else if(i.id==='number'){y=143*u;}
@@ -75,6 +76,8 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      else if(i.id==='details'){y=(sub?262:238)*u;}
      else if(i.id==='map'){s=1.1*u;width=i.w*s;height=i.h*s;x=cx-width/2;y=size.h-76*u;}
     }
+    // Width and height from the layout editor.
+    {const d=E(i.id);width*=d.w||1;height*=d.h||1;}
     if(i.id==='details'){
      // Rendered outside the scaled canvas so date, time and venue keep a readable size on small phones.
      const k=desktop?Math.min(1.15,Math.max(1,s)):Math.max(.92,Math.min(1,fit));
@@ -86,8 +89,10 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      else if(i.w>=300){width=Math.min(size.w-32,374*fit);x=Math.max(16,size.w/2-width/2);}
      else if(sub){y+=24*fit;width=Math.max(width,size.w-14-x);}
      else width=Math.max(width,size.w-14-x);
-     const rows:[string,string][]=[[T.date[lang],ev.date[lang]],[T.time[lang],ev.time[lang]],[T.venue[lang],ev.venue[lang]],[T.dress[lang],ev.dress[lang]]];
-     return <div key={i.id} className="saved-piece motion-details" data-piece="details" data-font={fontAttr('details')} style={fx('details',{left:x,top:y,width,zIndex:i.z,['--k' as any]:k*(E('details').fs||1)})}>
+     // Values can be reworded in the layout editor: one line each for date, time, venue and dress code.
+     const say=E('details').text?.[lang]?.split('\n')||[];
+     const rows:[string,string][]=[[T.date[lang],say[0]||ev.date[lang]],[T.time[lang],say[1]||ev.time[lang]],[T.venue[lang],say[2]||ev.venue[lang]],[T.dress[lang],say[3]||ev.dress[lang]]];
+     return <div key={i.id} className="saved-piece motion-details" data-piece="details" data-wh="w" data-font={fontAttr('details')} style={fx('details',{left:x,top:y,width,zIndex:i.z,['--k' as any]:k*(E('details').fs||1)})}>
       <dl className={'ev-facts'+(id==='mehandi'?' light':'')}>{rows.map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
      </div>;
     }
