@@ -352,7 +352,7 @@ export function App() {
         {/* The couple's invitation artwork, with the live countdown placed in the space under its "Countdown" caption. */}
         <div className="cover-art">
           <img src={lang === 'en' ? homeArtEn : homeArtTe} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
-          {/* English: the blessing lines, the welcome and the couple with their parents. Telugu: the welcome, both names and the countdown caption. */}
+          {/* English: the blessing lines, the welcome and the couple with their parents. Telugu: the same in Telugu, and the countdown caption. */}
           {lang === 'en' ? (
             <>
               <p className="cover-line cl-bless">Srirasthu <i>✦</i> Subhamasthu <i>✦</i> Avighnamasthu</p>
@@ -369,10 +369,15 @@ export function App() {
             </>
           ) : (
             <>
-              <p className="cover-line cl-lead">ఇరు కుటుంబాల ఆశీస్సులతో,<br />ప్రేమ మరియు కృతజ్ఞతతో నిండిన హృదయాలతో,<br />మా వివాహ వేడుకకు మిమ్మల్ని ఆహ్వానిస్తున్నాము.</p>
+              <p className="cover-line cl-lead">శ్రీ గణేశుని మరియు ఇరు కుటుంబాల ఆశీస్సులతో,<br />ప్రేమ మరియు కృతజ్ఞతతో నిండిన హృదయాలతో,<br />మా వివాహ వేడుకకు మిమ్మల్ని ఆహ్వానిస్తున్నాము.</p>
               <p className="cover-line cl-sub">మా జీవిత ప్రయాణం మొదలయ్యే ఈ శుభవేళ,<br />మీ రాక మా ఆనందాన్ని సంపూర్ణం చేస్తుంది.</p>
-              <p className="cover-line cl-name cl-bride">భవిత రెడ్డి గజ్జెల</p>
-              <p className="cover-line cl-name cl-groom">నాగేందర్ రెడ్డి గోలి</p>
+              <div className="cover-line cl-couple">
+                <p className="cl-who">చి.ల.సౌ. భవిత రెడ్డి గజ్జెల</p>
+                <p className="cl-kin">శ్రీమతి రజిత రెడ్డి గజ్జెల &amp; శ్రీ యాదవ్ రెడ్డి గజ్జెల గార్ల చిన్న కుమార్తె</p>
+                <p className="cl-with">తో</p>
+                <p className="cl-who">చి. నాగేందర్ రెడ్డి గోలి</p>
+                <p className="cl-kin">శ్రీమతి లక్ష్మి రెడ్డి గోలి &amp; కీ.శే. శ్రీ జయపాల్ రెడ్డి గోలి గార్ల పెద్ద కుమారుడు</p>
+              </div>
               <p className="cover-line cl-cap">వివాహ వేడుకలకు కౌంట్‌డౌన్</p>
             </>
           )}

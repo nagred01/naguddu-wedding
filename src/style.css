@@ -1008,9 +1008,6 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .cl-om { top: 10.2%; font: 2.5cqw/1.2 var(--font-body); letter-spacing: .03em; }
 .cl-lead { top: 38.2%; font: 2.75cqw/1.55 var(--font-body); }
 .cl-sub { top: 46.2%; font: 2.2cqw/1.55 var(--font-body); }
-.cl-name { font: 700 6cqw/1.3 var(--font-body); color: #ffd384; white-space: nowrap; } /* each full name on one line, close to the & */
-.cl-bride { top: 56%; }
-.cl-groom { top: 66.2%; }
 .cl-cap { top: 81.9%; font: 2.1cqw/1.2 var(--font-body); }
 .cl-lead.cl-en { left: 46%; font-style: italic; font-size: 2.6cqw; width: 88%; }
 /* English couple block: names in the title face, parents' lines smaller; centred a little left of the card's middle to clear the leaves. */
@@ -1020,6 +1017,10 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .cl-kin { font: italic 2.3cqw/1.4 var(--font-body); margin-bottom: .9em !important; }
 .cl-with { display: flex; align-items: center; justify-content: center; gap: .7em; font: italic 2.8cqw/1.2 var(--font-body); margin: .1em 0 .55em !important; }
 .cl-with::before, .cl-with::after { content: ''; width: 18%; height: 1px; background: linear-gradient(90deg, transparent, #e6b866, transparent); }
+/* Telugu letters need a little more room per line; sizes chosen so each line still fits on one line. */
+.is-te .cl-who { font: 700 4.2cqw/1.35 var(--font-body); letter-spacing: 0; }
+.is-te .cl-kin { font: 2.6cqw/1.5 var(--font-body); }
+.is-te .cl-with { font: 3cqw/1.2 var(--font-body); }
 /* Phones: the card spans the full width, starting just low enough that its top line of text clears the sound and
    language buttons, and only as wide as still keeps the countdown on screen (it ends about 89% down the card; a little margin below it).
    The #NaGuddu bar steps aside on Home (the card carries #NaGuddu itself). */
