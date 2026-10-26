@@ -775,6 +775,9 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-facts dd {margin:2px 0 0;font:calc(17px * var(--k))/1.25 Georgia,'Noto Serif Telugu','Telugu Sangam MN',serif;}
 .ev-facts.light {color:#fbf1d6;}
 .ev-facts.light dt {color:#f2cf7e;}
+/* Layout editor option: a field's label and value on one line. */
+.ev-facts .ev-inline {display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em;grid-column:1 / -1;}
+.ev-facts .ev-inline dd {margin:0;}
 .saved-content {position:absolute;left:0;top:0;transform-origin:top left;}
 .saved-rich {white-space:pre-wrap;overflow-wrap:anywhere;font:16px/1.5 Georgia,serif;}
 .saved-content *, .saved-content {animation:none!important;transition:none!important;}

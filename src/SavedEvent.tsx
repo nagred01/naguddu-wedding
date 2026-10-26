@@ -89,11 +89,17 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      else if(i.w>=300){width=Math.min(size.w-32,374*fit);x=Math.max(16,size.w/2-width/2);}
      else if(sub){y+=24*fit;width=Math.max(width,size.w-14-x);}
      else width=Math.max(width,size.w-14-x);
-     // Values can be reworded in the layout editor: one line each for date, time, venue and dress code.
-     const say=E('details').text?.[lang]?.split('\n')||[];
-     const rows:[string,string][]=[[T.date[lang],say[0]||ev.date[lang]],[T.time[lang],say[1]||ev.time[lang]],[T.venue[lang],say[2]||ev.venue[lang]],[T.dress[lang],say[3]||ev.dress[lang]]];
+     // Each field is its own piece in the layout editor. Its wording is two lines: the label, then the value
+     // (a single line replaces just the value).
+     const field=(p:'date'|'time'|'venue'|'dress'):[string,string,string]=>{
+      const t=E(p).text?.[lang];if(t===undefined)return [p,T[p][lang],ev[p][lang]];
+      const l=t.split('\n');return l.length>1?[p,l[0],l.slice(1).join('\n')]:[p,T[p][lang],l[0]];
+     };
+     const rows=[field('date'),field('time'),field('venue'),field('dress')];
      return <div key={i.id} className="saved-piece motion-details" data-piece="details" data-wh="w" data-font={fontAttr('details')} style={fx('details',{left:x,top:y,width,zIndex:i.z,['--k' as any]:k*(E('details').fs||1)})}>
-      <dl className={'ev-facts'+(id==='mehandi'?' light':'')}>{rows.map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+      <dl className={'ev-facts'+(id==='mehandi'?' light':'')}>{rows.map(([p,label,value])=>{const d=E(p);
+       const one=d.inline||E('details').inline;
+       return <div key={p} data-piece={p} data-wh="" data-font={fontAttr(p)} className={one?'ev-inline':undefined} style={{translate:d.dx||d.dy?`${(d.dx||0)*unit}px ${(d.dy||0)*unit}px`:undefined,scale:d.scale?String(d.scale):undefined,['--piece-font' as any]:d.font||undefined,['--k' as any]:d.fs?`calc(var(--k) * ${d.fs})`:undefined,whiteSpace:'pre-line'}}><dt>{label}</dt><dd>{value}</dd></div>;})}</dl>
      </div>;
     }
     const motion=i.id==='ganesha'?'g':i.id==='number'?'n':i.id==='title'?'title':i.id==='image1'?'a1':i.id==='image2'?'a2':i.id==='details'?'details':i.id==='map'?'map':'text';

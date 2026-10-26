@@ -21,8 +21,9 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'details', 'blessing', 'om', 'welcome', 'message', 'bride', 'groom', 'caption', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
+const WORDING = new Set(['title', 'blessing', 'om', 'welcome', 'message', 'bride', 'groom', 'caption', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
+const FIELDS = new Set(['date', 'time', 'venue', 'dress']);
 // Extra labels added in the saved layout (e.g. పెళ్లికొడుకు) can be reworded too.
 const hasWording = (piece: string) => WORDING.has(piece) || piece.startsWith('extra-');
 
@@ -43,9 +44,8 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
     if (!sel || !hasWording(sel.piece)) return;
     const saved = getEdit(key).text?.[lang];
     const el = pieceEl(sel);
-    // Details: one line per value (date, time, venue, dress); other pieces: their lines as shown.
-    const shown = !el ? '' : sel.piece === 'details' ? [...el.querySelectorAll('dd')].map((d) => d.textContent).join('\n')
-      : [...el.childNodes].map((n) => n.textContent).filter(Boolean).join('\n');
+    // The lines as shown (a date/time/venue/dress field gives its label, then its value).
+    const shown = !el ? '' : [...el.childNodes].map((n) => n.textContent).filter(Boolean).join('\n');
     setDraft(saved ?? shown);
   }, [key, lang]);
 
@@ -137,11 +137,17 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
                   </select>
                 </label>
                 {hasWording(sel.piece) && (
-                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : sel.piece === 'details' ? ' — one line each: date, time, venue, dress code' : ''}</span>
-                    <textarea rows={sel.piece === 'details' || sel.piece === 'welcome' ? 4 : 2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
+                  <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : FIELDS.has(sel.piece) && sel.page !== 'reception' ? ' — 1st line is the label, 2nd the value' : ''}</span>
+                    <textarea rows={sel.piece === 'welcome' ? 4 : 2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
                     <small>Switch the site language (top right) to edit the other language.</small>
                   </label>
                 )}
+                {(FIELDS.has(sel.piece) || sel.piece === 'details') && sel.page !== 'reception' && (
+                  <label className="le-row"><input type="checkbox" checked={!!edit.inline} onChange={(e) => setEdit(key, { inline: e.target.checked })} />
+                    <span style={{ width: 'auto' }}>{sel.piece === 'details' ? 'Labels and values on one line (all fields)' : 'Label and value on one line'}</span></label>
+                )}
+                {/* A single field is selected: offer the whole date/time/venue/dress block (to move or size it all at once). */}
+                {FIELDS.has(sel.piece) && sel.page !== 'reception' && <div className="le-row"><button onClick={() => setSel({ ...sel, piece: 'details' })}>Select the whole details block</button></div>}
                 <div className="le-row"><button onClick={() => { resetEdits(key); setSel({ ...sel }); }}>Reset this piece</button><button onClick={() => setSel(null)}>Done</button></div>
               </div>
             )}
