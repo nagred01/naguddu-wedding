@@ -786,10 +786,8 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-about[lang="te"] {font-style:normal;}
 /* Descriptions sized to the screen width so each stays within two lines. */
 .ev-about {width:min(92vw,660px);}
-.world-pasupu .ev-about {font-size:clamp(12px,3.3vw,16px);}
-.world-mehandi .ev-about {font-size:clamp(10px,2.55vw,16px);}
-.is-te .world-pasupu .ev-about {font-size:clamp(12px,3.8vw,16px);}
-.is-te .world-mehandi .ev-about {font-size:clamp(10px,2.6vw,16px);}
+.world-pasupu .ev-about, .world-mehandi .ev-about {font-size:clamp(10px,2.55vw,16px);} /* Haldi matches Mehendi */
+.is-te .world-pasupu .ev-about, .is-te .world-mehandi .ev-about {font-size:clamp(10px,2.6vw,16px);}
 /* Each event line stays on one line: a little wider than the text column, sized to the screen width. */
 .ev-col-lines {display:grid;gap:.25em;width:min(78vw,600px);font-size:clamp(12px,3.3vw,18px);}
 .is-te .ev-col-lines {font-size:clamp(11.5px,2.8vw,16px);}
