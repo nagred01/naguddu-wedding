@@ -284,14 +284,18 @@ export function App() {
   const enter = () => { player.start(); player.play(activeRef.current); setOpening(true); window.setTimeout(() => setEntered(true), 1100); };
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>('[data-sec]'));
+    // A page is current when it fills more than half the visible area. This also works for pages taller than the
+    // screen (RSVP, Photos), which never become 55% visible themselves.
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) {
+        const view = e.rootBounds?.height || window.innerHeight;
+        if (e.isIntersecting && e.intersectionRect.height > view * 0.5) {
           const id = (e.target as HTMLElement).dataset.sec!;
+          if (id === activeRef.current) return;
           activeRef.current = id; setActive(id); player.play(id);
         }
       });
-    }, { root: scroller.current, threshold: 0.55 });
+    }, { root: scroller.current, threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
