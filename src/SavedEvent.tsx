@@ -57,7 +57,6 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
    return <div className="ev-column" aria-label={id+' event'}>
     <img className="ev-col-ganesha" src={art('ganesha')} alt=""/>
     <h2 className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{position:'relative',color:TITLE_COLOR[id]})}>{tt}{sub&&<span className="ev-sub">{sub}</span>}</h2>
-    <span className="ev-col-gap" aria-hidden="true"/>
     <img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>
     <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang])}</p>
     <div className="ev-col-lines" data-piece="lines" data-wh="" data-font={fontAttr('lines')} style={fx('lines',{})}>{(say('lines',c.lines[lang].join('\n'))).split('\n').map((l,n)=><p key={n}>{l}</p>)}</div>

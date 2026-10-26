@@ -778,8 +778,8 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 /* Event pages laid out as one centred column (Haldi). */
 .ev-column {position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.6vh,14px);padding:58px 19% 40px;text-align:center;color:#4a2f00;text-shadow:0 0 6px rgba(255,250,235,.95),0 0 12px rgba(255,250,235,.8);}
 /* Text stays in the clear middle, between the garlands and pots on either side. */
-.ev-column .ev-title {margin:0;font-size:clamp(26px,4.4vh,40px);}
-/* The title sits right under Ganesha; the picture, description and details are centred in the space below it. */
+.ev-column .ev-title {margin:0 0 clamp(4px,1.2vh,12px);font-size:clamp(26px,4.4vh,40px);}
+/* The title sits right under Ganesha with the picture a short gap below; any spare room goes under the Maps button. */
 .ev-column {justify-content:flex-start;padding-top:calc(max(40px,6.6vh) + clamp(48px,8.3vh,72px) + 2px) !important;}
 .ev-col-gap {flex:1 1 0;min-height:0;margin:calc(-1 * clamp(6px,1.6vh,14px)) 0;}
 @media (min-width:900px) {.ev-column {padding-top:calc(20.25vh + 2px) !important;}}
@@ -790,11 +790,11 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-about[lang="te"] {font-style:normal;}
 /* Descriptions sized to the screen width so each stays within two lines. */
 .ev-about {width:min(92vw,660px);}
-.world-pasupu .ev-about, .world-mehandi .ev-about {font-size:clamp(10px,2.55vw,16px);} /* Haldi matches Mehendi */
-.is-te .world-pasupu .ev-about, .is-te .world-mehandi .ev-about {font-size:clamp(10px,2.6vw,16px);}
+.world-pasupu .ev-about, .world-mehandi .ev-about {font-size:clamp(11px,calc(2.55vw + 1px),17px);} /* Haldi matches Mehendi; up to three lines */
+.is-te .world-pasupu .ev-about, .is-te .world-mehandi .ev-about {font-size:clamp(11px,calc(2.6vw + 1px),17px);}
 /* Each event line stays on one line: a little wider than the text column, sized to the screen width. */
-.ev-col-lines {display:grid;gap:.25em;width:min(78vw,600px);font-size:clamp(12px,3.3vw,18px);}
-.is-te .ev-col-lines {font-size:clamp(11.5px,2.8vw,16px);}
+.ev-col-lines {display:grid;gap:.25em;width:min(86vw,640px);font-size:clamp(13px,calc(3.3vw + 1px),19px);}
+.is-te .ev-col-lines {font-size:clamp(12.5px,calc(2.8vw + 1px),17px);}
 .ev-col-lines p {margin:0;font:1em/1.35 var(--font-body);white-space:nowrap;}
 .ev-col-lines p:first-child {font-weight:700;}
 .ev-col-map {margin-top:4px;padding:8px 22px;border:1.5px solid #8a4b08;border-radius:999px;background:rgba(255,248,230,.85);color:#5a3200;text-decoration:none;font:600 13px/1 var(--font-display);letter-spacing:.06em;}
