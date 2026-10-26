@@ -1200,3 +1200,21 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .le-foot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; }
 .le-panel .le-save { background: #1a73e8; border-color: #1a73e8; color: #fff; font-weight: 600; }
 @media (max-width: 899px) { .le-panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto; max-height: 46vh; } }
+/* Pages scroll in the space between the menu and the #NaGuddu bar, so each page's background (and its border) fits
+   that space exactly and pages still meet edge to edge while scrolling. */
+:root { --nav-h: 53px; --bar-h: 27px; }
+@media (min-width:900px) { :root { --nav-h: 57px; } }
+.scroller { position: absolute; top: var(--nav-h); bottom: var(--bar-h); left: 0; right: 0; height: auto; }
+/* Within the new space (the menu and bar no longer overlap pages), offsets that allowed for them come out. */
+.cocktail-scene, .cocktail-toast, .cocktail-video-back, .cocktail-original-video { inset: 0 !important; height: 100% !important; }
+.cover-art { top: 39px; height: calc(100% - 39px); }
+@media (max-width: 899px) { .cover-art { top: max(13px, calc((100dvh - 80px - 150vw) / 2)); width: min(100%, calc((100dvh - 93px) / (.9 * 1.5))); } }
+.sec.supplied-itinerary { padding: 48px 0 4px !important; }
+@media (max-width: 899px) { .sec.supplied-itinerary { padding-top: 44px !important; } }
+/* Phones: Pellikuthuru is a little more compact so its details stay above the brass elephant. */
+@media (max-width:899px) {
+  .world-pellikuthuru .ev-column { gap: clamp(3px,.6vh,10px); padding-top: calc(max(40px,6.6vh) + clamp(40px,6.5vh,64px) + 2px) !important; }
+  .world-pellikuthuru .ev-col-ganesha { height: clamp(40px,6.5vh,64px); }
+  .world-pellikuthuru .ev-col-pair .ev-col-art { height: clamp(60px,10vh,240px); }
+  .world-pellikuthuru .ev-about { font-size: clamp(11px,1.75vh,16px); }
+}
