@@ -775,6 +775,10 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-facts dd {margin:2px 0 0;font:calc(17px * var(--k))/1.25 Georgia,'Noto Serif Telugu','Telugu Sangam MN',serif;}
 .ev-facts.light {color:#fbf1d6;}
 .ev-facts.light dt {color:#f2cf7e;}
+/* A short line about the ceremony. */
+.ev-about {margin:0;text-align:center;font-family:var(--font-body);font-style:italic;line-height:1.4;color:#4a2f00;text-wrap:balance;white-space:pre-line;}
+.ev-about.light {color:#fbf1d6;}
+.ev-about[lang="te"] {font-style:normal;}
 /* Layout editor option: a field's label and value on one line. */
 .ev-facts .ev-inline {display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em;grid-column:1 / -1;}
 .ev-facts .ev-inline dd {margin:0;}

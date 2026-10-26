@@ -14,6 +14,11 @@ const teluguEdits:Record<string,Record<string,string>>={
 };
 // A line under the title.
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
+// A short line about the ceremony, placed in free space (phone: [x, y, width] in layout units; desktop: under the details).
+const ABOUT:Record<string,{en:string;te:string;phone:[number,number,number]}>={
+ pasupu:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride for blessings and good luck.',
+  te:'వధువుకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.',phone:[10,440,190]},
+};
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 // Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
 const PHONE_NUDGE:Record<string,Record<string,[number,number]>>={pellikuthuru:{details:[0,-22],image2:[0,16]}};
@@ -107,6 +112,13 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
      <div className={art?'saved-float':'saved-still'}><div className={'saved-content'+(rich?' saved-rich':'')} style={{width:rich?i.w:(original?.w??i.w),height:rich?i.h:(original?.h??i.h),transform:rich?`scale(${s})`:`scale(${width/(original?.w??i.w)},${height/(original?.h??i.h)})`}} dangerouslySetInnerHTML={{__html:html}}/></div>
     </div>;
    })}
+   {ABOUT[id]&&(()=>{
+    const a=ABOUT[id],d=E('about');const u=Math.min(size.w/1280,size.h/800);
+    const width=(desktop?360*u:a.phone[2]*fit)*(d.w||1);
+    const at=desktop?{left:size.w/2-width/2,top:(SUBTITLE[id]?.[lang]?262:238)*u+150*u}:{left:offset+a.phone[0]*fit,top:top+a.phone[1]*fit};
+    const fs=(desktop?16*u:14*Math.max(.9,Math.min(1,fit)))*(d.fs||1);
+    return <p className={'saved-piece motion-text ev-about'+(id==='mehandi'?' light':'')} data-piece="about" data-wh="w" data-font={fontAttr('about')} style={fx('about',{...at,width,fontSize:fs,zIndex:5})} lang={lang}>{d.text?.[lang]??a[lang]}</p>;
+   })()}
   </div>
  </section>;
 }

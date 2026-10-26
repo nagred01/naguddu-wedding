@@ -10,7 +10,7 @@ const PIECES: Record<string, string> = {
   image1: 'Left picture', image2: 'Right picture', map: 'Open in Maps button', number: 'Number',
   kicker: 'Names line', sub: 'Subtitle', theme: 'Theme line', date: 'Date', time: 'Time', venue: 'Venue', dress: 'Dress code',
   blessing: 'Blessing line', om: 'Om line', welcome: 'Welcome lines', message: 'Second message', bride: 'Bride name', groom: 'Groom name',
-  caption: 'Countdown caption', countdown: 'Countdown',
+  caption: 'Countdown caption', countdown: 'Countdown', about: 'Description',
 };
 const PAGES: Record<string, string> = { cover: 'Home', pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
 const FONTS: [string, string][] = [
@@ -21,7 +21,7 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'blessing', 'om', 'welcome', 'message', 'bride', 'groom', 'caption', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
+const WORDING = new Set(['title', 'about', 'blessing', 'om', 'welcome', 'message', 'bride', 'groom', 'caption', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
 const FIELDS = new Set(['date', 'time', 'venue', 'dress']);
 // Extra labels added in the saved layout (e.g. పెళ్లికొడుకు) can be reworded too.
