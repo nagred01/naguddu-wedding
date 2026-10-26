@@ -1209,12 +1209,14 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 /* Event pages begin below the menu and the sound/language buttons (they end about 93px down on phones). */
 :root { --ev-top: 100px; }
 @media (max-width:374px) { :root { --ev-top: calc(53px + 9vh); } }
-/* Phones: these pages sit between the menu bar (53px) and the #NaGuddu bar (27px). Their background fills that space, and Ganesha sits inside the
-   arch below the sound/language buttons. */
+/* Phones: the event pages sit between the menu bar (53px) and the #NaGuddu bar (27px). Their background fills that
+   space, and the strips behind the two bars take the bars' own colours, so scrolling between pages shows no bands. */
 @media (max-width:899px) {
-  .sec.event.world-pasupu { background: url(./img/haldi-bg.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, #f7edc8 !important; }
-  .sec.event.world-mehandi { background: url(./img/me-bg.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, #476a1e !important; }
-  .sec.event.world-pellikuthuru { background: url(./img/pk-bg.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, #efe6dc !important; }
+  .sec.event { --bands: linear-gradient(#28060c 0 53px, transparent 53px calc(100% - 27px), #1d1d1d calc(100% - 27px)); }
+  .sec.event.world-pasupu { background: url(./img/haldi-bg.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, var(--bands), #f7edc8 !important; }
+  .sec.event.world-mehandi { background: url(./img/me-bg.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, var(--bands), #476a1e !important; }
+  .sec.event.world-pellikuthuru { background: url(./img/pk-bg.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, var(--bands), #efe6dc !important; }
+  .sec.event.world-vivaham { background: url(./img/wd-temple.jpg) 0 53px / 100% calc(100% - 80px) no-repeat, var(--bands), #f3e6c9 !important; }
   :root { --ev-top: calc(53px + 13vh); }
 }
 @media (max-width:374px) { :root { --ev-top: calc(53px + 9vh); } }
