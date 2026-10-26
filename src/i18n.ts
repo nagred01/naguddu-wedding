@@ -1,7 +1,7 @@
 export type Lang = 'en' | 'te';
 export const T = {
   sample: { en: '#NaGuddu', te: '#NaGuddu' },
-  enter: { en: 'Tap to open', te: 'తెరవడానికి తాకండి' },
+  enter: { en: 'Tap to open', te: 'ఆహ్వానం తెరవండి' },
   enterSub: { en: 'Best with sound on', te: 'శబ్దం ఆన్ చేసి చూడండి' },
   bride: { en: 'Bhavitha Reddy Gajjela', te: 'భవిత రెడ్డి గజ్జెల' },
   groom: { en: 'Nagender Reddy Goli', te: 'నాగేందర్ రెడ్డి గోలి' },
