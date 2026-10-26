@@ -16,7 +16,7 @@ const teluguEdits:Record<string,Record<string,string>>={
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Pages laid out as one centred column (title, picture, description, event lines, Maps button) instead of the
 // freely placed layout. Each text line can still be reworded in the layout editor.
-const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>}>={
+const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>;pair?:Record<Lang,[string,string]>}>={
  pasupu:{
   about:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride and groom for blessings and good luck.',
    te:'వధూవరులకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.'},
@@ -27,6 +27,13 @@ const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]
    te:'వధువు చేతులు, పాదాలను అందమైన గోరింటాకు డిజైన్లతో అలంకరించే ఆత్మీయమైన, ఆనందకరమైన వేడుక; ఇది ప్రేమ, వాగ్దానం, కొత్త ఆరంభాలకు ప్రతీక.'},
   lines:{en:["Tuesday, 1st Dec' 2026 from 4:00 PM",'Serengeti Events (Airbnb)','Festive attire in shades of green'],
    te:['మంగళవారం, డిసెంబర్ 1, 2026 సాయంత్రం 4:00 నుండి','Serengeti Events (Airbnb)','ఆకుపచ్చ రంగుల పండుగ దుస్తుల్లో రండి']}},
+ pellikuthuru:{
+  // Bride and groom pictures side by side, each named underneath.
+  pair:{en:['Pellikuthuru','Pellikoduku'],te:['పెళ్లికూతురు','పెళ్లికొడుకు']},
+  about:{en:'With the blessings of our families, we invite you to celebrate the making of the bride and groom, “PELLIKUTHURU & PELLIKODUKU”.\nA beautiful beginning to our wedding rituals, filled with turmeric hues, cherished customs, and heartfelt blessings, as we prepare for our new journey together.',
+   te:'మా కుటుంబాల ఆశీస్సులతో, వధూవరులను సిద్ధం చేసే “పెళ్లికూతురు & పెళ్లికొడుకు” వేడుకకు మిమ్మల్ని ఆహ్వానిస్తున్నాము.\nపసుపు రంగులు, ప్రియమైన సంప్రదాయాలు, హృదయపూర్వక ఆశీస్సులతో నిండిన ఈ వేడుక, మా కొత్త ప్రయాణానికి సిద్ధమవుతూ మా వివాహ వేడుకలకు అందమైన ఆరంభం.'},
+  lines:{en:["Wednesday, 2nd Dec' 2026 from 10:00 AM",'Serengeti Events (Airbnb)','Please join us as we celebrate in your favorite traditional Indian attire.'],
+   te:['బుధవారం, డిసెంబర్ 2, 2026 ఉదయం 10:00 నుండి','Serengeti Events (Airbnb)','మీకు ఇష్టమైన సంప్రదాయ భారతీయ దుస్తుల్లో మాతో కలిసి వేడుక చేసుకోండి.']}},
 };
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 // Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
@@ -57,7 +64,9 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
    return <div className="ev-column" aria-label={id+' event'}>
     <img className="ev-col-ganesha" src={art('ganesha')} alt=""/>
     <h2 className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{position:'relative',color:TITLE_COLOR[id]})}>{tt}{sub&&<span className="ev-sub">{sub}</span>}</h2>
-    <img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>
+    {c.pair?<div className="ev-col-pair">{(['image1','image2'] as const).map((p,n)=><figure key={p} data-piece={p} data-wh="" style={fx(p,{})}>
+      <img className="ev-col-art" src={art(p)} alt=""/><figcaption data-piece={'name'+(n+1)}>{say('name'+(n+1),c.pair![lang][n])}</figcaption></figure>)}</div>
+     :<img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>}
     <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang])}</p>
     <div className="ev-col-lines" data-piece="lines" data-wh="" data-font={fontAttr('lines')} style={fx('lines',{})}>{(say('lines',c.lines[lang].join('\n'))).split('\n').map((l,n)=><p key={n}>{l}</p>)}</div>
     {MAPS[id]&&<a className="ev-col-map" data-piece="map" href={MAPS[id]} target="_blank" rel="noopener" style={fx('map',{})}>{lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి'}</a>}

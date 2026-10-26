@@ -781,6 +781,17 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .ev-column .ev-title {margin:0 0 clamp(4px,1.2vh,12px);font-size:clamp(26px,4.4vh,40px);}
 /* The title sits right under Ganesha with the picture a short gap below; any spare room goes under the Maps button. */
 .ev-column {justify-content:flex-start;padding-top:calc(max(40px,6.6vh) + clamp(48px,8.3vh,72px) + 2px) !important;}
+/* Pellikuthuru: the bride and groom side by side, each named underneath; the longer text wraps evenly. */
+.ev-col-pair {display:flex;justify-content:center;align-items:flex-end;gap:4vw;width:min(92vw,620px);}
+.ev-col-pair figure {margin:0;flex:1 1 0;display:flex;flex-direction:column;align-items:center;}
+.ev-col-pair .ev-col-art {height:clamp(130px,24vh,280px);max-width:100%;}
+.ev-col-pair figcaption {margin-top:4px;font:600 clamp(13px,2.2vh,18px)/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:#5a3a08;}
+.world-pellikuthuru .ev-about {width:min(92vw,640px);font-size:clamp(11.5px,1.9vh,16px);}
+.world-pellikuthuru .ev-col-lines p:last-child {white-space:normal;text-wrap:balance;}
+.world-pellikuthuru .ev-column {padding-left:6%;padding-right:6%;}
+.world-pellikuthuru .ev-column .ev-title {white-space:nowrap;font-size:clamp(16px,min(4.3vw,3.6vh),34px);}
+/* Busy artwork behind the text: a soft cream haze with no edges keeps it readable. */
+.world-pellikuthuru .ev-about, .world-pellikuthuru .ev-col-lines {padding:8px 14px;background:radial-gradient(ellipse closest-side,rgba(251,246,236,.94) 70%,rgba(251,246,236,0));}
 .ev-col-gap {flex:1 1 0;min-height:0;margin:calc(-1 * clamp(6px,1.6vh,14px)) 0;}
 @media (min-width:900px) {.ev-column {padding-top:calc(20.25vh + 2px) !important;}}
 /* Ganesha at the top of the page, the same size and place as on the other event pages. */
