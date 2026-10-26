@@ -780,7 +780,7 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 /* Text stays in the clear middle, between the garlands and pots on either side. */
 .ev-column .ev-title {margin:0 0 clamp(4px,1.2vh,12px);font-size:clamp(26px,4.4vh,40px);}
 /* The title sits right under Ganesha with the picture a short gap below; any spare room goes under the Maps button. */
-.ev-column {justify-content:flex-start;padding-top:calc(max(40px,6.6vh) + clamp(48px,8.3vh,72px) + 2px) !important;}
+.ev-column {justify-content:flex-start;padding-top:calc(max(56px,8.6vh) + clamp(48px,8.3vh,72px) + 2px) !important;}
 /* Pellikuthuru: the bride and groom side by side, each named underneath; the longer text wraps evenly. */
 .ev-col-pair {display:flex;justify-content:center;align-items:flex-end;gap:4vw;width:min(92vw,620px);}
 .ev-col-pair figure {margin:0;flex:1 1 0;display:flex;flex-direction:column;align-items:center;}
@@ -803,14 +803,14 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .world-pellikuthuru .ev-col-pair {gap:1.5vw;width:auto;margin-top:clamp(4px,1.2vh,12px);}
 .world-pellikuthuru .ev-col-pair figure {flex:none;min-width:max-content;}
 .world-pellikuthuru .ev-col-pair figcaption {white-space:nowrap;}
-.world-pellikuthuru .ev-col-pair .ev-col-art {height:clamp(96px,15.5vh,260px);}
+.world-pellikuthuru .ev-col-pair .ev-col-art {height:clamp(92px,14.4vh,260px);}
 @media (min-width:900px) {.world-pellikuthuru .ev-col-pair .ev-col-art {height:29vh;}}
 .world-pellikuthuru .ev-col-pair figcaption {margin-top:6px;font:700 clamp(12.5px,min(3.1vw,2.6vh),22px)/1.15 var(--font-display);font-style:normal;letter-spacing:.06em;color:#5a3a08;}
 .is-te .world-pellikuthuru .ev-col-pair figcaption {font-family:var(--font-body);letter-spacing:0;font-size:clamp(15px,min(3.9vw,2.8vh),24px);}
 .ev-col-gap {flex:1 1 0;min-height:0;margin:calc(-1 * clamp(6px,1.6vh,14px)) 0;}
 @media (min-width:900px) {.ev-column {padding-top:calc(20.25vh + 2px) !important;}}
 /* Ganesha at the top of the page, the same size and place as on the other event pages. */
-.ev-col-ganesha {position:absolute;top:max(40px,6.6vh);left:50%;transform:translateX(-50%);height:clamp(48px,8.3vh,72px);width:auto;}
+.ev-col-ganesha {position:absolute;top:max(56px,8.6vh);left:50%;transform:translateX(-50%);height:clamp(48px,8.3vh,72px);width:auto;}
 .ev-col-art {display:block;height:clamp(150px,30vh,320px);width:auto;max-width:120%;object-fit:contain;}
 .ev-about {margin:0;width:min(90vw,640px);font:italic clamp(12.5px,2vh,16px)/1.4 var(--font-body);text-wrap:balance;white-space:pre-line;}
 .ev-about[lang="te"] {font-style:normal;}
@@ -820,7 +820,7 @@ section.sec.event.saved-event {padding:0!important;display:block!important;heigh
 .is-te .world-pasupu .ev-about, .is-te .world-mehandi .ev-about {font-size:clamp(11px,calc(2.6vw + 1px),17px);}
 /* Each event line stays on one line: a little wider than the text column, sized to the screen width. */
 .ev-col-lines {display:grid;gap:.25em;width:min(86vw,640px);font-size:clamp(13px,calc(3.3vw + 1px),19px);}
-.is-te .ev-col-lines {font-size:clamp(12.5px,calc(2.8vw + 1px),17px);}
+.is-te .ev-col-lines {font-size:clamp(11px,calc(2.8vw + 1px),17px);}
 .ev-col-lines p {margin:0;font:1em/1.35 var(--font-body);white-space:nowrap;}
 .ev-col-lines p:first-child {font-weight:700;}
 .ev-col-map {margin-top:4px;padding:8px 22px;border:1.5px solid #8a4b08;border-radius:999px;background:rgba(255,248,230,.85);color:#5a3200;text-decoration:none;font:600 13px/1 var(--font-display);letter-spacing:.06em;}
@@ -999,10 +999,9 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 @media(min-width:900px){.sec.supplied-itinerary{padding:100px 0 24px;}}
 .itinerary-active{background:#fffef9;}
 .itinerary-active .dots{display:none;}
-/* Phone itinerary uses the full available width, with no cropped event text. */
-@media(max-width:899px){.supplied-itinerary-image{object-fit:fill;}}
-/* Let the itinerary begin directly below the phone navigation. */
-@media(max-width:899px){.sec.supplied-itinerary{padding-top:52px;}}
+/* The itinerary fits whole between the sound/language buttons and the #NaGuddu bar, never stretched. */
+.sec.supplied-itinerary{padding-bottom:30px !important;}
+@media(max-width:899px){.sec.supplied-itinerary{padding-top:76px !important;}}
 @media(max-width:899px){
  .itinerary-active .topbar{left:6px;right:6px;}
  .itinerary-active .pill,.itinerary-active .lang button{min-height:24px;height:24px;font-size:10px;}

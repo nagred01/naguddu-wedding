@@ -38,7 +38,7 @@ const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]
 };
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 // Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
-const PHONE_NUDGE:Record<string,Record<string,[number,number]>>={pellikuthuru:{details:[0,-22],image2:[0,16]}};
+const PHONE_NUDGE:Record<string,Record<string,[number,number]>>={pellikuthuru:{details:[0,-22],image2:[0,16]},vivaham:{ganesha:[0,20]}};
 const PHONE_ART_SCALE:Record<string,Record<string,number>>={mehandi:{image2:1.15}};
 function htmlEscape(s:string){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}){
