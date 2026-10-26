@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './style.css';
+import homeArt from './img/home-invite.webp';
 import gate from './img/gate-garland.jpg';
 import ganesha from './img/ganesha.webp';
 import haldi from './img/haldi-c1.webp';
@@ -17,7 +18,6 @@ import { SCRIPT_URL } from './config';
 import { PhotoUpload } from './PhotoUpload';
 import { EDIT_MODE } from './editStore';
 import { LayoutEditor } from './LayoutEditor';
-import { HomeCard } from './HomeCard';
 const EXTRA: Record<string, { img: string; cap: Record<Lang, string> }> = {
   vivaham: { img: wedFeet, cap: { en: '', te: '' } },
   pasupu: { img: mangalaC, cap: { en: 'Mangala Snanam', te: 'మంగళ స్నానం' } },
@@ -344,7 +344,15 @@ export function App() {
       )}
 
       <div className={'scroller'+(switching?' page-switching':'')} ref={scroller}>
-      <HomeCard lang={lang} countdown={<Countdown lang={lang} />} />
+      <section id="cover" data-sec="cover" className="sec cover">
+        <div className="cover-bg" style={{ backgroundImage: `url(${homeArt})` }} aria-hidden="true" />
+        {/* The couple's invitation artwork, with the live countdown placed in the space under its "Countdown" caption. */}
+        <div className="cover-art">
+          <img src={homeArt} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
+          <h1 className="sr-only">{T.bride.en} &amp; {T.groom.en}</h1>
+          <div className="cover-count"><Countdown lang={lang} /></div>
+        </div>
+      </section>
 
       {EVENTS.map((ev) => ev.id === 'reception' ? <Cocktail key={ev.id} lang={lang} active={active === ev.id && entered} near={entered && ['vivaham', 'reception', 'glimpse'].includes(active)} paused={motionPaused}/> : <SavedEvent key={ev.id} id={ev.id} lang={lang} active={active === ev.id && entered} />)}
 

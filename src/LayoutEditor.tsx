@@ -9,10 +9,9 @@ const PIECES: Record<string, string> = {
   ganesha: 'Ganesha', title: 'Title', details: 'Date / time / venue',
   image1: 'Left picture', image2: 'Right picture', map: 'Open in Maps button', number: 'Number',
   kicker: 'Names line', sub: 'Subtitle', theme: 'Theme line', date: 'Date', time: 'Time', venue: 'Venue', dress: 'Dress code',
-  blessing: 'Blessing line', om: 'Om line', welcome: 'Welcome lines', message: 'Second message', bride: 'Bride name', groom: 'Groom name',
-  caption: 'Countdown caption', countdown: 'Countdown', about: 'Description',
+  about: 'Description',
 };
-const PAGES: Record<string, string> = { cover: 'Home', pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
+const PAGES: Record<string, string> = { pasupu: 'Haldi', mehandi: 'Mehendi', pellikuthuru: 'Pellikuthuru / Pellikoduku', vivaham: 'Wedding', reception: 'Cocktail' };
 const FONTS: [string, string][] = [
   ['', 'Default'],
   ["'Cinzel', Georgia, serif", 'Cinzel (titles)'],
@@ -21,7 +20,7 @@ const FONTS: [string, string][] = [
   ["'Noto Serif Telugu', 'Telugu Sangam MN', serif", 'Telugu serif'],
   ['system-ui, sans-serif', 'Sans-serif'],
 ];
-const WORDING = new Set(['title', 'about', 'blessing', 'om', 'welcome', 'message', 'bride', 'groom', 'caption', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
+const WORDING = new Set(['title', 'about', 'kicker', 'sub', 'theme', 'date', 'time', 'venue', 'dress', 'map']);
 type Sel = { page: string; mode: string; piece: string };
 const FIELDS = new Set(['date', 'time', 'venue', 'dress']);
 // Extra labels added in the saved layout (e.g. పెళ్లికొడుకు) can be reworded too.
@@ -138,7 +137,7 @@ export function LayoutEditor({ lang }: { lang: Lang }) {
                 </label>
                 {hasWording(sel.piece) && (
                   <label className="le-words"><span>Wording ({lang === 'en' ? 'English' : 'Telugu'}){sel.piece === 'title' && sel.page !== 'reception' ? ' — 2nd line is the subtitle' : FIELDS.has(sel.piece) && sel.page !== 'reception' ? ' — 1st line is the label, 2nd the value' : ''}</span>
-                    <textarea rows={sel.piece === 'welcome' ? 4 : 2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
+                    <textarea rows={2} value={draft} onChange={(e) => { setDraft(e.target.value); setEdit(key, { text: { ...getEdit(key).text, [lang]: e.target.value } }); }} />
                     <small>Switch the site language (top right) to edit the other language.</small>
                   </label>
                 )}
