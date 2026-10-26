@@ -1218,3 +1218,13 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
   .world-pellikuthuru .ev-col-pair .ev-col-art { height: clamp(60px,10vh,240px); }
   .world-pellikuthuru .ev-about { font-size: clamp(11px,1.75vh,16px); }
 }
+/* Pellikuthuru: bigger bride and groom pictures side by side, no names under them (the description names the
+   event), and a clear gap before the event details. */
+.world-pellikuthuru .ev-col-pair figcaption { display: none; }
+.world-pellikuthuru .ev-col-pair { gap: 0; }
+.world-pellikuthuru .ev-col-pair figure { min-width: 0; }
+.world-pellikuthuru .ev-col-lines { margin-top: clamp(6px, 1.6vh, 18px); }
+@media (max-width:899px) {
+  .world-pellikuthuru .ev-col-pair .ev-col-art { height: clamp(84px, 17.5vh, 300px); }
+}
+@media (min-width:900px) { .world-pellikuthuru .ev-col-pair .ev-col-art { height: 25vh; } }
