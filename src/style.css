@@ -1244,3 +1244,15 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 @media (min-width:900px) { .world-pellikuthuru .ev-col-pair figure + figure { margin-left: -3vw !important; } }
 /* Phones: the Maps button sits a little lower, in the clear space between the elephant stand and the lotuses. */
 @media (max-width:899px) { .world-pellikuthuru .ev-col-map { padding: 8px 16px; translate: 10px clamp(14px, 3.5vh, 40px); } }
+/* Pellikuthuru (phones): bigger pictures, closer in size to Haldi and Mehendi; quieter, more compact text that sits
+   just above the brass elephant; the dress code on one line; the Maps button lower in the clear middle. */
+@media (max-width:899px) {
+  .world-pellikuthuru .ev-col-pair .ev-col-art { height: clamp(96px, 21.5vh, 320px); }
+  .world-pellikuthuru .ev-column > * { flex-shrink: 0; }
+  .world-pellikuthuru .ev-column > .ev-col-gap { flex-shrink: 1; }
+  .world-pellikuthuru .ev-about { font-size: clamp(10.5px, 1.6vh, 15px); line-height: 1.35; }
+  .world-pellikuthuru .ev-col-lines { gap: .1em; }
+  .world-pellikuthuru .ev-col-lines p, .world-pellikuthuru .ev-col-lines p:last-child { white-space: nowrap; }
+  .world-pellikuthuru .ev-column { padding-bottom: calc((100dvh - 80px) * .31 - 10px); }
+  .world-pellikuthuru .ev-col-map { translate: 10px clamp(22px, 6vh, 60px); }
+}
