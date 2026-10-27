@@ -392,11 +392,12 @@ export function App() {
       <section id="rsvp" data-sec="rsvp" className="sec rsvp">
         {/* One screen, like the event pages: a compact row per event (the event pages already give dates and times). */}
         <div className="card wide rsvp-compact">
-          <h2>{t('rsvpTitle')}</h2>
-          <p className="blurb">{t('rsvpSub')}</p>
+          {status !== 'done' && <h2>{t('rsvpTitle')}</h2>}
+          {status !== 'done' && <p className="blurb">{t('rsvpSub')}</p>}
           {status === 'done' ? (
             <div className="rsvp-done" role="status">
-              <p className="rsvp-done-msg">✓ {t('rsvpDone')}</p>
+              <p className="rsvp-done-msg">{t('rsvpDone')}</p>
+              <p className="rsvp-done-sub">{t('rsvpLanded')}</p>
               <p className="note">{t('rsvpChangeNote')}</p>
               <button className="btn" type="button" onClick={() => setStatus('idle')}>{t('rsvpChange')}</button>
             </div>
