@@ -28,11 +28,11 @@ var WEDDING_FACTS = [
   'Couple: Bhavitha (bride) and Nagender (groom). Wedding hashtag: #NaGuddu. All times are US Central time, Texas.',
   '',
   'EVENTS',
-  '1. Haldi (Pasupu): Tuesday, December 1, 2026, 9:30 AM. Serengeti Events (Airbnb), 6147 FM 455, Anna, TX 75409. Turmeric, laughter and the first blessings of the wedding week. Followed by lunch. Dress code: shades of yellow.',
-  '2. Mehendi: Tuesday, December 1, 2026, 4:00 PM. Serengeti Events (Airbnb), 6147 FM 455, Anna, TX 75409. Henna, music and an evening with family and friends. Followed by dinner. Dress code: green or colorful Indian wear.',
-  '3. Pellikuthuru / Pellikoduku: Wednesday, December 2, 2026, 10:00 AM. Serengeti Events (Airbnb), 6147 FM 455, Anna, TX 75409. The traditional blessing ceremony for the bride and groom before the wedding, with turmeric, oil and the elders\' blessings. Followed by lunch. Dress code: traditional wear, your finest Indian traditional outfits.',
-  '4. Wedding: Thursday, December 3, 2026, 9:00 AM Muhurtham. Bella Cavalli Events, 1651 W Sherman Dr, Aubrey, TX 76227. Seven steps, one promise, and your blessings. Followed by lunch. Dress code: traditional, South Indian style: silk sarees, dhoti or kurta.',
-  '5. Cocktail party, "A Night under the Stars": Friday, December 4, 2026, 6:00 PM. The Meridian Venue, 351 Southwind Ln, Fairview, TX 75069. Drinks and dinner to celebrate the newlyweds. Dress code: formal or Indian festive wear; statement lehengas, sharp suits, bring on the Desi bling.',
+  '1. Haldi (Nalugu): Tuesday, December 1, 2026, from 9:30 AM. Serengeti Events (Airbnb), 6147 FM 455, Anna, TX 75409. A pre-wedding ceremony where turmeric paste is applied to the bride and groom for blessings and good luck. Followed by lunch. Dress code: please join us in your favorite hue of yellow.',
+  '2. Mehendi: Tuesday, December 1, 2026, from 4:00 PM. Serengeti Events (Airbnb), 6147 FM 455, Anna, TX 75409. An intimate and joyous celebration where intricate henna designs adorn the bride\'s hands and feet, symbolizing love, promise, and new beginnings. Followed by dinner. Dress code: festive attire in shades of green.',
+  '3. Pellikuthuru / Pellikoduku: Wednesday, December 2, 2026, from 10:00 AM. Serengeti Events (Airbnb), 6147 FM 455, Anna, TX 75409. The making of the bride and groom: a beautiful beginning to the wedding rituals, filled with turmeric hues, cherished customs, and heartfelt blessings. Followed by lunch. Dress code: dress up in your favorite traditional Indian attire.',
+  '4. Wedding (Telugu Pelli): Thursday, December 3, 2026, from 9:00 AM (Muhurtham). Bella Cavalli Events, 1651 W Sherman Dr, Aubrey, TX 76227. The rites, in order: Kanyadaanam, Jeelakarra Bellam, Mangalya Dharanam (tying the Mangalasutram), Thalambralu and Saptapadi. A celebration that brings two hearts and two families together. Followed by lunch. Dress code: bring out your silks for a traditional Telugu celebration.',
+  '5. Cocktail party, "A Night under the Stars": Friday, December 4, 2026, 6:00 PM. The Meridian Venue, 351 Southwind Ln, Fairview, TX 75069. An after-wedding celebration with drinks and dinner. Dress code: formal or Indian festive wear; statement lehengas, sharp suits, bring on the Desi bling.',
   '',
   'GETTING THERE',
   '- Every venue has plenty of on-site parking.',
@@ -47,7 +47,7 @@ var WEDDING_FACTS = [
   '- Holiday Inn Express & Suites Prosper, 1100 Mahard Pkwy, Prosper, TX 75078. Closest to the Wedding venue.',
   '',
   'ON THE WEBSITE',
-  '- RSVP: tap RSVP in the top bar, enter your name, answer for each event (with number of guests and meal choice), and tap Send RSVP. Sending again updates your reply.',
+  '- RSVP: tap RSVP in the top bar (or the round RSVP button). Enter your name (email and phone are optional), choose "Count Me In!" or "Sending Love!" for each event, and for events you are attending pick the number of guests and Vegetarian or Non-vegetarian. You can add an optional note for the couple, then tap Send RSVP. Sending again updates your reply.',
   '- Photos: the Photos page lets guests upload pictures from the celebrations. Only the couple can see them.'
 ].join('\n');
 
