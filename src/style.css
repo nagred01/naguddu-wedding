@@ -1256,3 +1256,8 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
   .world-pellikuthuru .ev-column { padding-bottom: calc((100dvh - 80px) * .31 - 10px); }
   .world-pellikuthuru .ev-col-map { translate: 10px clamp(22px, 6vh, 60px); }
 }
+/* Pellikuthuru (phones): the groom drawn larger (he sits smaller within his picture), with a small gap between the two. */
+@media (max-width:899px) {
+  .world-pellikuthuru .ev-col-pair figure + figure { margin-left: -4vw !important; }
+  .world-pellikuthuru .ev-col-pair figure + figure .ev-col-art { scale: 1.22; transform-origin: 40% 100%; }
+}
