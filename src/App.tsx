@@ -395,8 +395,8 @@ export function App() {
       <Glimpse lang={lang} />
 
       <section id="rsvp" data-sec="rsvp" className="sec rsvp">
-        <div className="card wide">
-          <img className="ganesha" src={ganesha} alt="" loading="lazy" decoding="async" />
+        {/* One screen, like the event pages: a compact row per event (the event pages already give dates and times). */}
+        <div className="card wide rsvp-compact">
           <h2>{t('rsvpTitle')}</h2>
           <p className="blurb">{t('rsvpSub')}</p>
           {status === 'done' ? (
@@ -407,14 +407,12 @@ export function App() {
             </div>
           ) : (
           <form onSubmit={sendRsvp} noValidate>
-            <label className="field"><span>{t('yourName')}</span><input type="text" name="name" autoComplete="name" maxLength={80} placeholder="…" value={guestName} onChange={(e) => { setGuestName(e.target.value); if (status === 'needName') setStatus('idle'); }} aria-invalid={status === 'needName'} /></label>
+            <label className="field"><span className="sr-only">{t('yourName')}</span><input type="text" name="name" autoComplete="name" maxLength={80} placeholder={t('yourName')} value={guestName} onChange={(e) => { setGuestName(e.target.value); if (status === 'needName') setStatus('idle'); }} aria-invalid={status === 'needName'} /></label>
             <input className="hp" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             <ul className="rsvp-cards">
               {EVENTS.map((ev) => (
                 <li key={ev.id} className={'rsvp-card' + (rsvp[ev.id] ? ' ' + rsvp[ev.id] : '')}>
                   <h3 className="rc-name">{lang === 'en' ? ev.en : ev.te}</h3>
-                  <p className="rc-when">{ev.date[lang]} · {ev.time[lang]}</p>
-                  <p className="rc-venue">{ev.venue[lang]}</p>
                   <span className="seg">
                     <button type="button" aria-pressed={rsvp[ev.id] === 'yes'} className={rsvp[ev.id] === 'yes' ? 'on' : ''} onClick={() => setRsvp((r) => ({ ...r, [ev.id]: 'yes' }))}>{t('yes')}</button>
                     <button type="button" aria-pressed={rsvp[ev.id] === 'no'} className={rsvp[ev.id] === 'no' ? 'on no' : ''} onClick={() => setRsvp((r) => ({ ...r, [ev.id]: 'no' }))}>{t('no')}</button>

@@ -1288,3 +1288,43 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .world-vivaham .ev-rites-row:nth-child(2) { margin: calc(clamp(70px, 14.5vh, 200px) * -.36) 0; position: relative; z-index: 1; }
 .world-vivaham .ev-rites-row figure { max-width: 49%; }
 @media (min-width:900px) { .world-vivaham .ev-rites { width: min(50vw, 680px); } }
+/* RSVP on one screen: a one-line title, no Ganesha, and a compact row per event (name on the left, Yes/No on the right;
+   guests and meal on one line underneath once attending). If many events are opened, the card scrolls inside. */
+.sec.rsvp { height: 100% !important; min-height: 0 !important; box-sizing: border-box; padding: 46px 14px 62px !important; display: flex; flex-direction: column; justify-content: center; }
+.rsvp-compact { display: flex; flex-direction: column; max-height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 16px 14px 12px !important; box-sizing: border-box; }
+.rsvp-compact h2 { margin: 0 0 2px; white-space: nowrap; font-size: clamp(18px, 6.2vw, 34px) !important; line-height: 1.15; }
+.rsvp-compact .blurb { margin: 0 0 8px; font-size: 13px; }
+.rsvp-compact .field { margin: 0; }
+.rsvp-compact .field input { min-height: 40px; }
+.rsvp-compact .rsvp-cards { margin: 8px 0; gap: 6px; display: grid !important; grid-template-columns: 1fr !important; }
+.rsvp-compact .rsvp-card { display: grid !important; grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; padding: 5px 6px 5px 12px; }
+.rsvp-compact .rc-name { margin: 0; font-size: 16px; }
+.rsvp-compact .rsvp-card .seg { margin: 0 !important; }
+.rsvp-compact .rsvp-card .seg button { flex: none; min-height: 32px; padding: 0 10px; font-size: 11.5px; }
+.rsvp-compact .rc-more { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 7px; padding-top: 7px; }
+.rsvp-compact .rc-label { margin: 0; font-size: 10px; }
+.rsvp-compact .stepper button { width: 32px; height: 32px; font-size: 18px; }
+.rsvp-compact .stepper output { min-width: 26px; font-size: 15px; }
+.rsvp-compact .chips { gap: 6px; }
+.rsvp-compact .chips button { min-height: 32px; padding: 0 11px; font-size: 12.5px; }
+.rsvp-compact .rsvp-msg { margin: 0 0 6px; min-height: 0; }
+.rsvp-compact .btn { margin: 0 auto; }
+.rsvp-compact .note { margin: 8px 0 0; font-size: 11px; }
+@media (min-width:900px) { .sec.rsvp { padding: 60px 24px 70px !important; } .rsvp-compact { max-width: 620px !important; } }
+.rsvp-compact { padding: 12px 12px 10px !important; }
+.rsvp-compact .rsvp-card { padding: 4px 5px 4px 12px; }
+.rsvp-compact .rsvp-card .seg button { min-height: 30px; }
+.rsvp-compact .rc-name { font-size: 15px; line-height: 1.15; }
+.rsvp-compact .note { margin-top: 6px; font-size: 10.5px; }
+.rsvp-compact .btn { min-height: 40px; }
+/* Attending: guests and meal on one line - the meal label is left to screen readers, the two choices say it. */
+.rsvp-compact .rc-more { flex-wrap: nowrap; gap: 6px; }
+.rsvp-compact .rc-more .rc-label:nth-of-type(2) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.rsvp-compact .chips { flex-wrap: nowrap; margin-left: auto; }
+.rsvp-compact .chips button { min-height: 30px; padding: 0 8px; font-size: 11px; }
+.rsvp-compact .stepper button { width: 28px; height: 30px; }
+.rsvp-compact .rc-name { font-size: 14px; }
+.rsvp-compact .rsvp-card .seg button { padding: 0 8px; font-size: 10.5px; }
+.rsvp-compact .rsvp-cards { gap: 5px; }
+.rsvp-compact .chips button { white-space: nowrap; padding: 0 7px; font-size: 10.5px; }
+.rsvp-compact .rc-more { margin-top: 5px; padding-top: 5px; }
