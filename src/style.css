@@ -1280,3 +1280,11 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .is-te .world-vivaham .ev-col-lines { font-size: clamp(11.5px, 2.8vw, 17px); }
 .world-vivaham .ev-col-lines p { white-space: nowrap; }
 @media (min-width:900px) { .world-vivaham .ev-column { padding-left: 22%; padding-right: 22%; } }
+/* Wedding: bigger rite pictures in a zigzag - the outer rows hold their pictures at the left and right edges and the
+   middle picture tucks in between them - so they grow without pushing the text down. */
+.world-vivaham .ev-rites { width: min(98vw, 760px); gap: 0; }
+.world-vivaham .ev-rites-row { height: clamp(70px, 14.5vh, 200px); }
+.world-vivaham .ev-rites-row:first-child, .world-vivaham .ev-rites-row:last-child { justify-content: space-between; }
+.world-vivaham .ev-rites-row:nth-child(2) { margin: calc(clamp(70px, 14.5vh, 200px) * -.36) 0; position: relative; z-index: 1; }
+.world-vivaham .ev-rites-row figure { max-width: 49%; }
+@media (min-width:900px) { .world-vivaham .ev-rites { width: min(50vw, 680px); } }
