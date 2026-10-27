@@ -21,7 +21,7 @@ const teluguEdits:Record<string,Record<string,string>>={
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Pages laid out as one centred column (title, picture, description, event lines, Maps button) instead of the
 // freely placed layout. Each text line can still be reworded in the layout editor.
-const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>;pair?:Record<Lang,[string,string]>;rites?:string[]}>={
+const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>;pair?:Record<Lang,[string,string]>;rites?:string[];riteNames?:Record<Lang,string[]>}>={
  pasupu:{
   about:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride and groom for blessings and good luck.',
    te:'వధూవరులకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.'},
@@ -35,6 +35,8 @@ const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]
  vivaham:{
   // The wedding rites in order, in three rows (two, one, two) under the title, then the words.
   rites:[rite1,rite2,rite3,rite4,rite5],
+  riteNames:{en:['Kanyadaanam','Jeelakarra Bellam','Mangalya Dharanam','Thalambralu','Saptapadi'],
+   te:['కన్యాదానం','జీలకర్ర బెల్లం','మాంగల్య ధారణ','తలంబ్రాలు','సప్తపది']},
   about:{en:'From the promise of togetherness in Jeelakarra Bellam to the sacred knot of the Mangalasutram, a Telugu Pelli marks the beginning of a lifelong bond. Filled with emotion and cherished traditions, it brings two hearts and two families together.\nPlease join us to celebrate this union and bless the couple as they begin their life together.',
    te:'జీలకర్ర బెల్లంతో ఒక్కటయ్యే వాగ్దానం నుండి మంగళసూత్రపు పవిత్ర ముడి వరకు, తెలుగు పెళ్లి జీవితాంతపు బంధానికి నాంది. భావోద్వేగాలు, ప్రియమైన సంప్రదాయాలతో నిండిన ఈ వేడుక రెండు హృదయాలను, రెండు కుటుంబాలను ఒక్కటి చేస్తుంది.\nఈ కలయికను మాతో కలిసి జరుపుకుని, కొత్త జీవితం ప్రారంభిస్తున్న జంటను ఆశీర్వదించండి.'},
   lines:{en:["Thursday, 3rd Dec' 2026 from 9:00 AM",'Bella Cavalli Events','Bring out your silks for a traditional Telugu celebration.'],
@@ -77,7 +79,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
    return <div className="ev-column" aria-label={id+' event'}>
     <img className="ev-col-ganesha" src={art('ganesha')} alt=""/>
     <h2 className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{position:'relative',color:TITLE_COLOR[id]})}>{tt}{sub&&<span className="ev-sub">{sub}</span>}</h2>
-    {c.rites&&<div className="ev-rites">{[[0,2],[2,3],[3,5]].map(([a,b])=><div key={a} className="ev-rites-row">{c.rites!.slice(a,b).map((r,n)=><img key={n} src={r} alt=""/>)}</div>)}</div>}
+    {c.rites&&<div className="ev-rites">{[[0,2],[2,3],[3,5]].map(([a,b])=><div key={a} className="ev-rites-row">{c.rites!.slice(a,b).map((r,n)=><figure key={n}><img src={r} alt=""/><figcaption>{c.riteNames?.[lang][a+n]}</figcaption></figure>)}</div>)}</div>}
     {c.rites?null:c.pair?<div className="ev-col-pair">{(['image1','image2'] as const).map((p,n)=><figure key={p} data-piece={p} data-wh="" style={fx(p,{})}>
       <img className="ev-col-art" src={art(p)} alt=""/><figcaption data-piece={'name'+(n+1)}>{say('name'+(n+1),c.pair![lang][n])}</figcaption></figure>)}</div>
      :<img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>}

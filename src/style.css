@@ -1265,8 +1265,12 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 }
 /* Wedding: the rites in order in three rows (two, one, two), then the description, event details and Maps button. */
 .ev-rites { display: grid; gap: clamp(2px, .6vh, 8px); width: min(96vw, 760px); pointer-events: none; }
-.ev-rites-row { display: flex; justify-content: center; align-items: flex-end; gap: 4vw; height: clamp(54px, 10.5vh, 150px); }
-.ev-rites-row img { display: block; height: 100%; width: auto; max-width: 47%; object-fit: contain; }
+.ev-rites-row { display: flex; justify-content: center; align-items: flex-end; gap: 4vw; height: clamp(60px, 11.4vh, 170px); }
+.ev-rites-row figure { margin: 0; height: 100%; max-width: 47%; display: flex; flex-direction: column; align-items: center; }
+.ev-rites-row img { display: block; flex: 1 1 0; min-height: 0; width: auto; max-width: 100%; object-fit: contain; }
+/* Each rite named under its picture. */
+.ev-rites-row figcaption { margin-top: 1px; font: 700 clamp(9.5px, 1.6vh, 15px)/1.2 var(--font-display); letter-spacing: .06em; text-transform: uppercase; color: #7a2a12; white-space: nowrap; }
+.is-te .ev-rites-row figcaption { font-family: var(--font-body); letter-spacing: 0; font-size: clamp(10.5px, 1.7vh, 16px); }
 .world-vivaham .ev-column { padding-left: 4%; padding-right: 4%; gap: clamp(4px, 1vh, 12px); color: #4a2412;
   text-shadow: 0 0 6px rgba(255,248,232,.95), 0 0 12px rgba(255,248,232,.85); }
 .world-vivaham .ev-column .ev-title { margin-bottom: 0; }
