@@ -69,6 +69,7 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
       <img className="ev-col-art" src={art(p)} alt=""/><figcaption data-piece={'name'+(n+1)}>{say('name'+(n+1),c.pair![lang][n])}</figcaption></figure>)}</div>
      :<img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>}
     <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang]).split('\n').map((para,n)=><span key={n} className={n?'ev-about-more':undefined}>{para.split('**').map((t,k)=>k%2?<b key={k}>{t}</b>:t)}</span>)}</p>
+    {c.pair&&<span className="ev-col-gap ev-gap-before-lines" aria-hidden="true"/>}
     <div className="ev-col-lines" data-piece="lines" data-wh="" data-font={fontAttr('lines')} style={fx('lines',{})}>{(say('lines',c.lines[lang].join('\n'))).split('\n').map((l,n)=><p key={n}>{l}</p>)}</div>
     {MAPS[id]&&<a className="ev-col-map" data-piece="map" href={MAPS[id]} target="_blank" rel="noopener" style={fx('map',{})}>{lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి'}</a>}
     <span className="ev-col-gap" aria-hidden="true"/>

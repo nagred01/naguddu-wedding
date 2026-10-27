@@ -1228,3 +1228,19 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
   .world-pellikuthuru .ev-col-pair .ev-col-art { height: clamp(84px, 17.5vh, 300px); }
 }
 @media (min-width:900px) { .world-pellikuthuru .ev-col-pair .ev-col-art { height: 25vh; } }
+/* Pellikuthuru (phones): Ganesha the same size as on Haldi and Mehendi; bride and groom close together; the event
+   details sit lower, ending just above the brass elephant (69% down the page), with the Maps button under them. */
+@media (max-width:899px) {
+  .world-pellikuthuru .ev-col-ganesha { height: clamp(48px,8.3vh,72px); }
+  .world-pellikuthuru .ev-column { padding-top: calc(max(40px,6.6vh) + clamp(48px,8.3vh,72px) + 2px) !important;
+    padding-bottom: calc((100dvh - 80px) * .31 - 12px); }
+  .world-pellikuthuru .ev-col-pair figure + figure { margin-left: -14vw !important; }
+  .world-pellikuthuru .ev-col-gap { flex: 0 0 0; }
+  .world-pellikuthuru .ev-gap-before-lines { flex: 1 1 0; }
+  .world-pellikuthuru .ev-col-lines { margin-top: 0; font-size: clamp(11.5px, 3vw, 18px); }
+  .world-pellikuthuru .ev-col-lines p:first-child { white-space: nowrap; }
+  .is-te .world-pellikuthuru .ev-col-lines { font-size: clamp(11px, 2.8vw, 17px); }
+}
+@media (min-width:900px) { .world-pellikuthuru .ev-col-pair figure + figure { margin-left: -3vw !important; } }
+/* Phones: the Maps button sits a little lower, in the clear space between the elephant stand and the lotuses. */
+@media (max-width:899px) { .world-pellikuthuru .ev-col-map { padding: 8px 16px; translate: 10px clamp(14px, 3.5vh, 40px); } }
