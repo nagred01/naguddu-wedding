@@ -1,0 +1,79 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NaGuddu//Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Bhavitha & Nagender (#NaGuddu)
+BEGIN:VTIMEZONE
+TZID:America/Chicago
+BEGIN:STANDARD
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0600
+TZNAME:CST
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0500
+TZNAME:CDT
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:haldi-2026@naguddu.com
+DTSTAMP:20261027T000000Z
+DTSTART;TZID=America/Chicago:20261201T093000
+DTEND;TZID=America/Chicago:20261201T123000
+SUMMARY:Haldi · Bhavitha & Nagender
+LOCATION:Serengeti Events (Airbnb)\, 6147 FM 455\, Anna\, TX 75409
+DESCRIPTION:Followed by lunch. Attire: shades of yellow. #NaGuddu · https:
+ //naguddu.com
+URL:https://naguddu.com
+END:VEVENT
+BEGIN:VEVENT
+UID:mehendi-2026@naguddu.com
+DTSTAMP:20261027T000000Z
+DTSTART;TZID=America/Chicago:20261201T160000
+DTEND;TZID=America/Chicago:20261201T210000
+SUMMARY:Mehendi · Bhavitha & Nagender
+LOCATION:Serengeti Events (Airbnb)\, 6147 FM 455\, Anna\, TX 75409
+DESCRIPTION:Followed by dinner. Attire: a splash of green. #NaGuddu · http
+ s://naguddu.com
+URL:https://naguddu.com
+END:VEVENT
+BEGIN:VEVENT
+UID:pellikuthuru-2026@naguddu.com
+DTSTAMP:20261027T000000Z
+DTSTART;TZID=America/Chicago:20261202T100000
+DTEND;TZID=America/Chicago:20261202T140000
+SUMMARY:Pellikuthuru / Pellikoduku · Bhavitha & Nagender
+LOCATION:Serengeti Events (Airbnb)\, 6147 FM 455\, Anna\, TX 75409
+DESCRIPTION:Followed by lunch. Attire: your finest Indian traditional fits.
+  #NaGuddu · https://naguddu.com
+URL:https://naguddu.com
+END:VEVENT
+BEGIN:VEVENT
+UID:wedding-2026@naguddu.com
+DTSTAMP:20261027T000000Z
+DTSTART;TZID=America/Chicago:20261203T090000
+DTEND;TZID=America/Chicago:20261203T140000
+SUMMARY:Wedding · Bhavitha & Nagender
+LOCATION:Bella Cavalli Events\, 1651 W Sherman Dr\, Aubrey\, TX 76227
+DESCRIPTION:Muhurtham at 9:00 AM. Followed by lunch. Attire: South Indian s
+ tyle\, wedding edition. #NaGuddu · https://naguddu.com
+URL:https://naguddu.com
+END:VEVENT
+BEGIN:VEVENT
+UID:cocktail-2026@naguddu.com
+DTSTAMP:20261027T000000Z
+DTSTART;TZID=America/Chicago:20261204T180000
+DTEND;TZID=America/Chicago:20261205T000000
+SUMMARY:Cocktail Night · Bhavitha & Nagender
+LOCATION:The Meridian Venue\, 351 Southwind Ln\, Fairview\, TX 75069
+DESCRIPTION:Followed by dinner. Attire: statement lehengas\, sharp suits. B
+ ring on the Desi bling! #NaGuddu · https://naguddu.com
+URL:https://naguddu.com
+END:VEVENT
+END:VCALENDAR
