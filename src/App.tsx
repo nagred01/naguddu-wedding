@@ -324,11 +324,6 @@ export function App() {
         </nav>
       )}
       <Petals hide={active === 'glimpse'} />
-      <nav className="dots" aria-label={t('nav')}>
-        {PAGES.map((x) => (
-          <button key={x.id} className={active === x.id ? 'on' : ''} onClick={() => go(x.id)} aria-label={lang === 'en' ? x.en : x.te} />
-        ))}
-      </nav>
 
       {entered && <Assistant lang={lang} />}
       {entered && EDIT_MODE && <LayoutEditor lang={lang} />}
