@@ -1333,3 +1333,11 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 /* RSVP: no frame around the form - it sits straight on the page like the event pages. */
 .sec.rsvp .rsvp-compact { border: 0 !important; outline: 0 !important; box-shadow: none !important; background: none !important; }
 .sec.rsvp .rsvp-compact::before, .sec.rsvp .rsvp-compact::after { display: none !important; }
+/* RSVP: use the free height - roomier rows and spacing that grow with the screen (the card still scrolls inside
+   if a guest opens several events). */
+.rsvp-compact h2 { margin-bottom: clamp(2px, .8vh, 8px) !important; }
+.rsvp-compact .blurb { margin-bottom: clamp(8px, 1.8vh, 24px); }
+.rsvp-compact .rsvp-cards { margin: clamp(8px, 1.5vh, 22px) 0; gap: clamp(6px, 1.2vh, 14px); }
+.rsvp-compact .rsvp-card { padding-top: clamp(4px, .7vh, 10px); padding-bottom: clamp(4px, .7vh, 10px); }
+.rsvp-compact .rsvp-msg { margin-bottom: clamp(4px, 1vh, 10px); }
+.rsvp-compact .note { margin-top: clamp(8px, 1.6vh, 16px); }
