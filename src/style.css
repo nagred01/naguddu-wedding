@@ -1368,3 +1368,20 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
   .rsvp-compact .note { margin-top: 6px; }
 }
 @media (min-width:900px) { .sec.rsvp { padding-top: 50px !important; padding-bottom: 36px !important; } .rsvp-compact .note { margin-top: 6px; } }
+/* Note for the couple: a small heading and line above the box. */
+.rsvp-compact .rsvp-note { text-align: left; }
+.rsvp-compact .rsvp-note .rsvp-note-title { display: block; margin: 0; font: 600 clamp(13px, 3.6vw, 16px)/1.25 var(--font-body) !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--ivory); }
+.rsvp-compact .rsvp-note .rsvp-note-sub { display: block; margin: 1px 0 5px; font: italic clamp(11.5px, 3vw, 13px)/1.25 var(--font-body) !important; letter-spacing: 0 !important; text-transform: none !important; color: rgba(251,241,214,.75); }
+@media (max-width:899px) {
+  .rsvp-compact .rsvp-contact input { width: 100%; box-sizing: border-box; }
+  .rsvp-compact .rsvp-card { padding-top: 2px; padding-bottom: 2px; }
+  .rsvp-compact .rsvp-card .seg button { min-height: 28px; }
+  .rsvp-compact .rsvp-cards { gap: clamp(4px, .7vh, 12px); }
+  .rsvp-compact .rsvp-note .rsvp-note-sub { margin-bottom: 4px; }
+}
+@media (max-width:899px) { .is-te .rsvp-compact .rsvp-cards { gap: 3px; } .is-te .rsvp-compact .blurb { margin-bottom: 4px; } }
+@media (min-width:900px) {
+  .rsvp-compact .rsvp-cards { gap: 6px; margin: 8px 0; }
+  .rsvp-compact .rsvp-card { padding-top: 3px; padding-bottom: 3px; }
+  .rsvp-compact .blurb { margin-bottom: 8px; }
+}

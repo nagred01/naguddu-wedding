@@ -441,7 +441,7 @@ export function App() {
                 </li>
               ))}
             </ul>
-            <label className="field rsvp-note"><span className="sr-only">{t('yourNote')}</span><textarea name="note" rows={2} maxLength={500} placeholder={t('yourNote')} value={contact.note} onChange={(e) => setContact((c) => ({ ...c, note: e.target.value }))} /></label>
+            <label className="field rsvp-note"><span className="rsvp-note-title">{t('noteTitle')}</span><span className="rsvp-note-sub">{t('noteSub')}</span><textarea name="note" rows={2} maxLength={500} placeholder={t('yourNote')} value={contact.note} onChange={(e) => setContact((c) => ({ ...c, note: e.target.value }))} /></label>
             <p className={'rsvp-msg' + (status === 'error' || status === 'needName' || status === 'needEvent' ? ' bad' : '')} role="status" aria-live="polite">
               {status === 'needName' ? t('needName') : status === 'needEvent' ? t('needEvent') : status === 'error' ? t('rsvpFail') : status === 'preview' ? '✓ ' + (lang === 'en' ? 'Nothing was sent. This is a preview.' : 'ఏమీ పంపబడలేదు. ఇది నమూనా మాత్రమే.') : ''}
             </p>
