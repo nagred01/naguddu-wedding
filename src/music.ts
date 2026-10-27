@@ -2,7 +2,7 @@ import cover from './audio/cover.mp3';
 import pasupu from './audio/pasupu.mp3';
 import mehandi from './audio/mehandi.mp3';
 import pellikuthuru from './audio/pellikuthuru.mp3';
-import vivaham from './audio/vivaham.mp3';
+import vivaham from './audio/vivaham.m4a'; // the couple's wedding song, Wedding page only
 import reception from './audio/reception.mp3';
 
 const SRC: Record<string, string> = { cover, pasupu, mehandi, pellikuthuru, vivaham, reception, rsvp: cover, photos: cover, glimpse: cover };
