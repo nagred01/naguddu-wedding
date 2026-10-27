@@ -1330,3 +1330,6 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
 .rsvp-compact .rc-more { margin-top: 5px; padding-top: 5px; }
 /* The longer RSVP title still fits on one line. */
 .rsvp-compact h2 { font-size: clamp(15px, 4.6vw, 30px) !important; letter-spacing: .04em !important; }
+/* RSVP: no frame around the form - it sits straight on the page like the event pages. */
+.sec.rsvp .rsvp-compact { border: 0 !important; outline: 0 !important; box-shadow: none !important; background: none !important; }
+.sec.rsvp .rsvp-compact::before, .sec.rsvp .rsvp-compact::after { display: none !important; }

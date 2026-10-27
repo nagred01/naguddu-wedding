@@ -13,7 +13,7 @@ export const T = {
   map: { en: 'Open in Maps', te: 'మ్యాప్‌లో చూడండి' },
   dress: { en: 'Dress code', te: 'వస్త్రధారణ' },
   rsvpTitle: { en: 'Ready to Celebrate?', te: 'వేడుకకు సిద్ధమా?' },
-  rsvpSub: { en: 'Tell us which celebrations you will attend.', te: 'ఏ వేడుకలకు హాజరవుతారో తెలియజేయండి.' },
+  rsvpSub: { en: 'Which Special Moments Will You Be Part Of?', te: 'ఏ ప్రత్యేక క్షణాల్లో మీరు భాగమవుతారు?' },
   yourName: { en: 'Your name', te: 'మీ పేరు' },
   guests: { en: 'Guests', te: 'అతిథులు' },
   yes: { en: 'Count Me In!', te: 'నేను వస్తాను!' },
