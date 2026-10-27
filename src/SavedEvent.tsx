@@ -2,6 +2,11 @@ import React, {useEffect,useRef,useState} from 'react';
 import {layoutTemplates,savedLayout} from './layoutData';
 import {EVENTS,T,mapUrl,type Lang} from './i18n';
 import {editKey,useEdits} from './editStore';
+import rite1 from './img/wed-rite-1.webp';
+import rite2 from './img/wed-rite-2.webp';
+import rite3 from './img/wed-rite-3.webp';
+import rite4 from './img/wed-rite-4.webp';
+import rite5 from './img/wed-rite-5.webp';
 const extraId='extra-mvfzb6jt-dfklno';
 // Google Maps link per event, from its address. An event without an address shows no "Open in Maps" button.
 // Desktop title colour per event, matching each page's palette.
@@ -16,7 +21,7 @@ const teluguEdits:Record<string,Record<string,string>>={
 const SUBTITLE:Record<string,Partial<Record<Lang,string>>>={pasupu:{te:'మంగళ స్నానం'}};
 // Pages laid out as one centred column (title, picture, description, event lines, Maps button) instead of the
 // freely placed layout. Each text line can still be reworded in the layout editor.
-const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>;pair?:Record<Lang,[string,string]>}>={
+const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]>;pair?:Record<Lang,[string,string]>;rites?:string[]}>={
  pasupu:{
   about:{en:'A pre-wedding ceremony where turmeric paste is applied to the bride and groom for blessings and good luck.',
    te:'వధూవరులకు శుభం, అదృష్టం కలగాలని పసుపు రాసి ఆశీర్వదించే వివాహానికి ముందు జరిగే వేడుక.'},
@@ -27,6 +32,13 @@ const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]
    te:'వధువు చేతులు, పాదాలను అందమైన గోరింటాకు డిజైన్లతో అలంకరించే ఆత్మీయమైన, ఆనందకరమైన వేడుక; ఇది ప్రేమ, వాగ్దానం, కొత్త ఆరంభాలకు ప్రతీక.'},
   lines:{en:["Tuesday, 1st Dec' 2026 from 4:00 PM",'Serengeti Events (Airbnb)','Festive attire in shades of green'],
    te:['మంగళవారం, డిసెంబర్ 1, 2026 సాయంత్రం 4:00 నుండి','Serengeti Events (Airbnb)','ఆకుపచ్చ రంగుల పండుగ దుస్తుల్లో రండి']}},
+ vivaham:{
+  // The wedding rites in order: two pictures at the top corners, three along the bottom, words in between.
+  rites:[rite1,rite2,rite3,rite4,rite5],
+  about:{en:'From the promise of togetherness in Jeelakarra Bellam to the sacred knot of the Mangalasutram, a Telugu Pelli marks the beginning of a lifelong bond. Filled with emotion and cherished traditions, it brings two hearts and two families together. Please join us to celebrate this union and bless the couple as they begin their life together.',
+   te:'జీలకర్ర బెల్లంతో ఒక్కటయ్యే వాగ్దానం నుండి మంగళసూత్రపు పవిత్ర ముడి వరకు, తెలుగు పెళ్లి జీవితాంతపు బంధానికి నాంది. భావోద్వేగాలు, ప్రియమైన సంప్రదాయాలతో నిండిన ఈ వేడుక రెండు హృదయాలను, రెండు కుటుంబాలను ఒక్కటి చేస్తుంది. ఈ కలయికను మాతో కలిసి జరుపుకుని, కొత్త జీవితం ప్రారంభిస్తున్న జంటను ఆశీర్వదించండి.'},
+  lines:{en:["Thursday, 3rd Dec' 2026 from 9:00 AM",'Bella Cavalli Events','Bring out your silks for a traditional Telugu celebration.'],
+   te:['గురువారం, డిసెంబర్ 3, 2026 ఉదయం 9:00 నుండి','Bella Cavalli Events','సంప్రదాయ తెలుగు వేడుకకు మీ పట్టు వస్త్రాలతో రండి.']}},
  pellikuthuru:{
   // Bride and groom pictures side by side, each named underneath.
   pair:{en:['Pellikuthuru','Pellikoduku'],te:['పెళ్లికూతురు','పెళ్లికొడుకు']},
@@ -65,12 +77,14 @@ export function SavedEvent({id,lang,active}:{id:string;lang:Lang;active:boolean}
    return <div className="ev-column" aria-label={id+' event'}>
     <img className="ev-col-ganesha" src={art('ganesha')} alt=""/>
     <h2 className="saved-piece motion-title ev-title" data-piece="title" data-wh="" data-font={fontAttr('title')} style={fx('title',{position:'relative',color:TITLE_COLOR[id]})}>{tt}{sub&&<span className="ev-sub">{sub}</span>}</h2>
-    {c.pair?<div className="ev-col-pair">{(['image1','image2'] as const).map((p,n)=><figure key={p} data-piece={p} data-wh="" style={fx(p,{})}>
+    {c.rites&&<div className="ev-rites ev-rites-top">{c.rites.slice(0,2).map((r,n)=><img key={n} src={r} alt=""/>)}</div>}
+    {c.rites?null:c.pair?<div className="ev-col-pair">{(['image1','image2'] as const).map((p,n)=><figure key={p} data-piece={p} data-wh="" style={fx(p,{})}>
       <img className="ev-col-art" src={art(p)} alt=""/><figcaption data-piece={'name'+(n+1)}>{say('name'+(n+1),c.pair![lang][n])}</figcaption></figure>)}</div>
      :<img className="ev-col-art" data-piece="image1" src={art('image1')} alt="" style={fx('image1',{})}/>}
     <p className="ev-about" data-piece="about" data-wh="" data-font={fontAttr('about')} style={fx('about',{})} lang={lang}>{say('about',c.about[lang]).split('\n').map((para,n)=><span key={n} className={n?'ev-about-more':undefined}>{para.split('**').map((t,k)=>k%2?<b key={k}>{t}</b>:t)}</span>)}</p>
     {c.pair&&<span className="ev-col-gap ev-gap-before-lines" aria-hidden="true"/>}
     <div className="ev-col-lines" data-piece="lines" data-wh="" data-font={fontAttr('lines')} style={fx('lines',{})}>{(say('lines',c.lines[lang].join('\n'))).split('\n').map((l,n)=><p key={n}>{l}</p>)}</div>
+    {c.rites&&<div className="ev-rites ev-rites-bottom">{c.rites.slice(2).map((r,n)=><img key={n} src={r} alt=""/>)}</div>}
     {MAPS[id]&&<a className="ev-col-map" data-piece="map" href={MAPS[id]} target="_blank" rel="noopener" style={fx('map',{})}>{lang==='en'?'Open in Maps':'మ్యాప్‌లో చూడండి'}</a>}
     <span className="ev-col-gap" aria-hidden="true"/>
    </div>;

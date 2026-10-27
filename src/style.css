@@ -1263,3 +1263,24 @@ section.cocktail-reel{padding:0!important;display:block!important;isolation:isol
   /* The groom fills less of his picture than the bride, so he is scaled a little more to stand as tall as her. */
   .world-pellikuthuru .ev-col-pair figure + figure .ev-col-art { scale: 1.19; transform-origin: 45% 100%; }
 }
+/* Wedding: the rites in order - two pictures under the title at the top corners, three along the bottom - with the
+   description, event details and Maps button in between. */
+.ev-rites { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; pointer-events: none; }
+.ev-rites img { display: block; width: auto; min-width: 0; object-fit: contain; }
+.ev-rites-top { width: min(96vw, 760px); height: clamp(70px, 15vh, 190px); }
+.ev-rites-top img { height: 100%; max-width: 48%; }
+.ev-rites-bottom { position: absolute; left: 0; right: 0; bottom: clamp(4px, 1.2vh, 14px); justify-content: center; gap: 1vw; padding: 0 2vw; height: clamp(62px, 13vh, 170px); }
+.ev-rites-bottom img { height: 100%; max-width: 32%; }
+.world-vivaham .ev-column { padding-left: 4%; padding-right: 4%; padding-bottom: calc(clamp(62px, 13vh, 170px) + clamp(8px, 2vh, 24px)); gap: clamp(4px, 1vh, 12px); }
+.world-vivaham .ev-column .ev-title { margin-bottom: 0; }
+.world-vivaham .ev-about { width: min(90vw, 620px); font-size: clamp(11px, 1.7vh, 16px); line-height: 1.38; }
+.world-vivaham .ev-col-lines { width: min(90vw, 620px); font-size: clamp(12px, 3.1vw, 18px); }
+.is-te .world-vivaham .ev-col-lines { font-size: clamp(11.5px, 2.8vw, 17px); }
+.world-vivaham .ev-col-lines p { white-space: nowrap; }
+.world-vivaham .ev-column { text-shadow: 0 0 6px rgba(255,248,232,.95), 0 0 12px rgba(255,248,232,.85); color: #4a2412; }
+@media (min-width:900px) { .world-vivaham .ev-column { padding-left: 22%; padding-right: 22%; } .ev-rites-bottom { padding: 0 14vw; } }
+/* Phones: the bottom row of rites sits just above the floating RSVP and chat buttons, so neither covers a picture. */
+@media (max-width:899px) {
+  .ev-rites-bottom { bottom: 68px; height: clamp(56px, 11vh, 150px); }
+  .world-vivaham .ev-column { padding-bottom: calc(68px + clamp(56px, 11vh, 150px) + 6px); }
+}
