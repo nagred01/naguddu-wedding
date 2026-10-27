@@ -33,8 +33,8 @@ const COLUMN:Record<string,{about:Record<Lang,string>;lines:Record<Lang,string[]
   // **…** is shown in bold; lines after the first are set smaller.
   about:{en:'Please join us to celebrate the making of the bride and groom, **“PELLIKUTHURU & PELLIKODUKU”**.\nA beautiful beginning to our wedding rituals, filled with turmeric hues, cherished customs, and heartfelt blessings, as we prepare for our new journey together.',
    te:'వధూవరులను సిద్ధం చేసే **“పెళ్లికూతురు & పెళ్లికొడుకు”** వేడుకను మాతో కలిసి జరుపుకోవడానికి రండి.\nపసుపు రంగులు, ప్రియమైన సంప్రదాయాలు, హృదయపూర్వక ఆశీస్సులతో నిండిన ఈ వేడుక, మా కొత్త ప్రయాణానికి సిద్ధమవుతూ మా వివాహ వేడుకలకు అందమైన ఆరంభం.'},
-  lines:{en:["Wednesday, 2nd Dec' 2026 from 10:00 AM",'Serengeti Events (Airbnb)','Please join us as we celebrate in your favorite traditional Indian attire.'],
-   te:['బుధవారం, డిసెంబర్ 2, 2026 ఉదయం 10:00 నుండి','Serengeti Events (Airbnb)','మీకు ఇష్టమైన సంప్రదాయ భారతీయ దుస్తుల్లో మాతో కలిసి వేడుక చేసుకోండి.']}},
+  lines:{en:["Wednesday, 2nd Dec' 2026 from 10:00 AM",'Serengeti Events (Airbnb)','Dress up in your favorite traditional Indian attire.'],
+   te:['బుధవారం, డిసెంబర్ 2, 2026 ఉదయం 10:00 నుండి','Serengeti Events (Airbnb)','మీకు ఇష్టమైన సంప్రదాయ భారతీయ దుస్తుల్లో రండి.']}},
 };
 // Phone artwork enlarged in place (kept anchored at its top-right corner, growing down into free space).
 // Phone pieces moved [x, y] in layout units, where the Telugu wording runs longer than the saved layout allows.
