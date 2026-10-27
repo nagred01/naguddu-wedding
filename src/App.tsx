@@ -256,6 +256,7 @@ export function App() {
   const [guestName, setGuestName] = useState('');
   // Optional contact details and a note for the couple.
   const [contact, setContact] = useState({ email: '', phone: '', note: '' });
+  const [emailed, setEmailed] = useState(false);
   const [status, setStatus] = useState<'idle' | 'needName' | 'needEvent' | 'sending' | 'done' | 'error' | 'preview'>('idle');
   const t = (k: keyof typeof T) => T[k][lang];
   const sendRsvp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -277,7 +278,9 @@ export function App() {
     try {
       // A text/plain body keeps this a simple request, which Apps Script accepts without a CORS preflight.
       const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
-      setStatus((await res.json()).ok ? 'done' : 'error');
+      const out = await res.json();
+      setEmailed(!!out.emailed);
+      setStatus(out.ok ? 'done' : 'error');
     } catch { setStatus('error'); }
   };
   const activeRef = useRef('cover');
@@ -401,6 +404,7 @@ export function App() {
             <div className="rsvp-done" role="status">
               <p className="rsvp-done-msg">{t('rsvpDone')}</p>
               <p className="rsvp-done-sub">{t('rsvpLanded')}</p>
+              {emailed && <p className="rsvp-done-sub">{t('rsvpEmailed')}</p>}
               <p className="note">{t('rsvpChangeNote')}</p>
               <button className="btn" type="button" onClick={() => setStatus('idle')}>{t('rsvpChange')}</button>
             </div>

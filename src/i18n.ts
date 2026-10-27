@@ -32,6 +32,7 @@ export const T = {
   needEvent: { en: 'Please answer for at least one celebration.', te: 'కనీసం ఒక వేడుకకు సమాధానం ఇవ్వండి.' },
   rsvpDone: { en: "And That's a Wrap! 💌", te: 'అంతా సిద్ధం! 💌' },
   rsvpLanded: { en: 'Your RSVP has officially landed in the #NaGuddu inbox!', te: 'మీ సమాధానం #NaGuddu ఇన్‌బాక్స్‌కు చేరింది!' },
+  rsvpEmailed: { en: 'A confirmation is on its way to your email. 📬', te: 'నిర్ధారణ మీ ఈమెయిల్‌కు వస్తోంది. 📬' },
   rsvpFail: { en: "Sorry, your reply didn't go through. Please check your connection and try again.", te: 'క్షమించండి, మీ సమాధానం పంపలేకపోయాం. ఇంటర్నెట్ చూసుకుని మళ్లీ ప్రయత్నించండి.' },
   rsvpChange: { en: 'Oops, Change My RSVP!', te: 'అయ్యో, నా సమాధానం మార్చాలి!' },
   rsvpChangeNote: { en: "Plot twist? Just send us a new RSVP and we'll go with your latest answer!", te: 'మనసు మారిందా? కొత్త సమాధానం పంపండి, మీ తాజా సమాధానాన్నే తీసుకుంటాం!' },

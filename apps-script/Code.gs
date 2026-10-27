@@ -47,7 +47,7 @@ var WEDDING_FACTS = [
   '- Holiday Inn Express & Suites Prosper, 1100 Mahard Pkwy, Prosper, TX 75078. Closest to the Wedding venue.',
   '',
   'ON THE WEBSITE',
-  '- RSVP: tap RSVP in the top bar (or the round RSVP button). Enter your name (email and phone are optional), choose "Count Me In!" or "Sending Love!" for each event, and for events you are attending pick the number of guests and Vegetarian or Non-vegetarian. You can add an optional note for the couple, then tap Send RSVP. Sending again updates your reply.',
+  '- RSVP: tap RSVP in the top bar (or the round RSVP button). Enter your name (email and phone are optional; guests who give an email get a confirmation email with their answers and the event details), choose "Count Me In!" or "Sending Love!" for each event, and for events you are attending pick the number of guests and Vegetarian or Non-vegetarian. You can add an optional note for the couple, then tap Send RSVP. Sending again updates your reply.',
   '- Photos: the Photos page lets guests upload pictures from the celebrations. Only the couple can see them.'
 ].join('\n');
 
@@ -120,7 +120,82 @@ function saveRsvp_(data) {
   } catch (err) {
     console.error('Notification failed: ' + err); // The RSVP is saved either way.
   }
-  return { ok: true, id: id };
+  var emailed = false;
+  // A few confirmations per address an hour, so the form can't be used to flood someone's inbox.
+  if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && allow_('mail:' + email.toLowerCase(), 3, 3600)) {
+    try {
+      confirmGuest_(email, name, rows, data.lang === 'te' ? 'te' : 'en');
+      emailed = true;
+    } catch (err) {
+      console.error('Confirmation email failed: ' + err);
+    }
+  }
+  return { ok: true, id: id, emailed: emailed };
+}
+
+// Details for the guest's confirmation email, keyed by the event names the website sends.
+var EVENT_INFO = {
+  'Haldi': { te: 'నలుగు', when: { en: 'Tuesday, December 1, 2026 · 9:30 AM', te: 'మంగళవారం, డిసెంబర్ 1, 2026 · ఉదయం 9:30' }, venue: 'Serengeti Events (Airbnb)', address: '6147 FM 455, Anna, TX 75409' },
+  'Mehendi': { te: 'మెహందీ', when: { en: 'Tuesday, December 1, 2026 · 4:00 PM', te: 'మంగళవారం, డిసెంబర్ 1, 2026 · సాయంత్రం 4:00' }, venue: 'Serengeti Events (Airbnb)', address: '6147 FM 455, Anna, TX 75409' },
+  'Pellikuthuru / Pellikoduku': { te: 'పెళ్లికూతురు / పెళ్లికొడుకు', when: { en: 'Wednesday, December 2, 2026 · 10:00 AM', te: 'బుధవారం, డిసెంబర్ 2, 2026 · ఉదయం 10:00' }, venue: 'Serengeti Events (Airbnb)', address: '6147 FM 455, Anna, TX 75409' },
+  'Wedding': { te: 'వివాహం', when: { en: 'Thursday, December 3, 2026 · 9:00 AM', te: 'గురువారం, డిసెంబర్ 3, 2026 · ఉదయం 9:00' }, venue: 'Bella Cavalli Events', address: '1651 W Sherman Dr, Aubrey, TX 76227' },
+  'Cocktail': { te: 'కాక్‌టెయిల్', when: { en: 'Friday, December 4, 2026 · 6:00 PM', te: 'శుక్రవారం, డిసెంబర్ 4, 2026 · సాయంత్రం 6:00' }, venue: 'The Meridian Venue', address: '351 Southwind Ln, Fairview, TX 75069' }
+};
+var MEAL_TE = { 'Vegetarian': 'శాకాహారం', 'Non-vegetarian': 'మాంసాహారం', 'Vegan': 'వీగన్', 'Jain': 'జైన్' };
+var SITE_URL = 'https://naguddu.com';
+
+// Thanks the guest and lists their answers, with date, venue and a Maps link for each event they're coming to.
+function confirmGuest_(to, name, rows, lang) {
+  var te = lang === 'te';
+  var W = te ? {
+    subject: 'మీ సమాధానం అందింది! 💌 భవిత & నాగేందర్ వివాహం',
+    hi: 'ప్రియమైన ' + name + ',',
+    thanks: 'మీ RSVP పంపినందుకు ధన్యవాదాలు! మాకు అందిన మీ సమాధానాలు:',
+    yes: 'నేను వస్తాను!', no: 'ప్రేమతో ఆశీస్సులు!', guest: 'అతిథి', guests: 'అతిథులు', map: 'మ్యాప్‌లో చూడండి',
+    change: 'మనసు మారిందా? naguddu.com లో కొత్త సమాధానం పంపండి, మీ తాజా సమాధానాన్నే తీసుకుంటాం.',
+    love: 'ప్రేమతో,', couple: 'భవిత & నాగేందర్'
+  } : {
+    subject: "You're on the list! 💌 Bhavitha & Nagender's wedding",
+    hi: 'Dear ' + name + ',',
+    thanks: 'Thank you for your RSVP! Here is what we have from you:',
+    yes: 'Count Me In!', no: 'Sending Love!', guest: 'guest', guests: 'guests', map: 'Open in Maps',
+    change: "Plot twist? Just send a new RSVP at naguddu.com and we'll go with your latest answer.",
+    love: 'With love,', couple: 'Bhavitha & Nagender'
+  };
+
+  var text = [W.hi, '', W.thanks, ''];
+  var html = '<div style="font-family:Georgia,serif;color:#3a1d14;max-width:520px;margin:auto;padding:24px;background:#fffaf0;border:1px solid #e6c98a;border-radius:12px">'
+    + '<p style="text-align:center;color:#a8742a;letter-spacing:2px;margin:0 0 16px">#NaGuddu</p>'
+    + '<p>' + esc_(W.hi) + '</p><p>' + esc_(W.thanks) + '</p>';
+  rows.forEach(function (r) {
+    var info = EVENT_INFO[r[3]] || { te: r[3], when: { en: '', te: '' }, venue: '', address: '' };
+    var event = te ? info.te : r[3];
+    var yes = r[4] === 'Yes';
+    var answer = yes
+      ? W.yes + ' · ' + r[5] + ' ' + (r[5] > 1 ? W.guests : W.guest) + (r[6] ? ' · ' + (te ? MEAL_TE[r[6]] || r[6] : r[6]) : '')
+      : W.no;
+    var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(info.venue + ', ' + info.address);
+    text.push(event + ': ' + answer);
+    if (yes && info.address) text.push('  ' + info.when[lang], '  ' + info.venue + ', ' + info.address, '  ' + maps);
+    text.push('');
+    html += '<div style="margin:12px 0;padding:12px 14px;background:#fff;border-left:3px solid ' + (yes ? '#a8742a' : '#c9b8a8') + ';border-radius:6px">'
+      + '<b style="color:#7a1f1f">' + esc_(event) + '</b><br>' + esc_(answer)
+      + (yes && info.address
+        ? '<br><span style="font-size:14px;color:#6b4a3a">' + esc_(info.when[lang]) + '<br>' + esc_(info.venue) + ', ' + esc_(info.address)
+          + '</span><br><a href="' + maps + '" style="color:#a8742a">' + esc_(W.map) + '</a>'
+        : '')
+      + '</div>';
+  });
+  text.push(W.change, '', W.love, W.couple, SITE_URL);
+  html += '<p style="font-size:14px">' + esc_(W.change) + '</p>'
+    + '<p>' + esc_(W.love) + '<br><b>' + esc_(W.couple) + '</b></p>'
+    + '<p style="text-align:center"><a href="' + SITE_URL + '" style="color:#a8742a">naguddu.com</a></p></div>';
+
+  MailApp.sendEmail(to, W.subject, text.join('\n'), { name: 'Bhavitha & Nagender', htmlBody: html });
+}
+
+function esc_(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // Guests attending each event, counting only each person's latest reply (rows from one send share a Reply ID).
