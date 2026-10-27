@@ -254,6 +254,8 @@ export function App() {
   const setGuests = (id: string, d: number) => setParty((p) => ({ ...p, [id]: { ...p[id], guests: Math.min(10, Math.max(1, (p[id]?.guests ?? 1) + d)) } }));
   const setMeal = (id: string, meal: string) => setParty((p) => ({ ...p, [id]: { guests: p[id]?.guests ?? 1, meal } }));
   const [guestName, setGuestName] = useState('');
+  // Optional contact details and a note for the couple.
+  const [contact, setContact] = useState({ email: '', phone: '', note: '' });
   const [status, setStatus] = useState<'idle' | 'needName' | 'needEvent' | 'sending' | 'done' | 'error' | 'preview'>('idle');
   const t = (k: keyof typeof T) => T[k][lang];
   const sendRsvp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -264,6 +266,7 @@ export function App() {
     if (!SCRIPT_URL) return setStatus('preview');
     const payload = {
       name: guestName.trim(), lang,
+      email: contact.email.trim(), phone: contact.phone.trim(), note: contact.note.trim(),
       website: (e.currentTarget.elements.namedItem('website') as HTMLInputElement).value,
       responses: chosen.map((ev) => {
         const meal = party[ev.id]?.meal as keyof typeof T | undefined;
@@ -404,6 +407,10 @@ export function App() {
           ) : (
           <form onSubmit={sendRsvp} noValidate>
             <label className="field"><span className="sr-only">{t('yourName')}</span><input type="text" name="name" autoComplete="name" maxLength={80} placeholder={t('yourName')} value={guestName} onChange={(e) => { setGuestName(e.target.value); if (status === 'needName') setStatus('idle'); }} aria-invalid={status === 'needName'} /></label>
+            <div className="rsvp-contact">
+              <label className="field"><span className="sr-only">{t('yourEmail')}</span><input type="email" name="email" autoComplete="email" inputMode="email" maxLength={120} placeholder={t('yourEmail')} value={contact.email} onChange={(e) => setContact((c) => ({ ...c, email: e.target.value }))} /></label>
+              <label className="field"><span className="sr-only">{t('yourPhone')}</span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" maxLength={30} placeholder={t('yourPhone')} value={contact.phone} onChange={(e) => setContact((c) => ({ ...c, phone: e.target.value }))} /></label>
+            </div>
             <input className="hp" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             <ul className="rsvp-cards">
               {EVENTS.map((ev) => (
@@ -434,6 +441,7 @@ export function App() {
                 </li>
               ))}
             </ul>
+            <label className="field rsvp-note"><span className="sr-only">{t('yourNote')}</span><textarea name="note" rows={2} maxLength={500} placeholder={t('yourNote')} value={contact.note} onChange={(e) => setContact((c) => ({ ...c, note: e.target.value }))} /></label>
             <p className={'rsvp-msg' + (status === 'error' || status === 'needName' || status === 'needEvent' ? ' bad' : '')} role="status" aria-live="polite">
               {status === 'needName' ? t('needName') : status === 'needEvent' ? t('needEvent') : status === 'error' ? t('rsvpFail') : status === 'preview' ? '✓ ' + (lang === 'en' ? 'Nothing was sent. This is a preview.' : 'ఏమీ పంపబడలేదు. ఇది నమూనా మాత్రమే.') : ''}
             </p>

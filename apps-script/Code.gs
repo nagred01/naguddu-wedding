@@ -9,7 +9,7 @@
  */
 
 var SHEET_NAME = 'RSVPs';
-var HEADERS = ['Submitted at', 'Reply ID', 'Name', 'Event', 'Attending', 'Guests', 'Meal', 'Language'];
+var HEADERS = ['Submitted at', 'Reply ID', 'Name', 'Event', 'Attending', 'Guests', 'Meal', 'Language', 'Email', 'Phone', 'Note'];
 var EVENTS = ['Haldi', 'Mehendi', 'Pellikuthuru / Pellikoduku', 'Wedding', 'Cocktail'];
 var MEALS = ['Vegetarian', 'Non-vegetarian', 'Vegan', 'Jain', ''];
 
@@ -90,12 +90,14 @@ function saveRsvp_(data) {
   var now = new Date();
   var id = Utilities.getUuid().slice(0, 8);
   var lang = data.lang === 'te' ? 'Telugu' : 'English';
+  // Optional contact details and note, the same on every row of this reply.
+  var email = clean_(data.email, 120), phone = clean_(data.phone, 30), note = clean_(data.note, 500);
   responses.forEach(function (r) {
     if (!r || EVENTS.indexOf(r.event) < 0) return;
     var yes = r.attending === 'yes';
     var guests = yes ? Math.max(1, Math.min(10, parseInt(r.guests, 10) || 1)) : 0;
     var meal = yes && MEALS.indexOf(r.meal) >= 0 ? r.meal : '';
-    rows.push([now, id, name, r.event, yes ? 'Yes' : 'No', guests, meal, lang]);
+    rows.push([now, id, name, r.event, yes ? 'Yes' : 'No', guests, meal, lang, email, phone, note]);
   });
   if (!rows.length) return { ok: false, error: 'events' };
 
@@ -146,7 +148,8 @@ function notify_(name, rows, totals) {
   }).join('\n');
   var all = 0;
   var lines = EVENTS.map(function (e) { all += totals[e]; return e + ': ' + totals[e]; });
-  var body = name + ' replied:\n' + reply + '\n\nGuests attending so far:\n' + lines.join('\n') + '\n(Sum across events: ' + all + ')';
+  var extra = [rows[0][8] && 'Email: ' + rows[0][8], rows[0][9] && 'Phone: ' + rows[0][9], rows[0][10] && 'Note: ' + rows[0][10]].filter(Boolean).join('\n');
+  var body = name + ' replied:\n' + reply + (extra ? '\n' + extra : '') + '\n\nGuests attending so far:\n' + lines.join('\n') + '\n(Sum across events: ' + all + ')';
 
   var props = PropertiesService.getScriptProperties();
   var email = props.getProperty('NOTIFY_EMAIL') || Session.getEffectiveUser().getEmail();
@@ -168,6 +171,9 @@ function sheet_() {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+  } else if (sheet.getLastColumn() < HEADERS.length) {
+    // An older sheet: add the newer column titles (Email, Phone, Note).
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
   }
   return sheet;
 }
