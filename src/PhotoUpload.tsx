@@ -80,7 +80,7 @@ export function PhotoUpload({ lang, upload, kolam }: { lang: Lang; upload: strin
           ? (en ? `✓ ${state.done} photo${state.done > 1 ? 's' : ''} sent to the couple. Thank you!` : `✓ ${state.done} ఫోటోలు వధూవరులకు చేరాయి. ధన్యవాదాలు!`)
           : '') + (state.failed ? (en ? ` ${state.failed} could not be sent; please try those again.` : ` ${state.failed} పంపలేకపోయాం; దయచేసి మళ్లీ ప్రయత్నించండి.`) : '')}
       </p>
-      <p className="note">{en ? 'Photos go to a private folder that only the couple can see.' : 'ఫోటోలు వధూవరులకు మాత్రమే కనిపించే ప్రైవేట్ ఫోల్డర్‌కు వెళ్తాయి.'}</p>
+      <p className="note">{en ? 'Shared privately with the couple.' : 'వధూవరులకు మాత్రమే చేరుతుంది.'}</p>
     </>
   );
 }

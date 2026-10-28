@@ -457,14 +457,15 @@ export function App() {
       </section>
 
       <section id="photos" data-sec="photos" className="sec photos">
-        <div className="card wide">
-          <img className="ganesha" src={ganesha} alt="" loading="lazy" decoding="async" />
+        <div className="card wide photos-compact">
           <h2>{t('photosTitle')}</h2>
-          <p className="blurb">{t('photosSub')}</p>
+          <p className="blurb photos-sub">{t('photosSub')}</p>
+          <p className="blurb photos-ask">{t('photosAsk')}</p>
           <PhotoUpload lang={lang} upload={t('upload')} kolam={<Kolam className="drop-k" />} />
           <Divider />
           <p className="thanks">{t('thanks')}</p>
-          <p className="credits">{lang === 'en' ? 'Music: chosen by the couple.' : 'సంగీతం: వధూవరులు ఎంచుకున్న పాటలు.'}</p>
+          <p className="credits">{t('musicNote')}</p>
+          <p className="photos-tag">#NaGuddu 🤍</p>
         </div>
       </section>
       </div>

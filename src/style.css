@@ -1446,3 +1446,50 @@ section.cocktail-twirl-page .cocktail-map { margin-top: 10px; }
   section.cocktail-twirl-page .cx-details { font-size: 19px; }
   section.cocktail-twirl-page .cx-headline { font-size: 50px; }
 }
+
+/* Photos: no Ganesha or border, and everything on one screen between the menu and the bottom bar. */
+.sec.photos { height: 100% !important; min-height: 0 !important; box-sizing: border-box; padding: 52px 16px 70px !important; display: flex; flex-direction: column; justify-content: center; }
+.sec.photos .photos-compact { border: 0 !important; outline: 0 !important; box-shadow: none !important; background: none !important; padding: 0 6px !important; max-height: 100%; }
+.sec.photos .photos-compact::before, .sec.photos .photos-compact::after { display: none !important; }
+.photos-compact h2 { margin: 0 0 6px; font-size: clamp(26px, 8vw, 42px) !important; line-height: 1.1; white-space: nowrap; }
+.photos-compact .blurb { margin: 0 0 clamp(10px, 2vh, 18px); }
+.photos-compact .field { margin: 0 0 4px; }
+.photos-compact .drop { padding: clamp(12px, 2.4vh, 24px) 12px; gap: 10px; }
+.photos-compact .drop-k { width: 44px; }
+.photos-compact .photo-msg { margin-top: 6px; min-height: 0; }
+.photos-compact .thanks { margin: clamp(6px, 1.4vh, 14px) 0 0; }
+.photos-compact .credits { margin-top: 6px; }
+@media (min-width:900px) { .sec.photos { padding: 56px 24px 60px !important; } .sec.photos .photos-compact { max-width: 600px !important; } }
+/* Telugu lines run longer: a little tighter so the page still fits on short phones. */
+.is-te .photos-compact .blurb { font-size: 13px; line-height: 1.4; margin-bottom: 8px; }
+.is-te .photos-compact .drop { padding: 10px 12px; gap: 8px; }
+.is-te .photos-compact .drop-k { width: 36px; }
+.is-te .photos-compact .note, .is-te .photos-compact .credits { font-size: 11px; }
+.is-te .photos-compact .thanks { font-size: 15px; }
+
+/* Photos wording: line breaks where the copy has them; the title may wrap to two lines. */
+.photos-compact h2 { white-space: normal; text-wrap: balance; font-size: clamp(24px, 7vw, 40px) !important; }
+.photos-compact .blurb, .photos-compact .thanks { white-space: pre-line; }
+.photos-compact .blurb + .photos-ask { margin-top: -4px; }
+.photos-compact .photos-tag { margin: 4px 0 0; font: 600 13px/1.3 var(--font-display, 'Cinzel', serif); letter-spacing: .08em; color: var(--gold); }
+/* Shorter phones: tighter spacing and no kolam in the upload box, so the page still fits on one screen. */
+@media (max-height: 760px) and (max-width: 899px) {
+  .sec.photos { padding-top: 44px !important; padding-bottom: 64px !important; }
+  .photos-compact h2 { font-size: clamp(21px, 6.2vw, 30px) !important; margin-bottom: 4px; }
+  .photos-compact .blurb { font-size: 13px; line-height: 1.35; margin-bottom: 6px; }
+  .photos-compact .field span { font-size: 11px; }
+  .photos-compact .field input { min-height: 36px; }
+  .photos-compact .drop { padding: 10px 12px; margin: 6px 0; }
+  .photos-compact .drop-k { display: none; }
+  .photos-compact .note { margin-top: 4px; font-size: 11px; }
+  .photos-compact .divider { margin: 6px auto; }
+  .photos-compact .thanks { font-size: 15px; margin-top: 4px; }
+  .photos-compact .credits { margin-top: 4px; font-size: 11px; }
+}
+
+/* "We can't be everywhere…" stays on one line, shrinking a little on narrow phones. */
+.photos-compact .blurb.photos-sub { white-space: nowrap; font-size: clamp(11px, 3.45vw, 17px) !important; }
+.is-te .photos-compact .blurb.photos-sub { font-size: clamp(10px, 3.05vw, 15px) !important; }
+.photos-compact .drop .btn { white-space: nowrap; }
+.is-te .photos-compact .drop .btn { font-size: clamp(11px, 3.3vw, 15px); padding-left: 14px; padding-right: 14px; }
+.photos-compact .blurb.photos-sub { margin-bottom: 4px; }
