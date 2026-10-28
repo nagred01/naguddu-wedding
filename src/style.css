@@ -1421,8 +1421,12 @@ section.cocktail-twirl-page .cx-verse { margin: 0 0 clamp(6px, 1.3vh, 12px); whi
 section.cocktail-twirl-page .cx-headline { margin: 0 0 clamp(4px, 1vh, 10px); font: 700 clamp(30px, 9vw, 44px)/1.1 'Cinzel Decorative', 'Cinzel', serif !important; letter-spacing: .06em !important; text-transform: uppercase; color: #f6dfa6 !important; -webkit-text-fill-color: #f6dfa6 !important; background: none !important; text-shadow: 0 2px 10px rgba(0,0,0,.9), 0 0 22px rgba(246,223,166,.35); }
 /* Event details: the same type as the other event pages (reading font, date in bold). */
 section.cocktail-twirl-page .cx-details { margin: clamp(10px, 2vh, 20px) auto 0; display: grid; gap: .25em; justify-items: center; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 10px 18px 12px; font-size: clamp(13px, calc(3.3vw + 1px), 19px);
-  /* A dark frosted card so the details stay readable over the busy ballroom. */
-  background: rgba(8, 12, 32, .72); border: 1px solid rgba(246, 223, 166, .45); border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); text-shadow: none; }
+  /* No box: a soft, feathered shadow behind the words and a dark halo on each letter keep them readable
+     while the ballroom shows through. */
+  position: relative; text-shadow: 0 1px 3px #000, 0 0 10px rgba(0,0,0,.95), 0 0 22px rgba(0,0,0,.8); }
+section.cocktail-twirl-page .cx-details::before { content: ''; position: absolute; inset: -18px -46px; z-index: -1; pointer-events: none; background: radial-gradient(ellipse closest-side, rgba(3,6,18,.72), rgba(3,6,18,.45) 55%, rgba(3,6,18,0)); }
+section.cocktail-twirl-page .cx-details p { color: #fff6e2; }
+section.cocktail-twirl-page .cx-details .cx-when { color: #f6dfa6; }
 section.cocktail-twirl-page .cx-details p { margin: 0; font: 1em/1.35 var(--font-body); letter-spacing: normal; color: #fff3da; }
 section.cocktail-twirl-page .cx-details .cx-when { font-weight: 700; white-space: nowrap; }
 section.cocktail-twirl-page .cocktail-map { margin-top: 10px; }
