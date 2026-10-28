@@ -67,7 +67,7 @@ export function PhotoUpload({ lang, upload, kolam }: { lang: Lang; upload: strin
   }
   return (
     <>
-      <label className="field"><span>{en ? 'Your name (optional)' : 'మీ పేరు (ఐచ్ఛికం)'}</span><input type="text" autoComplete="name" maxLength={60} value={name} onChange={(e) => setName(e.target.value)} placeholder="…" /></label>
+      <label className="field"><span>{en ? 'Your name (optional)' : 'మీ పేరు (ఐచ్ఛికం)'}</span><input type="text" autoComplete="name" maxLength={60} value={name} onChange={(e) => setName(e.target.value)} /></label>
       <div className="drop">
         {kolam}
         <label className={'btn' + (state?.busy ? ' busy' : '')} aria-disabled={state?.busy}>
