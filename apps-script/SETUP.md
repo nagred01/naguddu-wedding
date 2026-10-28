@@ -64,10 +64,12 @@ reply plus the updated totals per event (each guest's latest reply only, so chan
 
 - **Email (on by default):** goes to the Google account that owns the script. Your phone's Gmail app shows it.
   To send it elsewhere add a script property `NOTIFY_EMAIL` with that address; set it to `off` to stop emails.
-- **WhatsApp counts (optional):** after every RSVP, each phone gets the guest's reply and the guests attending per
-  event plus the total. Free, through CallMeBot. On each phone, follow the WhatsApp steps on callmebot.com (save
-  their number, send them the activation message) to get that phone's API key. Then add a script property
-  `WHATSAPP` with each phone and its key, comma-separated: `+18125550100:123456,+12195550100:654321`.
+- **Telegram counts (optional):** after every RSVP, a Telegram group gets the guest's reply and the guests
+  attending per event plus the total. In Telegram, message **@BotFather**, send `/newbot` and follow the prompts;
+  it gives you a token. Add the script property `TELEGRAM_TOKEN` with it. Create a group with everyone who should
+  get the counts, add your bot, and send a message in the group mentioning the bot (e.g. `@YourBot hi`). In the
+  Apps Script editor run `findTelegramChat`, copy the group id it logs (a negative number) into the script
+  property `TELEGRAM_CHAT`, then deploy a new version.
 - **Instant push (optional):** install the free **ntfy** app (App Store / Google Play), tap **+**, subscribe to
   your private topic name, then add a script property `NTFY_TOPIC` with the same name. Anyone who knows the
   topic name can read it, so keep it long and random.

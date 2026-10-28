@@ -121,9 +121,9 @@ function saveRsvp_(data) {
     console.error('Notification failed: ' + err); // The RSVP is saved either way.
   }
   try {
-    whatsapp_(name, rows, totals); // Every reply, including "Sending Love!" ones.
+    telegram_(name, rows, totals); // Every reply, including "Sending Love!" ones.
   } catch (err) {
-    console.error('WhatsApp message failed: ' + err);
+    console.error('Telegram message failed: ' + err);
   }
   var emailed = false;
   // A few confirmations per address an hour, so the form can't be used to flood someone's inbox.
@@ -244,27 +244,39 @@ function notify_(name, rows, totals) {
   }
 }
 
-// Sends the reply and the latest counts by WhatsApp through CallMeBot (free), to each phone in the WHATSAPP
-// script property: "+18125550100:apikey1,+12195550100:apikey2". Each phone gets its own key from CallMeBot.
-// The numbers live only in the script properties, never in this file.
-function whatsapp_(name, rows, totals) {
-  var setting = PropertiesService.getScriptProperties().getProperty('WHATSAPP');
-  if (!setting) return;
+// Posts the reply and the latest counts to your Telegram group through your own bot (free). Needs two script
+// properties: TELEGRAM_TOKEN (from BotFather) and TELEGRAM_CHAT (the group's id; run findTelegramChat to get it).
+function telegram_(name, rows, totals) {
+  var props = PropertiesService.getScriptProperties();
+  var token = props.getProperty('TELEGRAM_TOKEN'), chat = props.getProperty('TELEGRAM_CHAT');
+  if (!token || !chat) return;
   var reply = rows.map(function (r) {
-    return '• ' + r[3] + ': ' + (r[4] === 'Yes' ? r[5] + (r[5] > 1 ? ' guests' : ' guest') + (r[6] ? ', ' + r[6] : '') : "can't make it");
+    return '• ' + esc_(r[3]) + ': ' + (r[4] === 'Yes' ? r[5] + (r[5] > 1 ? ' guests' : ' guest') + (r[6] ? ', ' + r[6] : '') : "can't make it");
   });
   var all = 0;
-  var counts = EVENTS.map(function (e) { all += totals[e]; return '• ' + e + ': ' + totals[e]; });
-  var text = '🎉 *New RSVP from ' + name + '*\n' + reply.join('\n')
-    + (rows[0][10] ? '\n💌 ' + rows[0][10] : '')
-    + '\n\n📊 *Guests attending so far*\n' + counts.join('\n') + '\n*Total: ' + all + '*';
-  setting.split(',').forEach(function (entry) {
-    var parts = entry.trim().split(':');
-    if (parts.length < 2) return;
-    var res = UrlFetchApp.fetch('https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent(parts[0].replace(/\s/g, ''))
-      + '&apikey=' + encodeURIComponent(parts[1].trim()) + '&text=' + encodeURIComponent(text), { muteHttpExceptions: true });
-    if (res.getResponseCode() !== 200) console.error('CallMeBot ' + res.getResponseCode() + ': ' + res.getContentText().slice(0, 300));
+  var counts = EVENTS.map(function (e) { all += totals[e]; return '• ' + esc_(e) + ': ' + totals[e]; });
+  var text = '🎉 <b>New RSVP from ' + esc_(name) + '</b>\n' + reply.join('\n')
+    + (rows[0][10] ? '\n💌 ' + esc_(rows[0][10]) : '')
+    + '\n\n📊 <b>Guests attending so far</b>\n' + counts.join('\n') + '\n<b>Total: ' + all + '</b>';
+  var res = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+    method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+    payload: JSON.stringify({ chat_id: chat, text: text, parse_mode: 'HTML' })
   });
+  if (res.getResponseCode() !== 200) console.error('Telegram ' + res.getResponseCode() + ': ' + res.getContentText().slice(0, 300));
+}
+
+// Setup helper: run this once from the editor (after adding the bot to your group and sending a message there).
+// It logs the chats your bot has seen; copy the group's id into the TELEGRAM_CHAT script property.
+function findTelegramChat() {
+  var token = PropertiesService.getScriptProperties().getProperty('TELEGRAM_TOKEN');
+  if (!token) return console.log('Add the TELEGRAM_TOKEN script property first.');
+  var updates = JSON.parse(UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/getUpdates').getContentText()).result || [];
+  var seen = {};
+  updates.forEach(function (u) {
+    var c = (u.message || u.my_chat_member || u.channel_post || {}).chat;
+    if (c && !seen[c.id]) { seen[c.id] = true; console.log((c.title || c.first_name || 'chat') + ' -> TELEGRAM_CHAT = ' + c.id); }
+  });
+  if (!updates.length) console.log('No messages yet. Send a message in the group (mentioning the bot), then run this again.');
 }
 
 function sheet_() {
