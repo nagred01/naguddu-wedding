@@ -120,6 +120,11 @@ function saveRsvp_(data) {
   } catch (err) {
     console.error('Notification failed: ' + err); // The RSVP is saved either way.
   }
+  try {
+    whatsapp_(name, rows, totals); // Every reply, including "Sending Love!" ones.
+  } catch (err) {
+    console.error('WhatsApp message failed: ' + err);
+  }
   var emailed = false;
   // A few confirmations per address an hour, so the form can't be used to flood someone's inbox.
   if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && allow_('mail:' + email.toLowerCase(), 3, 3600)) {
@@ -237,6 +242,29 @@ function notify_(name, rows, totals) {
       headers: { Title: 'New wedding RSVP', Tags: 'tada' }
     });
   }
+}
+
+// Sends the reply and the latest counts by WhatsApp through CallMeBot (free), to each phone in the WHATSAPP
+// script property: "+18125550100:apikey1,+12195550100:apikey2". Each phone gets its own key from CallMeBot.
+// The numbers live only in the script properties, never in this file.
+function whatsapp_(name, rows, totals) {
+  var setting = PropertiesService.getScriptProperties().getProperty('WHATSAPP');
+  if (!setting) return;
+  var reply = rows.map(function (r) {
+    return '• ' + r[3] + ': ' + (r[4] === 'Yes' ? r[5] + (r[5] > 1 ? ' guests' : ' guest') + (r[6] ? ', ' + r[6] : '') : "can't make it");
+  });
+  var all = 0;
+  var counts = EVENTS.map(function (e) { all += totals[e]; return '• ' + e + ': ' + totals[e]; });
+  var text = '🎉 *New RSVP from ' + name + '*\n' + reply.join('\n')
+    + (rows[0][10] ? '\n💌 ' + rows[0][10] : '')
+    + '\n\n📊 *Guests attending so far*\n' + counts.join('\n') + '\n*Total: ' + all + '*';
+  setting.split(',').forEach(function (entry) {
+    var parts = entry.trim().split(':');
+    if (parts.length < 2) return;
+    var res = UrlFetchApp.fetch('https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent(parts[0].replace(/\s/g, ''))
+      + '&apikey=' + encodeURIComponent(parts[1].trim()) + '&text=' + encodeURIComponent(text), { muteHttpExceptions: true });
+    if (res.getResponseCode() !== 200) console.error('CallMeBot ' + res.getResponseCode() + ': ' + res.getContentText().slice(0, 300));
+  });
 }
 
 function sheet_() {
