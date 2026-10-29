@@ -1504,3 +1504,13 @@ section.cocktail-twirl-page .cocktail-map { margin-top: 10px; }
 .cover-art-top { position: absolute; left: 0; right: 0; bottom: 100%; height: 38px; background: bottom / 100% auto no-repeat; pointer-events: none; }
 /* Home keeps the #NaGuddu bar like every other page. */
 .home-active .sample-bar { opacity: 1 !important; pointer-events: auto !important; }
+/* Assistant chat: smaller, lighter text so more of each answer fits on a phone. */
+.wa-msg { font-size: 13.5px; line-height: 1.45; padding: 8px 12px; }
+.wa-q { font-weight: 500; }
+@media (min-width: 900px) { .wa-msg { font-size: 14px; } }
+
+/* Share button (in place of the old pause button), drawn as a gold outline icon; "Link copied!" shows beside it on laptops. */
+.share-pill { display: inline-flex; align-items: center; justify-content: center; }
+.share-pill svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.playback-pills { position: relative; }
+.share-toast { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); white-space: nowrap; padding: 4px 10px; border-radius: 999px; background: rgba(20,8,10,.85); color: #f6dfa6; font: 600 12px/1.2 system-ui, sans-serif; pointer-events: none; }

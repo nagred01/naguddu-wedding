@@ -248,7 +248,15 @@ export function App() {
   const [lang, setLang] = useState<Lang>('en');
   const [entered, setEntered] = useState(false);
   const [muted, setMuted] = useState(false);
-  const [motionPaused, setMotionPaused] = useState(false);
+  const [shared, setShared] = useState(false);
+  // Share opens the phone's share sheet (WhatsApp, Messages, Instagram…); where there isn't one, it copies the link.
+  const share = async () => {
+    const url = 'https://naguddu.com';
+    const data = { title: 'Bhavitha & Nagender · #NaGuddu', text: lang === 'en' ? 'You’re invited to Bhavitha & Nagender’s wedding celebrations! 💌' : 'భవిత & నాగేందర్ వివాహ వేడుకలకు మీకు ఆహ్వానం! 💌', url };
+    if (navigator.share) { try { await navigator.share(data); } catch { /* closed without sharing */ } return; }
+    try { await navigator.clipboard.writeText(url); } catch { window.prompt(lang === 'en' ? 'Copy this link:' : 'ఈ లింక్ కాపీ చేయండి:', url); return; }
+    setShared(true); window.setTimeout(() => setShared(false), 2200);
+  };
   const [active, setActive] = useState('cover');
   const [switching,setSwitching]=useState(false);
   const transitionTimer=useRef<number>();
@@ -309,17 +317,16 @@ export function App() {
     return () => io.disconnect();
   }, []);
   useEffect(() => { player.setMuted(muted); }, [muted]);
-  useEffect(() => { player.setPaused(motionPaused); }, [motionPaused]);
   useEffect(() => { const b = document.querySelector<HTMLElement>('.tabs [data-tab="' + active + '"]'); const bar = b && b.parentElement; if (b && bar) bar.scrollTo({ left: b.offsetLeft - bar.clientWidth / 2 + b.clientWidth / 2, behavior: 'smooth' }); }, [active]);
 
   const go = (id: string) => { const el = document.getElementById(id); if(!el||!scroller.current||id===activeRef.current)return; window.clearTimeout(transitionTimer.current); const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;setSwitching(!reduced);transitionTimer.current=window.setTimeout(()=>{scroller.current!.scrollTo({top:el.offsetTop,behavior:'instant' as ScrollBehavior});activeRef.current=id;setActive(id);player.play(id);requestAnimationFrame(()=>requestAnimationFrame(()=>setSwitching(false)));},reduced?0:350); };
 
   return (
     <div className={'wed ' + (lang === 'te' ? 'is-te' : '')} lang={lang}>
-     <div className={'stage' + (motionPaused ? ' motion-paused' : '') + (active === 'glimpse' ? ' itinerary-active' : '') + (active === 'cover' ? ' home-active' : '')}>
+     <div className={'stage' + (active === 'glimpse' ? ' itinerary-active' : '') + (active === 'cover' ? ' home-active' : '')}>
       <div className="sample-bar">{t('sample')}</div>
       <div className="topbar">
-        <div className="playback-pills"><button className="pill" onClick={() => setMuted(!muted)} aria-pressed={muted} aria-label={t('sound')}>{muted ? '🔇' : '🔊'}</button><button className="pill motion-pause" onClick={() => setMotionPaused(!motionPaused)} aria-pressed={motionPaused} aria-label={lang === 'en' ? (motionPaused ? 'Resume music and animation' : 'Pause music and animation') : (motionPaused ? 'కొనసాగించు' : 'విరామం')}>{motionPaused ? '▶' : 'Ⅱ'}</button></div>
+        <div className="playback-pills"><button className="pill" onClick={() => setMuted(!muted)} aria-pressed={muted} aria-label={t('sound')}>{muted ? '🔇' : '🔊'}</button><button className="pill share-pill" onClick={share} aria-label={lang === 'en' ? 'Share this invitation' : 'ఈ ఆహ్వానాన్ని పంచుకోండి'}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" /><circle cx="6" cy="12" r="2.6" /><circle cx="18" cy="19" r="2.6" /><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3" /></svg></button>{shared && <span className="share-toast" role="status">{lang === 'en' ? 'Link copied!' : 'లింక్ కాపీ అయింది!'}</span>}</div>
         <div className="lang" role="group" aria-label="Language">
           <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>English</button>
           <button className={lang === 'te' ? 'on' : ''} onClick={() => setLang('te')}>తెలుగు</button>
@@ -395,7 +402,7 @@ export function App() {
         </div>
       </section>
 
-      {EVENTS.map((ev) => ev.id === 'reception' ? <Cocktail key={ev.id} lang={lang} active={active === ev.id && entered} near={entered && ['vivaham', 'reception', 'glimpse'].includes(active)} paused={motionPaused}/> : <SavedEvent key={ev.id} id={ev.id} lang={lang} active={active === ev.id && entered} />)}
+      {EVENTS.map((ev) => ev.id === 'reception' ? <Cocktail key={ev.id} lang={lang} active={active === ev.id && entered} near={entered && ['vivaham', 'reception', 'glimpse'].includes(active)} paused={false}/> : <SavedEvent key={ev.id} id={ev.id} lang={lang} active={active === ev.id && entered} />)}
 
       <Glimpse lang={lang} />
 

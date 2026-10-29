@@ -3,9 +3,9 @@ import pasupu from './audio/pasupu.mp3';
 import mehandi from './audio/mehandi.mp3';
 import pellikuthuru from './audio/pellikuthuru.mp3';
 import vivaham from './audio/vivaham.m4a'; // the couple's wedding song, Wedding page only
-import reception from './audio/reception.mp3';
+import lucky from './audio/lucky.mp3'; // Cocktail through Photos: one song that keeps playing across those pages
 
-const SRC: Record<string, string> = { cover, pasupu, mehandi, pellikuthuru, vivaham, reception, rsvp: cover, photos: cover, glimpse: cover };
+const SRC: Record<string, string> = { cover, pasupu, mehandi, pellikuthuru, vivaham, reception: lucky, glimpse: lucky, rsvp: lucky, photos: lucky };
 // Web Audio is used instead of <audio>: the host serves files without Range support, which iPhone Safari needs for <audio>.
 class Player {
   ctx: AudioContext | null = null;
