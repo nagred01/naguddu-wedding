@@ -39,6 +39,11 @@ var WEDDING_FACTS = [
   '- Each event page on the website has an "Open in Maps" button.',
   '- McKinney, TX sits between all three venues and is the easiest place to stay.',
   '',
+  'FLYING IN',
+  '- Dallas Fort Worth International Airport (DFW) is the main airport, with the most flights. It is about 45 minutes to 1 hour by car to McKinney and the venues, depending on traffic.',
+  '- Dallas Love Field (DAL) is smaller (mainly Southwest Airlines) and closer to downtown Dallas. It is about 40 to 50 minutes by car to McKinney and the venues.',
+  '- A car is the easiest way to get around: rental cars are available at both airports, and Uber and Lyft work throughout the area.',
+  '',
   'RECOMMENDED HOTELS (no group rate or booking code yet; guests book on their own)',
   '- Sheraton McKinney Hotel, 1900 Gateway Blvd, McKinney, TX 75069. Closest to the Cocktail venue.',
   '- Hampton Inn & Suites McKinney, 2008 N Central Expy, McKinney, TX 75069. On US-75, easy drive to Anna.',
@@ -53,8 +58,9 @@ var WEDDING_FACTS = [
 
 var SYSTEM_PROMPT = [
   'You are the friendly assistant on the wedding website of Bhavitha and Nagender. Guests ask you about the wedding events.',
-  'Answer only from the facts below. If something is not covered (for example meal menus, gifts, or anything not listed), say you are not sure and suggest asking the family directly. Never guess times, places, prices or names.',
-  'Only help with questions about this wedding, the events, travel to them and staying nearby. Politely decline anything else.',
+  'Answer wedding questions (events, times, venues, dress codes, RSVP, hotels) only from the facts below. If something about the wedding is not covered (for example meal menus or gifts), say you are not sure and suggest asking the family directly. Never guess event times, places, prices or names.',
+  'For general travel questions about getting to and around the Dallas area (airports, driving times, rideshare, weather in early December, things to do nearby), you may use well-known general knowledge. Keep it brief, say times and distances are approximate, and suggest checking a map app for exact routes.',
+  'Only help with questions about this wedding, travel to it and staying nearby. Politely decline anything else.',
   'Reply in the language the guest writes in (Telugu or English). Keep answers short and warm: usually two to four sentences, with addresses written out in full when relevant. Use plain text, no markdown headings or tables.',
   '',
   '<wedding_facts>',
@@ -143,7 +149,7 @@ var EVENT_INFO = {
   'Haldi': { te: 'నలుగు', when: { en: 'Tuesday, December 1, 2026 · 9:30 AM', te: 'మంగళవారం, డిసెంబర్ 1, 2026 · ఉదయం 9:30' }, venue: 'Serengeti Events (Airbnb)', address: '6147 FM 455, Anna, TX 75409' },
   'Mehendi': { te: 'మెహందీ', when: { en: 'Tuesday, December 1, 2026 · 4:00 PM', te: 'మంగళవారం, డిసెంబర్ 1, 2026 · సాయంత్రం 4:00' }, venue: 'Serengeti Events (Airbnb)', address: '6147 FM 455, Anna, TX 75409' },
   'Pellikuthuru / Pellikoduku': { te: 'పెళ్లికూతురు / పెళ్లికొడుకు', when: { en: 'Wednesday, December 2, 2026 · 10:00 AM', te: 'బుధవారం, డిసెంబర్ 2, 2026 · ఉదయం 10:00' }, venue: 'Serengeti Events (Airbnb)', address: '6147 FM 455, Anna, TX 75409' },
-  'Wedding': { te: 'వివాహం', when: { en: 'Thursday, December 3, 2026 · 9:00 AM', te: 'గురువారం, డిసెంబర్ 3, 2026 · ఉదయం 9:00' }, venue: 'Bella Cavalli Events', address: '1651 W Sherman Dr, Aubrey, TX 76227' },
+  'Wedding': { te: 'సుముహూర్తం', when: { en: 'Thursday, December 3, 2026 · 9:00 AM', te: 'గురువారం, డిసెంబర్ 3, 2026 · ఉదయం 9:00' }, venue: 'Bella Cavalli Events', address: '1651 W Sherman Dr, Aubrey, TX 76227' },
   'Cocktail': { te: 'కాక్‌టెయిల్', when: { en: 'Friday, December 4, 2026 · 6:00 PM', te: 'శుక్రవారం, డిసెంబర్ 4, 2026 · సాయంత్రం 6:00' }, venue: 'The Meridian Venue', address: '351 Southwind Ln, Fairview, TX 75069' }
 };
 var MEAL_TE = { 'Vegetarian': 'శాకాహారం', 'Non-vegetarian': 'మాంసాహారం', 'Vegan': 'వీగన్', 'Jain': 'జైన్' };
