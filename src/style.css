@@ -1493,3 +1493,14 @@ section.cocktail-twirl-page .cocktail-map { margin-top: 10px; }
 .photos-compact .drop .btn { white-space: nowrap; }
 .is-te .photos-compact .drop .btn { font-size: clamp(11px, 3.3vw, 15px); padding-left: 14px; padding-right: 14px; }
 .photos-compact .blurb.photos-sub { margin-bottom: 4px; }
+/* Home: the invitation card fills the whole page between the menu and the bottom bar, like the event pages.
+   On tall phones it may stretch up to 15% taller; past that the plain side edges are trimmed instead. */
+.sec.cover .cover-art { top: 38px !important; height: calc(100% - 38px) !important; }  /* starts just below the sound and language buttons */
+@media (max-width: 899px) {
+  .sec.cover .cover-art { aspect-ratio: auto; width: max(100%, calc((100dvh - var(--nav-h) - var(--bar-h) - 38px) / 1.725)) !important; }
+  .sec.cover .cover-art img { object-fit: fill; }
+}
+
+.cover-art-top { position: absolute; left: 0; right: 0; bottom: 100%; height: 38px; background: bottom / 100% auto no-repeat; pointer-events: none; }
+/* Home keeps the #NaGuddu bar like every other page. */
+.home-active .sample-bar { opacity: 1 !important; pointer-events: auto !important; }

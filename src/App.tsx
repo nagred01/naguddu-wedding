@@ -4,6 +4,9 @@ import homeArt from './img/home-invite.webp';
 // The same artwork with one language's words painted out, so those lines can be set as live text in the other language.
 import homeArtEn from './img/home-invite-en.webp';
 import homeArtTe from './img/home-invite-te.webp';
+// The card's top edge, mirrored: fills the band under the sound and language buttons so the card reaches the menu.
+import homeTopEn from './img/home-invite-top-en.webp';
+import homeTopTe from './img/home-invite-top-te.webp';
 import gate from './img/gate-garland.jpg';
 import ganesha from './img/ganesha.webp';
 import haldi from './img/haldi-c1.webp';
@@ -95,7 +98,7 @@ const QA_LIST: QA[] = [
     q: { en: 'Where are the events?', te: 'వేడుకలు ఎక్కడ?' },
     a: {
       en: <><span className="wa-line">Haldi, Mehendi, Pellikuthuru · <b>Serengeti Events (Airbnb)</b><br /><a href={mapUrl(EVENTS[0].address)} target="_blank" rel="noopener">6147 FM 455, Anna, TX 75409</a></span><span className="wa-line">Wedding · <b>Bella Cavalli Events</b><br /><a href={mapUrl(EVENTS[3].address)} target="_blank" rel="noopener">1651 W Sherman Dr, Aubrey, TX 76227</a></span><span className="wa-line">Cocktail · <b>The Meridian Venue</b><br /><a href={mapUrl(EVENTS[4].address)} target="_blank" rel="noopener">351 Southwind Ln, Fairview, TX 75069</a></span>Tap an address to open it in Maps.</>,
-      te: <><span className="wa-line">పసుపు, మెహందీ, పెళ్లికూతురు · <b>Serengeti Events (Airbnb)</b><br /><a href={mapUrl(EVENTS[0].address)} target="_blank" rel="noopener">6147 FM 455, Anna, TX 75409</a></span><span className="wa-line">వివాహం · <b>Bella Cavalli Events</b><br /><a href={mapUrl(EVENTS[3].address)} target="_blank" rel="noopener">1651 W Sherman Dr, Aubrey, TX 76227</a></span><span className="wa-line">కాక్‌టెయిల్ · <b>The Meridian Venue</b><br /><a href={mapUrl(EVENTS[4].address)} target="_blank" rel="noopener">351 Southwind Ln, Fairview, TX 75069</a></span>మ్యాప్‌లో చూడటానికి చిరునామాను తాకండి.</>,
+      te: <><span className="wa-line">పసుపు, మెహందీ, పెళ్లికూతురు · <b>Serengeti Events (Airbnb)</b><br /><a href={mapUrl(EVENTS[0].address)} target="_blank" rel="noopener">6147 FM 455, Anna, TX 75409</a></span><span className="wa-line">సుముహూర్తం · <b>Bella Cavalli Events</b><br /><a href={mapUrl(EVENTS[3].address)} target="_blank" rel="noopener">1651 W Sherman Dr, Aubrey, TX 76227</a></span><span className="wa-line">కాక్‌టెయిల్ · <b>The Meridian Venue</b><br /><a href={mapUrl(EVENTS[4].address)} target="_blank" rel="noopener">351 Southwind Ln, Fairview, TX 75069</a></span>మ్యాప్‌లో చూడటానికి చిరునామాను తాకండి.</>,
     },
   },
   {
@@ -356,6 +359,7 @@ export function App() {
         <div className="cover-bg" style={{ backgroundImage: `url(${homeArt})` }} aria-hidden="true" />
         {/* The couple's invitation artwork, with the live countdown placed in the space under its "Countdown" caption. */}
         <div className="cover-art">
+          <div className="cover-art-top" aria-hidden="true" style={{ backgroundImage: `url(${lang === 'en' ? homeTopEn : homeTopTe})` }} />
           <img src={lang === 'en' ? homeArtEn : homeArtTe} alt={`${T.inviteLead.en} ${T.inviteSub.en} ${T.bride.en} & ${T.groom.en}. #NaGuddu`} />
           {/* English: the blessing lines, the welcome and the couple with their parents. Telugu: the same in Telugu, and the countdown caption. */}
           {lang === 'en' ? (
