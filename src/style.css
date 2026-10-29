@@ -1514,3 +1514,8 @@ section.cocktail-twirl-page .cocktail-map { margin-top: 10px; }
 .share-pill svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 .playback-pills { position: relative; }
 .share-toast { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); white-space: nowrap; padding: 4px 10px; border-radius: 999px; background: rgba(20,8,10,.85); color: #f6dfa6; font: 600 12px/1.2 system-ui, sans-serif; pointer-events: none; }
+/* Smaller English / Telugu switch. */
+.topbar .lang button { min-height: 30px; height: 30px; padding: 0 10px; font-size: 11px; }
+/* Sound and share circles match the smaller language switch. */
+.topbar .pill { width: 32px; min-height: 32px; height: 32px; font-size: 13px; padding: 0; }
+.topbar .share-pill svg { width: 15px; height: 15px; }
