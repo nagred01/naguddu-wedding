@@ -323,7 +323,7 @@ export function App() {
 
   return (
     <div className={'wed ' + (lang === 'te' ? 'is-te' : '')} lang={lang}>
-     <div className={'stage' + (active === 'glimpse' ? ' itinerary-active' : '') + (active === 'cover' ? ' home-active' : '')}>
+     <div className={'stage' + (active === 'cover' ? ' home-active' : '')}>
       <div className="sample-bar">{t('sample')}</div>
       <div className="topbar">
         <div className="playback-pills"><button className="pill" onClick={() => setMuted(!muted)} aria-pressed={muted} aria-label={t('sound')}>{muted ? '🔇' : '🔊'}</button><button className="pill share-pill" onClick={share} aria-label={lang === 'en' ? 'Share this invitation' : 'ఈ ఆహ్వానాన్ని పంచుకోండి'}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" /><circle cx="6" cy="12" r="2.6" /><circle cx="18" cy="19" r="2.6" /><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3" /></svg></button>{shared && <span className="share-toast" role="status">{lang === 'en' ? 'Link copied!' : 'లింక్ కాపీ అయింది!'}</span>}</div>
