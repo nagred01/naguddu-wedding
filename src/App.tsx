@@ -430,7 +430,7 @@ export function App() {
             <ul className="rsvp-cards">
               {EVENTS.map((ev) => (
                 <li key={ev.id} className={'rsvp-card' + (rsvp[ev.id] ? ' ' + rsvp[ev.id] : '')}>
-                  <h3 className="rc-name">{lang === 'en' ? ev.en : ev.te}</h3>
+                  <h3 className="rc-name">{(lang === 'en' ? ev.en : ev.te).replace(' / ', '\u00a0/ ')}</h3>
                   <span className="seg">
                     <button type="button" aria-pressed={rsvp[ev.id] === 'yes'} className={rsvp[ev.id] === 'yes' ? 'on' : ''} onClick={() => setRsvp((r) => ({ ...r, [ev.id]: 'yes' }))}>{t('yes')}</button>
                     <button type="button" aria-pressed={rsvp[ev.id] === 'no'} className={rsvp[ev.id] === 'no' ? 'on no' : ''} onClick={() => setRsvp((r) => ({ ...r, [ev.id]: 'no' }))}>{t('no')}</button>

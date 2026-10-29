@@ -131,7 +131,7 @@ function saveRsvp_(data) {
   } catch (err) {
     console.error('Telegram message failed: ' + err);
   }
-  var emailed = false;
+  var emailed = false, mailError = '';
   // A few confirmations per address an hour, so the form can't be used to flood someone's inbox.
   if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && allow_('mail:' + email.toLowerCase(), 3, 3600)) {
     try {
@@ -139,9 +139,10 @@ function saveRsvp_(data) {
       emailed = true;
     } catch (err) {
       console.error('Confirmation email failed: ' + err);
+      mailError = String(err);
     }
   }
-  return { ok: true, id: id, emailed: emailed };
+  return { ok: true, id: id, emailed: emailed, mailError: mailError };
 }
 
 // Details for the guest's confirmation email, keyed by the event names the website sends.
@@ -203,6 +204,14 @@ function confirmGuest_(to, name, rows, lang) {
     + '<p style="text-align:center"><a href="' + SITE_URL + '" style="color:#a8742a">naguddu.com</a></p></div>';
 
   MailApp.sendEmail(to, W.subject, text.join('\n'), { name: 'Bhavitha & Nagender', htmlBody: html });
+}
+
+// Run this once from the editor: it asks for any missing Gmail permission, logs how many emails are left today and sends you a sample confirmation.
+function testConfirmationEmail() {
+  var me = Session.getEffectiveUser().getEmail();
+  console.log('Emails left today: ' + MailApp.getRemainingDailyQuota());
+  confirmGuest_(me, 'Test Guest', [[new Date(), 'test', 'Test Guest', 'Haldi', 'Yes', 1, 'Vegetarian', 'English', me, '', '']], 'en');
+  console.log('Sample confirmation sent to ' + me);
 }
 
 function esc_(s) {
