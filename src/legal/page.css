@@ -1,0 +1,7 @@
+body { margin: 0; background: #fbf4e6; color: #3a1d14; font: 16px/1.6 Georgia, serif; }
+main { max-width: 680px; margin: 0 auto; padding: 32px 16px 48px; }
+h1 { color: #7a1f1f; font-weight: 400; font-size: 28px; margin: 0 0 4px; }
+h2 { color: #7a1f1f; font-weight: 400; font-size: 20px; margin: 28px 0 6px; }
+.sub { color: #8a6a4a; margin: 0 0 24px; }
+a { color: #a8742a; }
+img { max-width: 100%; border: 1px solid #e6c98a; border-radius: 10px; display: block; margin: 12px auto; }

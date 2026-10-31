@@ -268,6 +268,7 @@ export function App() {
   // Optional contact details and a note for the couple.
   const [contact, setContact] = useState({ email: '', phone: '', note: '' });
   const [emailed, setEmailed] = useState(false);
+  const [texted, setTexted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'needName' | 'needEvent' | 'sending' | 'done' | 'error' | 'preview'>('idle');
   const t = (k: keyof typeof T) => T[k][lang];
   const sendRsvp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -291,6 +292,7 @@ export function App() {
       const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
       const out = await res.json();
       setEmailed(!!out.emailed);
+      setTexted(!!out.texted);
       setStatus(out.ok ? 'done' : 'error');
     } catch { setStatus('error'); }
   };
@@ -416,6 +418,7 @@ export function App() {
               <p className="rsvp-done-msg">{t('rsvpDone')}</p>
               <p className="rsvp-done-sub">{t('rsvpLanded')}</p>
               {emailed && <p className="rsvp-done-sub">{t('rsvpEmailed')}</p>}
+              {texted && <p className="rsvp-done-sub">{t('rsvpTexted')}</p>}
               <p className="note">{t('rsvpChangeNote')}</p>
               <button className="btn" type="button" onClick={() => setStatus('idle')}>{t('rsvpChange')}</button>
             </div>
@@ -426,6 +429,7 @@ export function App() {
               <label className="field"><span className="sr-only">{t('yourEmail')}</span><input type="email" name="email" autoComplete="email" inputMode="email" maxLength={120} placeholder={t('yourEmail')} value={contact.email} onChange={(e) => setContact((c) => ({ ...c, email: e.target.value }))} /></label>
               <label className="field"><span className="sr-only">{t('yourPhone')}</span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" maxLength={30} placeholder={t('yourPhone')} value={contact.phone} onChange={(e) => setContact((c) => ({ ...c, phone: e.target.value }))} /></label>
             </div>
+            <p className="sms-consent">{t('smsConsent')} <a href="./sms-terms.html" target="_blank" rel="noopener">{t('smsTerms')}</a> · <a href="./privacy.html" target="_blank" rel="noopener">{t('privacy')}</a></p>
             <input className="hp" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             <ul className="rsvp-cards">
               {EVENTS.map((ev) => (

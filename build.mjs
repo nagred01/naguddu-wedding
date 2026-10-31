@@ -10,6 +10,9 @@ const html=(js,css,inline)=>`<!doctype html><html><head><meta charset="utf-8"><m
 const web=await esbuild.build({entryPoints:['src/main.tsx'],bundle:true,format:'iife',platform:'browser',outdir:'dist',entryNames:'[name]-[hash]',assetNames:'assets/[name]-[hash]',metafile:true,loader:Object.fromEntries(assets.map(x=>[x,'file'])),minify:true,define:{'process.env.NODE_ENV':'"production"'}});
 const out=Object.keys(web.metafile.outputs).map(f=>f.replace(/^dist\//,''));
 copyFileSync('src/share.jpg','dist/share.jpg');
+// Plain pages linked from the RSVP form: SMS terms, privacy policy and the text opt-in proof for Twilio.
+for(const f of ['sms-terms.html','privacy.html','sms-optin.html','sms-optin.jpg'])copyFileSync('src/legal/'+f,'dist/'+f);
+copyFileSync('src/legal/page.css','dist/legal.css');
 writeFileSync('dist/index.html',html(out.find(f=>/^main-.*\.js$/.test(f)),out.find(f=>/^main-.*\.css$/.test(f)),false));
 await esbuild.build({entryPoints:['src/main.tsx'],bundle:true,format:'iife',platform:'browser',outdir:'inline',loader:Object.fromEntries(assets.map(x=>[x,'dataurl'])),minify:true,define:{'process.env.NODE_ENV':'"production"'}});
 writeFileSync('Wedding-Invitation.html',html(readFileSync('inline/main.js','utf8'),readFileSync('inline/main.css','utf8'),true));

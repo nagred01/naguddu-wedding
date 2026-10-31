@@ -52,7 +52,7 @@ var WEDDING_FACTS = [
   '- Holiday Inn Express & Suites Prosper, 1100 Mahard Pkwy, Prosper, TX 75078. Closest to the Wedding venue.',
   '',
   'ON THE WEBSITE',
-  '- RSVP: tap RSVP in the top bar (or the round RSVP button). Enter your name (email and phone are optional; guests who give an email get a confirmation email with their answers and the event details), choose "Count Me In!" or "Sending Love!" for each event, and for events you are attending pick the number of guests and Vegetarian or Non-vegetarian. You can add an optional note for the couple, then tap Send RSVP. Sending again updates your reply.',
+  '- RSVP: tap RSVP in the top bar (or the round RSVP button). Enter your name (email and phone are optional; guests who give an email get a confirmation email with their answers and the event details, and guests who give a US phone number get a confirmation text), choose "Count Me In!" or "Sending Love!" for each event, and for events you are attending pick the number of guests and Vegetarian or Non-vegetarian. You can add an optional note for the couple, then tap Send RSVP. Sending again updates your reply.',
   '- Photos: the Photos page lets guests upload pictures from the celebrations. Only the couple can see them.'
 ].join('\n');
 
@@ -142,7 +142,59 @@ function saveRsvp_(data) {
       mailError = String(err);
     }
   }
-  return { ok: true, id: id, emailed: emailed, mailError: mailError };
+  var texted = false;
+  var mobile = usPhone_(phone);
+  // Same flood guard as email: a few texts per number an hour.
+  if (mobile && allow_('sms:' + mobile, 3, 3600)) {
+    try {
+      texted = textGuest_(mobile, name, rows, data.lang === 'te' ? 'te' : 'en');
+    } catch (err) {
+      console.error('Confirmation text failed: ' + err);
+    }
+  }
+  return { ok: true, id: id, emailed: emailed, mailError: mailError, texted: texted };
+}
+
+// A US or Canadian number in +1XXXXXXXXXX form, or '' for anything else (texts abroad cost more and mostly need local registration).
+function usPhone_(raw) {
+  var digits = String(raw || '').replace(/\D/g, '');
+  if (digits.length === 10) digits = '1' + digits;
+  return digits.length === 11 && digits.charAt(0) === '1' ? '+' + digits : '';
+}
+
+// Texts the guest a short confirmation through Twilio. Needs three script properties: TWILIO_SID, TWILIO_TOKEN
+// and TWILIO_FROM (your Twilio number, like +18885551234). Without them it does nothing.
+function textGuest_(to, name, rows, lang) {
+  var props = PropertiesService.getScriptProperties();
+  var sid = props.getProperty('TWILIO_SID'), token = props.getProperty('TWILIO_TOKEN'), from = props.getProperty('TWILIO_FROM');
+  if (!sid || !token || !from) return false;
+  var te = lang === 'te';
+  var lines = rows.map(function (r) {
+    var event = te ? (EVENT_INFO[r[3]] || {}).te || r[3] : r[3];
+    if (r[4] !== 'Yes') return event + ': ' + (te ? 'రాలేకపోతున్నారు' : "can't make it");
+    return event + ': ' + r[5] + ' ' + (te ? (r[5] > 1 ? 'అతిథులు' : 'అతిథి') : (r[5] > 1 ? 'guests' : 'guest'));
+  });
+  var body = te
+    ? name + ', మీ RSVP అందింది! భవిత & నాగేందర్ వివాహం\n' + lines.join('\n') + '\nవివరాలు, మార్పులు: naguddu.com'
+    : 'Hi ' + name + ', thank you for your RSVP to Bhavitha & Nagender\'s wedding!\n' + lines.join('\n') + '\nDetails or changes: naguddu.com';
+  var res = UrlFetchApp.fetch('https://api.twilio.com/2010-04-01/Accounts/' + sid + '/Messages.json', {
+    method: 'post', muteHttpExceptions: true,
+    headers: { Authorization: 'Basic ' + Utilities.base64Encode(sid + ':' + token) },
+    payload: { To: to, From: from, Body: body }
+  });
+  if (res.getResponseCode() >= 300) {
+    console.error('Twilio ' + res.getResponseCode() + ': ' + res.getContentText().slice(0, 300));
+    return false;
+  }
+  return true;
+}
+
+// Run this once from the editor after adding the Twilio properties: it texts a sample confirmation to the number you type below.
+function testConfirmationText() {
+  var to = usPhone_('YOUR NUMBER HERE');
+  if (!to) return console.log('Put your 10-digit US number in place of YOUR NUMBER HERE first.');
+  var ok = textGuest_(to, 'Test Guest', [[new Date(), 'test', 'Test Guest', 'Haldi', 'Yes', 2, 'Vegetarian', 'English', '', to, '']], 'en');
+  console.log(ok ? 'Sample text sent to ' + to : 'Not sent: check the Twilio properties and the error above.');
 }
 
 // Details for the guest's confirmation email, keyed by the event names the website sends.

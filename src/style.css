@@ -1650,3 +1650,6 @@ section.cocktail-twirl-page .cocktail-map { margin-top: 10px; }
 .rsvp-compact .rc-name { letter-spacing: .02em; }
 .rsvp-compact .rsvp-card { padding-top: clamp(5px, .8vh, 12px) !important; padding-bottom: clamp(5px, .8vh, 12px) !important; column-gap: 10px; }
 .rsvp-compact .rsvp-card .seg button { padding: 0 9px !important; letter-spacing: .03em; }
+/* Text-message consent under the email and phone boxes (needed for the confirmation texts). */
+.rsvp-compact .sms-consent { margin: 5px 2px 0; font: 10.5px/1.35 var(--font-body); color: rgba(251,241,214,.7); text-align: left; }
+.rsvp-compact .sms-consent a { color: var(--gold); }
